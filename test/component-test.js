@@ -1,3 +1,6 @@
+// If a global document does not exists, create one using jsdom.
+require('testdom')('<html><body></body></html>');
+
 import React from 'react';
 import { expect } from 'chai';
 import { shallow, mount, render } from 'enzyme';
