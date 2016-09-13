@@ -53,7 +53,7 @@ gulp.task("build", ['html', 'test'], function () {
 });
 
 gulp.task('test', function () {
-	return gulp.src('./test/**/*.js', { read: false })
+	return gulp.src('./test/**/*.spec.js', { read: false })
 		.pipe(mocha({
 			compilers: {
 				js: babel
