@@ -62,3 +62,10 @@ Find the source code under the `src` directory for javascript and `sass` for the
 		https://medium.freecodecamp.com/react-unit-testing-with-mocha-and-enzyme-77d18b6875cb#.eynaminv6
 		https://semaphoreci.com/community/tutorials/testing-react-components-with-enzyme-and-mocha
 	```
+
+### Todo
+
+	```
+	Implement Sinonjs:
+		http://sinonjs.org/
+	```
