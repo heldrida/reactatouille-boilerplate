@@ -52,8 +52,8 @@ Find the source code under the `src` directory for javascript and `sass` for the
 
 ### References
 
-	```
-	Testing Reactjs components:
+	> Testing Reactjs components:
+
 		https://facebook.github.io/react/docs/test-utils.html
 		http://airbnb.io/enzyme/index.html
 		http://chaijs.com/
@@ -61,11 +61,9 @@ Find the source code under the `src` directory for javascript and `sass` for the
 		http://www.bebetterdeveloper.com/coding/getting-started-react-mocha.html
 		https://medium.freecodecamp.com/react-unit-testing-with-mocha-and-enzyme-77d18b6875cb#.eynaminv6
 		https://semaphoreci.com/community/tutorials/testing-react-components-with-enzyme-and-mocha
-	```
 
 ### Todo
 
-	```
-	Implement Sinonjs:
+	> Implement Sinonjs:
+
 		http://sinonjs.org/
-	```
