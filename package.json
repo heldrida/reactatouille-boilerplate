@@ -24,6 +24,7 @@
     "babel-preset-react": "^6.11.1",
     "css-loader": "^0.23.1",
     "gulp": "^3.9.1",
+    "gulp-mocha": "^3.0.1",
     "gulp-plumber": "^1.1.0",
     "gulp-util": "^3.0.7",
     "html-webpack-plugin": "^2.22.0",

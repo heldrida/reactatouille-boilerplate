@@ -4,7 +4,9 @@ var gulp = require('gulp'),
 	webpackDevServer = require("webpack-dev-server"),
 	webpackDevConfig = require("./webpack.dev.config.js"),
 	webpackProductionConfig = require("./webpack.production.config.js"),
-	gutil = require('gulp-util');
+	gutil = require('gulp-util'),
+	babel = require('babel-core/register'),
+	mocha = require('gulp-mocha');
 
 
 gulp.task('html', function () {
@@ -40,7 +42,7 @@ gulp.task("webpack:server", function(callback) {
 
 });
 
-gulp.task("build", ['html'], function () {
+gulp.task("build", ['html', 'test'], function () {
     // run webpack
     webpack(webpackProductionConfig, function (err, stats) {
         if(err) throw new gutil.PluginError("webpack", err);
@@ -50,8 +52,18 @@ gulp.task("build", ['html'], function () {
     });
 });
 
+gulp.task('test', function () {
+	return gulp.src('./test/**/*.js', { read: false })
+		.pipe(mocha({
+			compilers: {
+				js: babel
+			}
+	}));
+});
+
 gulp.task('watch', function () {
 	gulp.watch('./src/index.html', ['html']);
+	gulp.watch('.src/js/**/*.js', ['test']);
 });
 
 gulp.task('dev', ['default']);
