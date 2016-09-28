@@ -28,3 +28,6 @@ Temporary Items
 node_modules
 config.json
 config.js
+
+_PROJECT
+npm-debug.log
