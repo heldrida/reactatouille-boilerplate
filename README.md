@@ -35,6 +35,26 @@ gulp dev
 gulp test
 ```
 
+### Configuration
+
+There's a Configuration file that requires to be changed in order to hold the correct api location information, bag price, etc and other initialisation parameters.
+
+### Tests
+
+The tests are split in two different categories, Unit and End-to-end (integration) tests. These are run separately, there are two different tasks for that matter: `gulp unit_test` & `gulp end2end_test`. 
+
+### Modal windows
+
+A Modal window can be displayed by force, for styling etc. To do that type `http://hostname:port/?modal=modal_name_here`, see the `src/js/components/modalWindow.js` to get the correct names for the one's you want to see.
+
+### Preview the app for distribution
+
+Run the command below to create a small web server to serve the app that exists for distribution ( run the build command to create and see the `dist` directory ).
+
+```
+gulp preview
+```
+
 ### Build architecture
 
 Find the source code under the `src` directory for javascript and `sass` for the stylesheets. Before modifying ensure that the development watcher is running by running the development watch command (see development notes). The `dist` directory holds the files ready for distribution.
@@ -67,3 +87,7 @@ Find the source code under the `src` directory for javascript and `sass` for the
 	> Implement Sinonjs:
 
 		http://sinonjs.org/
+
+	> Implement flow: static type checker for javascript
+
+		https://flowtype.org/
