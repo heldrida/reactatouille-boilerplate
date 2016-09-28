@@ -6,7 +6,10 @@ var gulp = require('gulp'),
 	webpackProductionConfig = require("./webpack.production.config.js"),
 	gutil = require('gulp-util'),
 	babel = require('babel-core/register'),
-	mocha = require('gulp-mocha');
+	mocha = require('gulp-mocha'),
+	spawn = require('child_process').spawn,
+	port = 3000,
+	open = require('open');
 
 
 gulp.task('html', function () {
@@ -32,38 +35,76 @@ gulp.task("webpack:server", function(callback) {
 		open: true,
 		stats: {
 			colors: true
-		}
+		},
+		noInfo: true //  will disable informational messages unless there's an error.
 	});
 
-	server.listen(3000, "0.0.0.0", function(err) {
+	server.listen(port, "0.0.0.0", function(err) {
 		if(err) throw new gutil.PluginError("webpack-dev-server", err);
-		gutil.log("[webpack-dev-server]", "http://localhost:3000");
+		gutil.log("[webpack-dev-server]", "http://localhost:" + port);
+		gulp.start('openBrowser');
 	});
 
 });
 
-gulp.task("build", ['html', 'test'], function () {
+gulp.task("build", ['test', 'html'], function () {
     // run webpack
     webpack(webpackProductionConfig, function (err, stats) {
         if(err) throw new gutil.PluginError("webpack", err);
-        gutil.log("[webpack]", stats.toString({
-            // output options
-        }));
+		gutil.log("[webpack:errors]", stats.compilation.errors.toString({
+			colors: true
+		}));
+		gutil.log("[webpack:warnings]", stats.compilation.warnings.toString({
+			colors: true
+		}));
+		console.log('webpack compile success.');
     });
 });
 
-gulp.task('test', function () {
-	return gulp.src('./test/**/*.spec.js', { read: false })
-		.pipe(mocha({
-			compilers: {
-				js: babel
-			}
-	}));
+gulp.task('preview', function (cb) {
+	var cmd = spawn('node', ['server.js'], { stdio: 'inherit' });
+	open('http://localhost:8080', function (err) {
+		if (err) throw err;
+	});
+	cmd.on('close', function (code) {
+		console.log('my-task exited with code ' + code);
+		cb(code);
+	});
+});
+
+gulp.task('unit_test', function () {
+	return gulp.src('./test/unit_tests/**/*.spec.js', { read: false })
+				.pipe(mocha({
+					compilers: {
+						js: babel
+					}
+				}))
+				.once('end', function () {
+					gulp.start('end2end_test');
+				});
+});
+
+gulp.task('end2end_test', function () {
+	return gulp.src('./test/end2end_tests/**/*.spec.js', { read: false })
+				.pipe(mocha({
+					timeout: 5000,
+					compilers: {
+						js: babel
+					}
+				}));
+});
+
+gulp.task('test', ['unit_test']);
+
+gulp.task('openBrowser', function () {
+  open('http://localhost:' + port, function (err) {
+  	if (err) throw err;
+  });
 });
 
 gulp.task('watch', function () {
 	gulp.watch('./src/index.html', ['html']);
-	gulp.watch('.src/js/**/*.js', ['test']);
+	gulp.watch('./src/js/**/*.js', ['test']);
 });
 
 gulp.task('dev', ['default']);
