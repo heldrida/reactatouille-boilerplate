@@ -9,7 +9,9 @@ class App extends Component {
 		const h1 = document.querySelector('.app h1');
 		const p = document.querySelector('.app p') 
 
-		motion.tween({
+		const tw1 = motion.tween({
+			ease: motion.easing.cubicBezier(0, .42, 0, 1),
+			duration: 600,
 			values: {
 				x: {
 					from: -30,
@@ -20,10 +22,11 @@ class App extends Component {
 					to: 1
 				}
 			}
-		}).on(h1).start();
+		}).on(h1);
 
-		motion.tween({
-			delay: 300,
+		const tw2 = motion.tween({
+			ease: motion.easing.anticipate,
+			duration: 600,
 			values: {
 				x: {
 					from: -30,
@@ -34,7 +37,24 @@ class App extends Component {
 					to: 1
 				}
 			}
-		}).on(p).start();
+		}).on(p);
+
+		const tl = motion.timeline([
+			{
+				tween: tw1
+			},
+			{
+				tween: tw2,
+				offset: "-=800"
+			}
+		]);
+
+
+		setTimeout(() => {
+	
+			tl.start();
+
+		}, 800);
 
 	}
 
