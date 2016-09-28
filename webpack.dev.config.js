@@ -15,7 +15,8 @@ module.exports = {
 	module: {
 		loaders: [
 			{ test: /\.js$/, exclude: /node_modules/, loaders: ["react-hot-loader", "babel-loader"] },
-            { test: /\.scss$/, loader: 'style!css!sass' }
+            { test: /\.scss$/, loader: 'style!css!sass' },
+			{ test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/, loader: 'file-loader' }
 		]
 	},
 	plugins: [
