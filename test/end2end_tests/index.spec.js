@@ -10,24 +10,20 @@
 // 		return browser.visit('/', () => {
 
 // 			browser.wait(() => {
-// 				return document.querySelector('.row-z2m').getAttribute('style').indexOf('opacity: 1') > -1;
+// 				return document.querySelector('.app h1').getAttribute('style').indexOf('translateX') > -1;
 // 			}, () => {
-// 				console.log('Browser waited enought time for GSAP animations to finish!');
+// 				console.log('Browser waited enought time for Tween animations to finish!');
 // 				done();
 // 			});
 
 // 		});
 // 	});
 
-// 	describe('types using the keyboard', () => {
+// 	describe('the content', () => {
 
-// 		it ('should be qwerty', (done) => {
+// 		it ('should have the correct title', (done) => {
 
-// 			['q','w','e','r','t','y'].forEach((v) => {
-// 				browser.click('span.' + v);
-// 			});
-
-// 			browser.assert.evaluate('browser.querySelector(\'input[name="collect-reservation-code"]\').value', 'QWERTY');
+// 			browser.assert.evaluate('browser.querySelector(\'.app h1\').innerHTML', 'Reaclux Boilerplate');
 
 // 			done();
 
