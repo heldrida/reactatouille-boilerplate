@@ -8,7 +8,8 @@ module.exports = {
 	],
 	output: {
 		path: __dirname + '/dist',
-	    filename: 'bundle-[hash].js'
+	    filename: 'bundle-[hash].js',
+		publicPath: '/'
 	},
 	module: {
 		loaders: [
