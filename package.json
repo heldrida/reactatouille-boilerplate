@@ -1,6 +1,6 @@
 {
   "name": "reaclux-boilerplate",
-  "version": "0.5",
+  "version": "0.5.0",
   "description": "A React Redux Webpack Gulp Sass Mocha Enzyme Chai Boilerplate",
   "main": "gulpfile.js",
   "scripts": {
