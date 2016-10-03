@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+	historyApiFallback: true,
 	entry: [
 		'webpack-dev-server/client?http://localhost:3000',
 		'webpack/hot/dev-server',
@@ -10,7 +11,8 @@ module.exports = {
 	],
 	output: {
 		path: __dirname + '/static',
-		filename: "index_bundle.js"
+		filename: "index_bundle.js",
+		publicPath: '/'
 	},
 	module: {
 		loaders: [
