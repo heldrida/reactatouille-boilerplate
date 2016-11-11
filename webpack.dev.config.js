@@ -27,6 +27,11 @@ module.exports = {
 			template: __dirname + '/src/' + 'index.html',
 			filename: 'index.html'
 		}),
+		new webpack.DefinePlugin({
+			'process.env': {
+				'NODE_ENV': JSON.stringify('development')
+			}
+		}),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoErrorsPlugin()
 	]
