@@ -14,7 +14,21 @@ app.use(function (req, res, next) {
 
 app.use(express.static(dist));
 
-app.get('/', function(req, res) {
+// router order matters
+// see example for route named `/`
+app.get('/', function (req, res) {
+	res.sendFile(path.join(dist, 'index.html'));	
+});
+
+// any other is mapped here
+app.get('*', function(req, res) {
+	
+	// Catch-all route after the ones you want to exclude like the example before '/' 
+	// or exclude it here (this has the advantage of ordering however you'd like)
+	if (req.url === '/' || req.url === '/login') {
+		return next()
+	};
+
 	res.sendFile(path.join(dist, 'index.html'));
 });
 
