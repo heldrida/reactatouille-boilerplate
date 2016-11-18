@@ -6,6 +6,7 @@ A React Redux Webpack Gulp Sass Mocha Enzyme Chai Boilerplate
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 Clone the repository to your local environment, install any dependencies and install the packages. Run the development command to start a local server, run the test command to run unit tests and the build command to create a new version for release.
+Use the `config.js` in the root to set any parameters, such as the `repository remote list`, it's recommended to use a PaaS like Heroku or alike to easy deployment.
 
 ### Prerequisities
 

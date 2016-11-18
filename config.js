@@ -1,5 +1,8 @@
 var config = {
-	param1: 'value1'	
+	param1: 'value1',
+	git: {
+		remoteList: ['origin', 'heroku'] // add any other remotes here
+	}
 }
 
 // Modified production configuration parameters
