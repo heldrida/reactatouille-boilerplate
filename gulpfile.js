@@ -9,8 +9,9 @@ var gulp = require('gulp'),
 	mocha = require('gulp-mocha'),
 	spawn = require('child_process').spawn,
 	port = 3000,
-	open = require('open');
-
+	open = require('open'),
+	git = require('gulp-git'),
+	config = require('./config');
 
 gulp.task('html', function () {
     return gulp.src('src/index.html')
@@ -69,6 +70,17 @@ gulp.task('preview', function (cb) {
 	cmd.on('close', function (code) {
 		console.log('my-task exited with code ' + code);
 		cb(code);
+	});
+});
+
+// todo: decide if called push or remote
+// so far I decided to call it deploy (because the boilerplate, hopes the dev 
+// sitcks with a PaaS / Heroku kind of)
+gulp.task('deploy', function(){
+	config.git.remoteList.forEach(function (v, k) {
+		git.push(v, ['master'], null, function (err) {
+			if (err) throw err;
+		});
 	});
 });
 
