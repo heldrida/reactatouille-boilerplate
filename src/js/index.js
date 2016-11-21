@@ -4,18 +4,19 @@ import { AppContainer } from 'react-hot-loader';
 import Root from './root';
 
 render(
-  <AppContainer
-    component={ Root }
-  />,
+  <AppContainer>
+  	<Root />
+  </AppContainer>,
   document.getElementById('app')
 );
 
 if (module.hot) {
   module.hot.accept('./root', () => {
+	const NextRoot = require('./root').default;
     render(
-      <AppContainer
-        component={require('./root').default}
-      />,
+      <AppContainer>
+      	<NextRoot />
+      </AppContainer>,
       document.getElementById('app')
     );
   });

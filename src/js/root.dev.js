@@ -7,7 +7,6 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import reducers from './reducers';
 import thunk from 'redux-thunk';
-import DevTools from './containers/devTools';
 
 // include the stylesheet entry point
 require('../sass/app.scss');
@@ -26,7 +25,6 @@ export default class Root extends Component {
 		<Provider store={ store }>
 			<div>
 				<Router history={ history } routes={ routes } />\
-				<DevTools />
 			</div>
 		</Provider>
     );
