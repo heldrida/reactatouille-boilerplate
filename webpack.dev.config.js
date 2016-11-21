@@ -6,7 +6,8 @@ module.exports = {
 	historyApiFallback: true,
 	entry: [
 		'webpack-dev-server/client?http://localhost:3000',
-		'webpack/hot/dev-server',
+		'webpack/hot/only-dev-server',
+		'react-hot-loader/patch',
 		'./src/js/index.js'
 	],
 	output: {
@@ -16,7 +17,7 @@ module.exports = {
 	},
 	module: {
 		loaders: [
-			{ test: /\.js$/, exclude: /node_modules/, loaders: ["react-hot-loader", "babel-loader"] },
+			{ test: /\.js$/, exclude: /node_modules/, loaders: ["babel-loader"] },
             { test: /\.scss$/, loader: 'style!css!sass' },
 			{ test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/, loader: 'file-loader' }
 		]
