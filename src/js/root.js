@@ -7,16 +7,13 @@
 import React, { Component } from 'react';
 import ReactDOM from "react-dom";
 import { Router, browserHistory } from 'react-router';
-import { syncHistoryWithStore, routerMiddleware, push } from 'react-router-redux';
+import { routerMiddleware, push } from 'react-router-redux';
 import routes from './routes';
 import { Provider } from 'react-redux';
 import configureStore from './store'
 
 // include the stylesheet entry point
 require('../sass/app.scss');
-
-const store = configureStore({});
-const history = syncHistoryWithStore(browserHistory, store);
 
 export default class Root extends Component {
   render() {
