@@ -66,6 +66,12 @@ Find the source code under the `src` directory for javascript and `sass` for the
 
 ### References
 
+	> Warning: [react-router] You cannot change ; it will be ignored
+
+		https://github.com/gaearon/react-hot-loader/issues/298#issuecomment-262115089
+		https://github.com/gaearon/react-hot-loader/issues/298#issuecomment-262115089
+
+
 	> Testing Reactjs components:
 
 		https://facebook.github.io/react/docs/test-utils.html
