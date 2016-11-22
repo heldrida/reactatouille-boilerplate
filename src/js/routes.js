@@ -1,10 +1,12 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Route } from 'react-router';
 import App from './containers/app';
 
-const routes = (
+const routes = () => {
+  return (
 	<Route path='/' component={ App }>
 	</Route>
-);
+  );
+};
 
 export default routes;

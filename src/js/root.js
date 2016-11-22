@@ -8,21 +8,22 @@ import React, { Component } from 'react';
 import ReactDOM from "react-dom";
 import { Router, browserHistory } from 'react-router';
 import { routerMiddleware, push } from 'react-router-redux';
-import routes from './routes';
 import { Provider } from 'react-redux';
 import configureStore from './store'
 
 // include the stylesheet entry point
 require('../sass/app.scss');
 
-export default class Root extends Component {
-  render() {
+const Root = (props) => {
     return (
-		<Provider store={ this.props.store }>
+		<Provider store={ props.store }>
 			<div>
-				<Router history={ this.props.history } routes={ routes } />
+				<Router history={ props.history }>
+				{ props.routes() }
+				</Router>
 			</div>
 		</Provider>
     );
-  }
 }
+
+export default Root;
