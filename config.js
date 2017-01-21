@@ -1,5 +1,6 @@
 var config = {
-	param1: '',
+	param1: '', // example
+	param2: process.env.NODE_ENV === 'development' ? 'foo' : 'bar', // example
 	git: {
 		remoteList: ['origin', 'heroku'] // add any other remotes here
 	},
