@@ -4,7 +4,7 @@ var babel = require('babel-polyfill'),
 	app = express(),
 	router = express.Router(),
 	port = process.env.NODE_ENV === 'development' ? 3001 : 3000,
-	dist = path.join(__dirname, ('dist' + (process.env.NODE_ENV ? '/' + process.env.NODE_ENV : null))),
+	dist = path.join(__dirname, ('dist' + (process.env.NODE_ENV ? '/' + process.env.NODE_ENV : 'staging'))),
 	superagent = require('superagent'),
 	config = require('./config'),
 	serverInstance = null
