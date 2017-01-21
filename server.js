@@ -12,8 +12,8 @@ var babel = require('babel-polyfill'),
 	webpackDevMiddleware = require('webpack-dev-middleware'),
 	webpackHotMiddleware = require('webpack-hot-middleware'),
 	webpackDevConfig = require('./webpack.dev.config'),
-	compiler = webpack(webpackDevConfig)
-
+	compiler = webpack(webpackDevConfig),
+	_ = require('lodash')
 
 process.on('uncaughtException', function (err) {
 	throw err;
@@ -49,42 +49,61 @@ router.use('/api/test', function (req, res) {
 		.get('https://jsonip.com/')
 		.end(function (err, response) {
 			res.send(response.body);
+			res.end();
 		});
 });
 
 // router order matters
-// see example for route named `/`
-router.get('/', function (req, res) {
-	res.sendFile(path.join(dist, 'index.html'));	
-});
-
-// any other is mapped here
-router.get('*', function(req, res, next) {
-	
-	// Catch-all route after the ones you want to exclude like the example before '/' 
-	// or exclude it here (this has the advantage of ordering however you'd like)
-	if (req.url === '/' || req.url === '/foobar') {
-		return next()
-	};
-
-	res.sendFile(path.join(dist, 'index.html'));
-});
 
 // HMR only in development
 if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging') {
     console.log('Development environment: Starting webPack middleware...');
-	router.use(webpackDevMiddleware(compiler, {
+
+	var devMiddleware = webpackDevMiddleware(compiler, {
 		publicPath: webpackDevConfig.output.publicPath,
 		stats: {
 			colors: true
 		}
-	}));
+	});
+
+	router.use(devMiddleware);
+
 	router.use(webpackHotMiddleware(compiler, {
 		log: console.log
 	}));
+
+	router.use(function (req, res, next) {
+		const reqPath = req.url
+		// find the file that the browser is looking for
+		const file = _.last(reqPath.split('/'))
+		if ([webpackDevConfig.output.filename, 'index.html'].indexOf(file) !== -1) {
+			res.end(devMiddleware.fileSystem.readFileSync(path.join(webpackDevConfig.output.path, file)));
+		} else if (file.indexOf('.') === -1) {
+			// if the url does not have an extension, assume they've navigated to something like /home and want index.html
+			res.end(devMiddleware.fileSystem.readFileSync(path.join(webpackDevConfig.output.path, 'index.html')));
+		} else {
+			next();
+		}
+	});
+
 } else {
+
     //Production needs physical files! (built via separate process)
 	router.use('/assets', express.static(dist));
+
+
+	// any other is mapped here
+	router.get('*', function(req, res, next) {
+		
+		// Catch-all route after the ones you want to exclude like the example before '/' 
+		// or exclude it here (this has the advantage of ordering however you'd like)
+		if (req.url === '/foo' || req.url === '/bar') {
+			return next()
+		};
+
+		res.sendFile(path.join(dist, 'index.html'));
+		res.end();
+	});
 }
 
 app.disable('x-powered-by');
@@ -95,5 +114,5 @@ serverInstance = app.listen(port, function (error) {
 	if (error) {
 		console.log(error); // eslint-disable-line no-console
 	}
-	console.log('[' + config.build_name + '] listening on port ' + port + '!');
+	console.log('[' + config.app_name + ' | ' + process.env.NODE_ENV + ' | ' + config.build_name + '] listening on port ' + port + '!');
 });

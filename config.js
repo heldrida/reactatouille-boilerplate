@@ -4,7 +4,8 @@ var config = {
 	git: {
 		remoteList: ['origin', 'heroku'] // add any other remotes here
 	},
-	build_name: 'Build name Foobar'
+	app_name: 'Reaclux Boilerplate', // your app name here
+	build_name: 'v0.5b' // name your build here for referencing
 }
 
 // Modified production configuration parameters

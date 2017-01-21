@@ -5,13 +5,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
 	devtool: '#source-map',
 	historyApiFallback: true,
-	// entry: [
-	// 	'webpack-dev-server/client?http://localhost:3000',
-	// 	'webpack/hot/only-dev-server',
-	// 	'react-hot-loader/patch',
-	// 	'./src/js/index.js'
-	// ],
 	entry: [
+		'react-hot-loader/patch',
 		'webpack/hot/dev-server',
 		'webpack-hot-middleware/client',
 		'./src/js/index.js'
@@ -19,7 +14,7 @@ module.exports = {
 	output: {
 		path: __dirname + '/static',
 		filename: 'bundle.js',
-		publicPath: '/'
+		publicPath: '/assets'
 	},
 	module: {
 		loaders: [
