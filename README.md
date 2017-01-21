@@ -21,7 +21,8 @@ npm install
 ```
 
 ```
-gulp build
+gulp build --env staging
+gulp build --env production
 ```
 
 ### Development

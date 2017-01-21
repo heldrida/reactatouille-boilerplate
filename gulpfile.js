@@ -3,6 +3,7 @@ var gulp = require('gulp'),
 	webpack = require("webpack"),
 	webpackDevServer = require("webpack-dev-server"),
 	webpackDevConfig = require("./webpack.dev.config.js"),
+	webpackStagingConfig = require("./webpack.staging.config.js"),
 	webpackProductionConfig = require("./webpack.production.config.js"),
 	gutil = require('gulp-util'),
 	babel = require('babel-core/register'),
@@ -14,8 +15,9 @@ var gulp = require('gulp'),
 	config = require('./config');
 
 gulp.task('html', function () {
-    return gulp.src('src/index.html')
-				.pipe(gulp.dest('dist'));
+	var n = (['production', 'staging'].indexOf(process.argv[4]) > -1 && process.argv[4]) || 'staging';
+	return gulp.src('src/index.html')
+				.pipe(gulp.dest('dist/' + n));
 });
 
 gulp.task("webpack:server", function(callback) {
@@ -48,7 +50,25 @@ gulp.task("webpack:server", function(callback) {
 
 });
 
-gulp.task("build", ['test', 'html'], function () {
+gulp.task('build', ['test', 'html'], function () {
+	var n = (['production', 'staging'].indexOf(process.argv[4]) > -1 && process.argv[4]) || 'staging';
+	gulp.start('build-' + n);
+});
+
+gulp.task("build-staging", function () {
+    // run webpack
+    webpack(webpackStagingConfig, function (err, stats) {
+        if(err) throw new gutil.PluginError("webpack", err);
+		gutil.log("[webpack:errors]", stats.compilation.errors.toString({
+			colors: true
+		}));
+		gutil.log("[webpack:warnings]", stats.compilation.warnings.toString({
+			colors: true
+		}));
+		console.log('webpack compile success.');
+    });
+});
+gulp.task("build-production", function () {
     // run webpack
     webpack(webpackProductionConfig, function (err, stats) {
         if(err) throw new gutil.PluginError("webpack", err);
@@ -64,7 +84,7 @@ gulp.task("build", ['test', 'html'], function () {
 
 gulp.task('preview', function (cb) {
 	var cmd = spawn('node', ['server.js'], { stdio: 'inherit' });
-	open('http://localhost:8080', function (err) {
+	open('http://localhost:' + port, function (err) {
 		if (err) throw err;
 	});
 	cmd.on('close', function (code) {

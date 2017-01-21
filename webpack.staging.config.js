@@ -9,7 +9,7 @@ module.exports = {
 		'./src/js/index.js'
 	],
 	output: {
-		path: __dirname + '/dist/production',
+		path: __dirname + '/dist/staging',
 	    filename: 'js/bundle-[hash].js',
 	    publicPath: '/assets'
 	},
@@ -32,31 +32,6 @@ module.exports = {
 			'process.env': {
 				'NODE_ENV': JSON.stringify('production')
 			}
-		}),
-		new webpack.optimize.AggressiveMergingPlugin(),
-		new webpack.optimize.OccurrenceOrderPlugin(),
-		new webpack.optimize.DedupePlugin(),
-		new webpack.optimize.UglifyJsPlugin({
-			mangle: true,
-			compress: {
-				warnings: false, // Suppress uglification warnings
-				pure_getters: true,
-				unsafe: true,
-				unsafe_comps: true,
-				screw_ie8: true,
-				drop_console: true
-			},
-			output: {
-				comments: false,
-			},
-			exclude: [/\.min\.js$/gi] // skip pre-minified libs
-		}),
-		new CompressionPlugin({
-			asset: "[path].gz[query]",
-			algorithm: "gzip",
-			test: /\.js$|\.css$|\.html$/,
-			threshold: 10240,
-			minRatio: 0.8
 		})
 	]
 };
