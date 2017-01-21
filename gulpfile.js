@@ -139,6 +139,14 @@ gulp.task('watch', function () {
 	gulp.watch('./src/js/**/*.js', ['test']);
 });
 
+gulp.task('node-server', function (cb) {
+	var cmd = spawn('node', ['server.js'], { stdio: 'inherit' });
+	cmd.on('close', function (code) {
+		console.log('my-task exited with code ' + code);
+		cb(code);
+	});
+});
+
 gulp.task('dev', ['default']);
 
-gulp.task('default', ['webpack:server', 'watch']);
+gulp.task('default', ['webpack:server', 'watch', 'node-server']);
