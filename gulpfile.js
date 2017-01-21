@@ -20,36 +20,6 @@ gulp.task('html', function () {
 				.pipe(gulp.dest('dist/' + n));
 });
 
-gulp.task("webpack:server", function(callback) {
-
-	// modify some webpack config options
-	var myConfig = Object.create(webpackDevConfig);
-	myConfig.devtool = "eval";
-	myConfig.debug = true;
-
-	// Start a webpack-dev-server
-	var server = new webpackDevServer(webpack(myConfig), {
-		//noInfo: true,
-		//watch: true,
-		historyApiFallback: true,
-		contentBase: './dist',
-		hot: true,
-		progress: true,
-		open: true,
-		stats: {
-			colors: true
-		},
-		noInfo: true //  will disable informational messages unless there's an error.
-	});
-
-	server.listen(port, "0.0.0.0", function(err) {
-		if(err) throw new gutil.PluginError("webpack-dev-server", err);
-		gutil.log("[webpack-dev-server]", "http://localhost:" + port);
-		gulp.start('openBrowser');
-	});
-
-});
-
 gulp.task('build', ['test', 'html'], function () {
 	var n = (['production', 'staging'].indexOf(process.argv[4]) > -1 && process.argv[4]) || 'staging';
 	gulp.start('build-' + n);
@@ -80,17 +50,6 @@ gulp.task("build-production", function () {
 		}));
 		console.log('webpack compile success.');
     });
-});
-
-gulp.task('preview', function (cb) {
-	var cmd = spawn('node', ['server.js'], { stdio: 'inherit' });
-	open('http://localhost:' + port, function (err) {
-		if (err) throw err;
-	});
-	cmd.on('close', function (code) {
-		console.log('my-task exited with code ' + code);
-		cb(code);
-	});
 });
 
 // todo: decide if called push or remote
@@ -147,6 +106,41 @@ gulp.task('node-server', function (cb) {
 	});
 });
 
+gulp.task('preview', function (cb) {
+
+	var n = (['production', 'staging'].indexOf(process.argv[4]) > -1 && process.argv[4]) || false;
+
+	if (n) {
+		process.env.NODE_ENV = n;
+
+		var cmd = spawn('node', ['server.js'], { stdio: 'inherit' });
+
+		cmd.on('close', function (code) {
+			console.log('my-task exited with code ' + code);
+			cb(code);
+		});
+
+		setTimeout(function () {
+			open('http://localhost:' + port, function (err) {
+				if (err) throw err;
+			});
+		}, 1800);
+
+	} else {
+		console.log('Error: use the command `gulp preview --env [ENVIRONMENT]` to preview!')
+	}
+
+
+});
+
+gulp.task('set-dev-env', function () {
+	return process.env.NODE_ENV = 'development';
+});
+
+gulp.task('set-prod-env', function () {
+	return process.env.NODE_ENV = 'production';
+});
+
 gulp.task('dev', ['default']);
 
-gulp.task('default', ['webpack:server', 'watch', 'node-server']);
+gulp.task('default', ['set-dev-env', 'node-server', 'watch']);

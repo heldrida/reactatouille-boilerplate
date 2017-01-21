@@ -28,7 +28,7 @@ gulp build --env production
 ### Development
 
 ```
-gulp dev
+gulp
 ```
 
 ### Test runner
@@ -43,10 +43,16 @@ The tests are split in two different categories, Unit and End-to-end (integratio
 
 ### Preview the app for distribution
 
-Run the command below to create a small web server to serve the app that exists for distribution ( run the build command to create and see the `dist` directory ).
+Run the command below to create a small web server to serve the app that exists for distribution ( remember to run the build command to create the `dist` directory for the desired `environment`).
 
 ```
-gulp preview
+gulp preview --env staging
+```
+
+Or
+
+```
+gulp preview --env production
 ```
 
 ### Build architecture

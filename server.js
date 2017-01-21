@@ -49,7 +49,6 @@ router.use('/api/test', function (req, res) {
 		.get('https://jsonip.com/')
 		.end(function (err, response) {
 			res.send(response.body);
-			res.end();
 		});
 });
 
@@ -102,7 +101,6 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging')
 		};
 
 		res.sendFile(path.join(dist, 'index.html'));
-		res.end();
 	});
 }
 
