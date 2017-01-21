@@ -3,11 +3,17 @@ var babel = require('babel-polyfill'),
 	path = require('path'),
 	app = express(),
 	router = express.Router(),
-	port = process.env.PORT ? process.env.PORT : (process.env.NODE_ENV === 'development' ? 3001 : 3000),
+	port = process.env.PORT ? process.env.PORT : 3000,
 	dist = path.join(__dirname, ('dist' + (process.env.NODE_ENV ? '/' + process.env.NODE_ENV : 'staging'))),
 	superagent = require('superagent'),
 	config = require('./config'),
-	serverInstance = null
+	serverInstance = null,
+	webpack = require('webpack'),
+	webpackDevMiddleware = require('webpack-dev-middleware'),
+	webpackHotMiddleware = require('webpack-hot-middleware'),
+	webpackDevConfig = require('./webpack.dev.config'),
+	compiler = webpack(webpackDevConfig)
+
 
 process.on('uncaughtException', function (err) {
 	throw err;
@@ -38,8 +44,6 @@ app.use('/healthcheck', function (req, res) {
 	res.end();
 });
 
-router.use('/assets', express.static(dist));
-
 router.use('/api/test', function (req, res) {
 	superagent
 		.get('https://jsonip.com/')
@@ -65,6 +69,23 @@ router.get('*', function(req, res, next) {
 
 	res.sendFile(path.join(dist, 'index.html'));
 });
+
+// HMR only in development
+if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging') {
+    console.log('Development environment: Starting webPack middleware...');
+	router.use(webpackDevMiddleware(compiler, {
+		publicPath: webpackDevConfig.output.publicPath,
+		stats: {
+			colors: true
+		}
+	}));
+	router.use(webpackHotMiddleware(compiler, {
+		log: console.log
+	}));
+} else {
+    //Production needs physical files! (built via separate process)
+	router.use('/assets', express.static(dist));
+}
 
 app.disable('x-powered-by');
 
