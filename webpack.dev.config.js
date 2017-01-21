@@ -3,16 +3,22 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+	devtool: '#source-map',
 	historyApiFallback: true,
+	// entry: [
+	// 	'webpack-dev-server/client?http://localhost:3000',
+	// 	'webpack/hot/only-dev-server',
+	// 	'react-hot-loader/patch',
+	// 	'./src/js/index.js'
+	// ],
 	entry: [
-		'webpack-dev-server/client?http://localhost:3000',
-		'webpack/hot/only-dev-server',
-		'react-hot-loader/patch',
+		'webpack/hot/dev-server',
+		'webpack-hot-middleware/client',
 		'./src/js/index.js'
 	],
 	output: {
 		path: __dirname + '/static',
-		filename: "index_bundle.js",
+		filename: 'bundle.js',
 		publicPath: '/'
 	},
 	module: {
