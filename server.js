@@ -59,9 +59,23 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging')
     console.log('Development environment: Starting webPack middleware...');
 
 	var devMiddleware = webpackDevMiddleware(compiler, {
+		noInfo: true,
 		publicPath: webpackDevConfig.output.publicPath,
 		stats: {
-			colors: true
+			colors: true,
+			hash: false,
+			version: false,
+			timings: false,
+			assets: false,
+			chunks: false,
+			modules: false,
+			reasons: false,
+			children: false,
+			source: false,
+			errors: false,
+			errorDetails: false,
+			warnings: false,
+			publicPath: false
 		}
 	});
 

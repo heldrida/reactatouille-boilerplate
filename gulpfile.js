@@ -150,7 +150,7 @@ gulp.task('banner', function () {
 			figlet.textSync('Reaclux', { horizontalLayout: 'full' })
 		),
 		chalk.yellow.bold('\n' + ' ' + 'Boilerplate'),
-		chalk.yellow('by Punkbit'),
+		chalk.yellow('with by Punkbit'),
 		'\n',
 		'\n'
 	);
