@@ -14,7 +14,9 @@ var gulp = require('gulp'),
 	git = require('gulp-git'),
 	config = require('./config'),
 	chalk = require('chalk'),
-	figlet = require('figlet');
+	figlet = require('figlet'),
+	clean = require('gulp-clean');
+
 
 
 gulp.task('html', function () {
@@ -23,7 +25,7 @@ gulp.task('html', function () {
 				.pipe(gulp.dest('dist/' + n));
 });
 
-gulp.task('build', ['test', 'html'], function () {
+gulp.task('build', ['clean', 'test', 'html'], function () {
 	var n = (['production', 'staging'].indexOf(process.argv[4]) > -1 && process.argv[4]) || 'staging';
 	gulp.start('build-' + n);
 });
@@ -155,6 +157,12 @@ gulp.task('banner', function () {
 		'\n',
 		'\n'
 	);
+});
+
+gulp.task('clean', function () {
+	var n = (['production', 'staging'].indexOf(process.argv[4]) > -1 && process.argv[4]) || false;
+	return gulp.src('./dist/' + n, { read: false })
+			.pipe(clean());
 });
 
 gulp.task('dev', ['default']);
