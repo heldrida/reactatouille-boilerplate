@@ -13,7 +13,8 @@ var babel = require('babel-polyfill'),
 	webpackHotMiddleware = require('webpack-hot-middleware'),
 	webpackDevConfig = require('./webpack.dev.config'),
 	compiler = webpack(webpackDevConfig),
-	_ = require('lodash')
+	_ = require('lodash'),
+	chalk = require('chalk')
 
 process.on('uncaughtException', function (err) {
 	throw err;
@@ -126,5 +127,5 @@ serverInstance = app.listen(port, function (error) {
 	if (error) {
 		console.log(error); // eslint-disable-line no-console
 	}
-	console.log('[' + config.app_name + ' | ' + process.env.NODE_ENV + ' | ' + config.build_name + '] listening on port ' + port + '!');
+	console.log(chalk.green('[' + config.app_name + ' | ' + process.env.NODE_ENV + ' | ' + config.build_name + '] listening on port ' + port + '!'));
 });
