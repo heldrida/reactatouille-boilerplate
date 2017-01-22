@@ -12,7 +12,10 @@ var gulp = require('gulp'),
 	port = 3000,
 	open = require('open'),
 	git = require('gulp-git'),
-	config = require('./config');
+	config = require('./config'),
+	chalk = require('chalk'),
+	figlet = require('figlet');
+
 
 gulp.task('html', function () {
 	var n = (['production', 'staging'].indexOf(process.argv[4]) > -1 && process.argv[4]) || 'staging';
@@ -141,6 +144,18 @@ gulp.task('set-prod-env', function () {
 	return process.env.NODE_ENV = 'production';
 });
 
+gulp.task('banner', function () {
+	console.log(
+		chalk.magenta(
+			figlet.textSync('Reaclux', { horizontalLayout: 'full' })
+		),
+		chalk.yellow.bold('\n' + ' ' + 'Boilerplate'),
+		chalk.yellow('by Punkbit'),
+		'\n',
+		'\n'
+	);
+});
+
 gulp.task('dev', ['default']);
 
-gulp.task('default', ['set-dev-env', 'node-server', 'watch']);
+gulp.task('default', ['banner', 'set-dev-env', 'node-server', 'watch']);
