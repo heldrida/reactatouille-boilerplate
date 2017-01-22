@@ -145,6 +145,7 @@ gulp.task('set-prod-env', function () {
 });
 
 gulp.task('banner', function () {
+	spawn('clear', [null], { stdio: 'inherit' });
 	console.log(
 		chalk.magenta(
 			figlet.textSync('Reaclux', { horizontalLayout: 'full' })
