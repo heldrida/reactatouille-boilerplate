@@ -64,7 +64,7 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging')
 		stats: {
 			colors: true,
 			hash: false,
-			version: false,
+			version: true,
 			timings: false,
 			assets: false,
 			chunks: false,
@@ -72,9 +72,9 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging')
 			reasons: false,
 			children: false,
 			source: false,
-			errors: false,
-			errorDetails: false,
-			warnings: false,
+			errors: true,
+			errorDetails: true,
+			warnings: true,
 			publicPath: false
 		}
 	});
