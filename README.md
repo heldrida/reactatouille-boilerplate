@@ -2,10 +2,10 @@
 
 Reacstart is a command-line tool for the Reacstart-Boilerplate created by Punkbit, to help quickly start and build a new React project.
 
-### Prerequisities
+### Pre-requisities
 
 ```
-NodeJS + NPM
+Nodejs & NPM
 ```
 
 ## Getting Started
