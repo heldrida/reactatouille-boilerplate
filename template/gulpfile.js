@@ -58,7 +58,7 @@ gulp.task("build-production", function () {
 });
 
 // todo: decide if called push or remote
-// so far I decided to call it deploy (because the boilerplate, hopes the dev 
+// so far I decided to call it deploy (because the boilerplate, hopes the dev
 // sitcks with a PaaS / Heroku kind of)
 gulp.task('deploy', function(){
 	config.git.remoteList.forEach(function (v, k) {
@@ -150,7 +150,7 @@ gulp.task('banner', function () {
 	spawn('clear', [null], { stdio: 'inherit' });
 	console.log(
 		chalk.magenta(
-			figlet.textSync('Reactstart', { horizontalLayout: 'full' })
+			figlet.textSync('Reacstart', { horizontalLayout: 'full' })
 		),
 		chalk.yellow.bold('\n' + ' ' + 'Boilerplate'),
 		chalk.yellow('by Punkbit'),

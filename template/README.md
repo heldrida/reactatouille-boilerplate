@@ -1,4 +1,4 @@
-# Reactstart Boilerplate
+# Reacstart Boilerplate
 
 Reacstart is a command-line tool for the Reacstart-Boilerplate created by Punkbit, to help quickly start and build a new React project. Built using Redux Webpack HMR Gulp Sass Mocha Enzyme Chai Express Boilerplate.
 
@@ -50,7 +50,7 @@ gulp test
 
 ### Tests
 
-The tests are split in two different categories, Unit and End-to-end (integration) tests. These are run separately, there are two different tasks for that matter: `gulp unit_test` & `gulp end2end_test`. 
+The tests are split in two different categories, Unit and End-to-end (integration) tests. These are run separately, there are two different tasks for that matter: `gulp unit_test` & `gulp end2end_test`.
 
 ### Preview the app for distribution
 
