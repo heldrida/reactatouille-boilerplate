@@ -10,6 +10,19 @@
     "type": "git",
     "url": "git+https://github.com/heldrida/reactstart-boilerplate.git"
   },
+  "keywords": [
+    "gulp",
+    "react",
+    "webpack",
+    "boilerplate",
+    "ES6",
+    "ES2015",
+    "babel",
+    "mocha",
+    "hmr",
+    "express",
+    "sass"
+  ],
   "author": "Punkbit",
   "license": "WTFPL",
   "bugs": {
