@@ -14,6 +14,8 @@ Use the `config.js` in the root to set any parameters, such as the `repository r
 Nodejs & NPM
 ```
 
+To use EditorConfig file, you will need to install a plugin available @ http://editorconfig.org/ for your favourite editor.
+
 ### Installing
 
 ```

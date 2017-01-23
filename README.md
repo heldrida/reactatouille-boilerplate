@@ -8,6 +8,8 @@ Reacstart is a command-line tool for the Reacstart-Boilerplate created by Punkbi
 Nodejs & NPM
 ```
 
+To use EditorConfig file, you will need to install a plugin available @ http://editorconfig.org/ for your favourite editor.
+
 ## Getting Started
 
 These instructions will get you a copy of the command line tool, that you'll be able to use to generate or quick start a new project boilerplate. To do so please run the command below, that will install `reactstart` has a global:
