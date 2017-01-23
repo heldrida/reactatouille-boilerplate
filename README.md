@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/template/src/images/logo-reacstart.png" height="200">
+  <img src="/template/src/images/logo-reacstart.png?201701231315" height="200">
 </p>
 <p align="left">
 	Reacstart is a command-line tool for the Reacstart-Boilerplate created by <code>Punkbit</code>, to help quickly start and build a new <code>React</code> project. Built using Redux Webpack HMR Gulp Sass Mocha Enzyme Chai Express Boilerplate.
