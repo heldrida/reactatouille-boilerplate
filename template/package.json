@@ -43,6 +43,7 @@
     "enzyme": "^2.4.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "figlet": "^1.2.0",
+    "file-loader": "^0.9.0",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-git": "^1.12.0",
