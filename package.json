@@ -1,7 +1,7 @@
 {
   "name": "reactstart",
-  "version": "0.6.0",
-  "description": "Reacstart is a command-line tool for the Reacstart-Boilerplate created by Punkbit, to help quickly start and build a new React project.",
+  "version": "0.6.1",
+  "description": "Reacstart is a command-line tool for the Reacstart-Boilerplate, to help quickly start and build a new React project with Redux.",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/heldrida/reactstart-boilerplate.git"
   },
   "author": "Punkbit",
-  "license": "ISC",
+  "license": "WTFPL",
   "bugs": {
     "url": "https://github.com/heldrida/reactstart-boilerplate/issues"
   },
