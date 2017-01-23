@@ -1,6 +1,6 @@
 # Reactstart Boilerplate
 
-A React Redux Webpack Gulp Sass Mocha Enzyme Chai Boilerplate
+Reacstart is a command-line tool for the Reacstart-Boilerplate created by Punkbit, to help quickly start and build a new React project. Built using Redux Webpack Gulp Sass Mocha Enzyme Chai Boilerplate.
 
 ## Getting Started
 
