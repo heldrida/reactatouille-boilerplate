@@ -1,4 +1,4 @@
-<p align="center" style="margin-bottom: 30px;">
+<p align="center" style="margin: 30px 0;">
   <img src="https://raw.githubusercontent.com/heldrida/reacstart-boilerplate/master/template/src/images/logo-reacstart.png?201701231335" height="200">
 </p>
 <p align="left">
