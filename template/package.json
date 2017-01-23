@@ -1,6 +1,6 @@
 {
   "name": "reactstart-boilerplate",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "Reacstart-Boilerplate built using Redux Webpack Gulp Sass Mocha Enzyme Chai Boilerplate.",
   "main": "gulpfile.js",
   "scripts": {
