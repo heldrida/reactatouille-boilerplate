@@ -1,6 +1,6 @@
 # Reacstart Boilerplate
 
-Reacstart is a command-line tool for the Reacstart-Boilerplate created by Punkbit, to help quickly start and build a new React project. Built using Redux Webpack HMR Gulp Sass Mocha Enzyme Chai Express Boilerplate.
+Reacstart is a command-line tool for the Reacstart-Boilerplate to help quickly start and build a new React project, built using Redux, Webpack, Gulp, HMR/Hot Module Reload, Sass (architecture best practices), Mocha, Enzyme, Chai, Express server
 
 ## Getting Started
 
