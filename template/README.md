@@ -79,31 +79,3 @@ Find the source code under the `src` directory for javascript and `sass` for the
 * CHAI
 * ENZYME
 * ZOMBIEJS
-
-### References
-
-	> Warning: [react-router] You cannot change ; it will be ignored
-
-		https://github.com/gaearon/react-hot-loader/issues/298#issuecomment-262115089
-		https://github.com/gaearon/react-hot-loader/issues/298#issuecomment-262115089
-
-
-	> Testing Reactjs components:
-
-		https://facebook.github.io/react/docs/test-utils.html
-		http://airbnb.io/enzyme/index.html
-		http://chaijs.com/
-		https://medium.com/@jerrymao/testing-react-js-components-with-enzyme-mocha-and-chai-534c7f000976#.nafxdk7pj
-		http://www.bebetterdeveloper.com/coding/getting-started-react-mocha.html
-		https://medium.freecodecamp.com/react-unit-testing-with-mocha-and-enzyme-77d18b6875cb#.eynaminv6
-		https://semaphoreci.com/community/tutorials/testing-react-components-with-enzyme-and-mocha
-
-### Todo
-
-	> Implement Sinonjs:
-
-		http://sinonjs.org/
-
-	> Implement flow: static type checker for javascript
-
-		https://flowtype.org/
