@@ -23,7 +23,7 @@
 
 // 		it ('should have the correct title', (done) => {
 
-// 			browser.assert.evaluate('browser.querySelector(\'.app h1\').innerHTML', 'Reaclux Boilerplate');
+// 			browser.assert.evaluate('browser.querySelector(\'.app h1\').innerHTML', 'Reactstart Boilerplate');
 
 // 			done();
 

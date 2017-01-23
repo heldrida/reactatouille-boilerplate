@@ -150,7 +150,7 @@ gulp.task('banner', function () {
 	spawn('clear', [null], { stdio: 'inherit' });
 	console.log(
 		chalk.magenta(
-			figlet.textSync('Reaclux', { horizontalLayout: 'full' })
+			figlet.textSync('Reactstart', { horizontalLayout: 'full' })
 		),
 		chalk.yellow.bold('\n' + ' ' + 'Boilerplate'),
 		chalk.yellow('by Punkbit'),

@@ -4,7 +4,7 @@ var config = {
 	git: {
 		remoteList: ['origin', 'heroku'] // add any other remotes here
 	},
-	app_name: 'Reaclux Boilerplate', // your app name here
+	app_name: 'Reactstart Boilerplate', // your app name here
 	build_name: 'v0.5b' // name your build here for referencing
 }
 

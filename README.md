@@ -1,4 +1,4 @@
-# Reaclux Boilerplate
+# Reactstart Boilerplate
 
 A React Redux Webpack Gulp Sass Mocha Enzyme Chai Boilerplate
 
