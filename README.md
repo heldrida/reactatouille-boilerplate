@@ -1,4 +1,4 @@
-<p align="center">
+<p align="center" style="margin-bottom: 30px;">
   <img src="/template/src/images/logo-reacstart-boilerplate.png?201701231316" height="200">
 </p>
 <p align="left">
