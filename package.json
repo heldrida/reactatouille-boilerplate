@@ -1,6 +1,6 @@
 {
   "name": "reacstart",
-  "version": "0.6.9",
+  "version": "0.6.91",
   "description": "Reacstart is a command-line tool for the Reacstart-Boilerplate, to help quickly start and build a new React project with Redux.",
   "main": "gulpfile.js",
   "scripts": {
