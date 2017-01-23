@@ -41,12 +41,12 @@ if (!projectName) {
 
 } else {
 
-	// 
-	fs.copyAsync(rootDir + '/template', projectName, { clobber: true })	
+	//
+	fs.copyAsync(rootDir + '/template', projectName, { clobber: true })
 		.then(function (err) {
 
 			// Show the initialisation text, white space added to text align
-			console.log(chalk.blue(' ' + 'Creating the project directory `' + projectName + '`...'))			
+			console.log(chalk.blue(' ' + 'Creating the project directory `' + projectName + '`...'))
 			console.log('\n')
 
 			if (err) {
@@ -54,8 +54,10 @@ if (!projectName) {
 				return console.error(chalk.red.bold(err))
 
 			} else {
-				
-				console.log(chalk.green(' ' + 'Success! Your project boilerplate is ready! Happy coding yo!'))
+
+				console.log(chalk.green(' ' + 'Success! Your project boilerplate is ready!'))
+				console.log(chalk.yellow(' ' + 'Remember to `cd ' + projectName + '` and run the `npm install`'))
+				console.log(chalk.green(' ' + 'Happy coding yo!'))
 				console.log('\n')
 
 			}
