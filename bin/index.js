@@ -57,6 +57,7 @@ if (!projectName) {
 
 				console.log(chalk.green(' ' + 'Success! Your project boilerplate is ready!'))
 				console.log(chalk.yellow(' ' + 'Remember to `cd ' + projectName + '` and run the `npm install`'))
+				console.log(chalk.yellow(' ' + 'Also there, you will find the boilerplate README file containing instructions to run the server, build, etc.'))
 				console.log(chalk.green(' ' + 'Happy coding yo!'))
 				console.log('\n')
 
