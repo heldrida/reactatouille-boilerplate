@@ -1,6 +1,6 @@
 {
   "name": "reactatouille",
-  "version": "0.6.92",
+  "version": "0.6.93",
   "description": "Reactatouille is a command-line tool for the Reactatouille-Boilerplate, to help quickly start and build a new React project with Redux.",
   "main": "gulpfile.js",
   "scripts": {
