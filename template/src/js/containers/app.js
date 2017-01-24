@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as motion from 'popmotion';
-
+console.log('motion: ', motion)
 class App extends Component {
 
 	componentDidMount() {
