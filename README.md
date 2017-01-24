@@ -29,7 +29,7 @@ The following command will generate a new boilerplate for you in your desired lo
 reactatouille [project name]
 ```
 
-It'll generate the `project_name` directory for  you, with all the Boilerplate template, where you'll also find a README file containing further instructions to: run the development server, build for staging or production, test, etc.
+It'll generate the `project_name` directory for  you, with all the Boilerplate template files, where you'll also find a README file containing further instructions to: run the development server, build for staging or production, test, etc.
 
 ## Built With
 
