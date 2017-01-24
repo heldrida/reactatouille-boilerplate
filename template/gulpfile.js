@@ -165,6 +165,4 @@ gulp.task('clean', function () {
 			.pipe(clean());
 });
 
-gulp.task('dev', ['default']);
-
 gulp.task('default', ['banner', 'set-dev-env', 'node-server', 'watch']);
