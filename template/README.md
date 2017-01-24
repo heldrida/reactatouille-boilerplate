@@ -81,3 +81,7 @@ Find the source code under the `src` directory for javascript and `sass` for the
 * CHAI
 * ENZYME
 * ZOMBIEJS
+
+### Logo
+
+<div>Icon Transformed from the original made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
