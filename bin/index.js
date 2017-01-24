@@ -17,7 +17,7 @@ spawn('clear', [null], { stdio: 'inherit' })
 // Show the startup banner
 console.log(
 	chalk.magenta(
-		figlet.textSync('Reacstart', { horizontalLayout: 'full' })
+		figlet.textSync('Reactatouille', { horizontalLayout: 'full' })
 	),
 	chalk.yellow.bold('\n' + ' ' + 'Boilerplate CLI'),
 	chalk.yellow('by Punkbit'),

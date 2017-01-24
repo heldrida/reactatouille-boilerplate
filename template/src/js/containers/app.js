@@ -62,7 +62,7 @@ class App extends Component {
 
 		return (
 			<div className="app">
-				<h1>Reacstart Boilerplate</h1>
+				<h1>Reactatouille Boilerplate</h1>
 				<p>A React Redux Webpack Gulp Sass Mocha Enzyme Zombie Chai Boilerplate by <span>Punkbit</span></p>
 			</div>
 		);

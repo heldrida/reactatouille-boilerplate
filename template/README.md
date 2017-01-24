@@ -1,6 +1,6 @@
-# Reacstart Boilerplate
+# Reactatouille Boilerplate
 
-Reacstart is a command-line tool for the Reacstart-Boilerplate to help quickly start and build a new React project, built using Redux, Webpack, Gulp, HMR/Hot Module Reload, Sass (architecture best practices), Mocha, Enzyme, Chai, Express server
+Reactatouille is a command-line tool for the Reactatouille-Boilerplate to help quickly start and build a new React project, built using Redux, Webpack, Gulp, HMR/Hot Module Reload, Sass (architecture best practices), Mocha, Enzyme, Chai, Express server
 
 ## Getting Started
 

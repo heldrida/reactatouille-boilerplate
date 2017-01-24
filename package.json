@@ -1,14 +1,14 @@
 {
-  "name": "reacstart",
+  "name": "reactatouille",
   "version": "0.6.92",
-  "description": "Reacstart is a command-line tool for the Reacstart-Boilerplate, to help quickly start and build a new React project with Redux.",
+  "description": "Reactatouille is a command-line tool for the Reactatouille-Boilerplate, to help quickly start and build a new React project with Redux.",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heldrida/reacstart-boilerplate.git"
+    "url": "git+https://github.com/heldrida/reactatouille-boilerplate.git"
   },
   "keywords": [
     "gulp",
@@ -26,12 +26,12 @@
   "author": "Punkbit",
   "license": "WTFPL",
   "bugs": {
-    "url": "https://github.com/heldrida/reacstart-boilerplate/issues"
+    "url": "https://github.com/heldrida/reactatouille-boilerplate/issues"
   },
   "bin": {
-    "reacstart": "./bin/index.js"
+    "reactatouille": "./bin/index.js"
   },
-  "homepage": "https://github.com/heldrida/reacstart-boilerplate#readme",
+  "homepage": "https://github.com/heldrida/reactatouille-boilerplate#readme",
   "dependencies": {
     "babel-polyfill": "^6.22.0",
     "bluebird": "^3.4.7",
