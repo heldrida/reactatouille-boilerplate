@@ -42,5 +42,9 @@
 		"file-loader": "^0.9.0",
 		"fs-extra": "^2.0.0",
 		"superagent": "^3.3.2"
+	},
+	"engines" : {
+		"node" : ">=7.4.0",
+		"npm": ">=4.0.5"
 	}
 }
