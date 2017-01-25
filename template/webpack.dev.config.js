@@ -14,13 +14,14 @@ module.exports = {
 	output: {
 		path: __dirname + '/static',
 		filename: 'bundle.js',
-		publicPath: '/assets'
+		publicPath: '/'
 	},
 	module: {
 		loaders: [
 			{ test: /\.js$/, exclude: /node_modules/, loaders: ["babel-loader"] },
             { test: /\.scss$/, loader: 'style!css!sass' },
-			{ test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/, loader: 'file-loader' }
+			{ test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/, loader: 'file-loader' },
+			{ test: /\.(jpg|png|gif|svg)$/i, loader: 'file-loader?name=[name].[ext]'}
 		]
 	},
 	plugins: [
