@@ -1,5 +1,4 @@
 var gulp = require('gulp'),
-	plumber = require('gulp-plumber'),
 	webpack = require("webpack"),
 	webpackDevServer = require("webpack-dev-server"),
 	webpackDevConfig = require("./webpack.dev.config.js"),
@@ -15,8 +14,8 @@ var gulp = require('gulp'),
 	config = require('./config'),
 	chalk = require('chalk'),
 	figlet = require('figlet'),
-	clean = require('gulp-clean');
-
+	clean = require('gulp-clean'),
+	nullCompiler = require('./nullCompiler');
 
 
 gulp.task('html', function () {
@@ -75,20 +74,32 @@ gulp.task('unit_test', function () {
 						js: babel
 					}
 				}))
+				.once('error', function () {
+					process.exit(1);
+				})
 				.once('end', function () {
-					gulp.start('end2end_test');
+					process.exit();
 				});
 });
 
-gulp.task('end2end_test', function () {
-	return gulp.src('./test/end2end_tests/**/*.spec.js', { read: false })
-				.pipe(mocha({
-					timeout: 5000,
-					compilers: {
-						js: babel
-					}
-				}));
-});
+// gulp.task('end2end_test', function () {
+// 	return gulp.src('./test/end2end_tests/**/*.spec.js', { read: false })
+// 				.pipe(mocha({
+// 					timeout: 5000,
+// 					compilers: {
+// 						js: babel,
+// 						png: nullCompiler,
+// 						jpg: nullCompiler,
+// 						gif: nullCompiler,
+// 						svg: nullCompiler,
+// 						sass: nullCompiler,
+// 						css: nullCompiler
+// 					}
+// 				}))
+// 				.once('end', function () {
+// 					process.exit();
+// 				});
+// });
 
 gulp.task('test', ['unit_test']);
 

@@ -6,6 +6,8 @@ import { expect } from 'chai';
 import { shallow, mount, render } from 'enzyme';
 import App from '../../src/js/containers/app';
 
+require.extensions['.png'] = function (){ return null; }
+
 describe('Component Foo', function() {
 	it ('should have a class named foo', function() {
 		const wrapper = shallow(<App />);

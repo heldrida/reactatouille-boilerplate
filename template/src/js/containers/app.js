@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TweenLite } from "gsap";
+import { TweenLite, Ease } from "gsap";
 
 const img = require('../../images/logo-reactatouille-boilerplate.png')
 
