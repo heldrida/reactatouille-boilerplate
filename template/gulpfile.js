@@ -78,7 +78,7 @@ gulp.task('unit_test', function () {
 					process.exit(1);
 				})
 				.once('end', function () {
-					process.exit();
+
 				});
 });
 
