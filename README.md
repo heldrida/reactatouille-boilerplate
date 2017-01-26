@@ -41,7 +41,6 @@ It'll generate the `project_name` directory for  you, with all the Boilerplate t
 * MOCHA
 * CHAI
 * ENZYME
-* ZOMBIEJS
 
 ### Logo
 

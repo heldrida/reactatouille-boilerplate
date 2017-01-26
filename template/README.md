@@ -80,7 +80,6 @@ Find the source code under the `src` directory for javascript and `sass` for the
 * MOCHA
 * CHAI
 * ENZYME
-* ZOMBIEJS
 
 ### Logo
 
