@@ -1,6 +1,6 @@
 {
   "name": "reactatouille-boilerplate",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "Reactatouille-Boilerplate built using Redux Webpack Gulp Sass Mocha Enzyme Chai Boilerplate.",
   "main": "gulpfile.js",
   "scripts": {
