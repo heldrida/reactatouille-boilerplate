@@ -6,10 +6,12 @@ import { expect } from 'chai';
 import { shallow, mount, render } from 'enzyme';
 import App from '../../src/js/containers/app';
 
-require.extensions['.png'] = function (){ return null; }
+describe('The main app component', function() {
+	it('renders without crashing', () => {
+		mount(<App />);
+	});
 
-describe('Component Foo', function() {
-	it ('should have a class named foo', function() {
+	it ('should have a class named App', function() {
 		const wrapper = shallow(<App />);
 		expect(wrapper.is('.app')).to.equal(true);
 	});
