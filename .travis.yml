@@ -2,8 +2,9 @@ before_script:
   - npm install -g gulp
   - npm install --save-dev gulp
   - npm install -g webpack
+  - npm install -save0dev webpack
 install:
   - npm install
 language: node_js
 node_js:
-  - '6'
+  - '7'
