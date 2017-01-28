@@ -2,7 +2,9 @@ before_script:
   - npm install -g gulp
   - npm install --save-dev gulp
 before_install:
+  - pwd
   - ls -la
+  - cd ./template
 install:
   - npm install
 language: node_js
