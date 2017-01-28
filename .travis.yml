@@ -1,8 +1,8 @@
 before_script:
   - npm install -g gulp
   - npm install --save-dev gulp
-  - npm install -g webpack
-  - npm install -save0dev webpack
+before_install:
+  - cp ./template/package.json ../
 install:
   - npm install
 language: node_js
