@@ -1,7 +1,7 @@
 {
   "name": "reactatouille-boilerplate",
-  "version": "0.7.4",
-  "description": "Reactatouille-Boilerplate built using Redux Webpack Gulp Sass Mocha Enzyme Chai Boilerplate.",
+  "version": "0.7.41",
+  "description": "Reactatouille-Boilerplate built using Redux Webpack2 Gulp Sass Mocha Enzyme Chai gsap Boilerplate.",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,7 +13,7 @@
   "keywords": [
     "gulp",
     "react",
-    "webpack",
+    "webpack2",
     "boilerplate",
     "ES6",
     "ES2015",
@@ -21,7 +21,8 @@
     "mocha",
     "hmr",
     "express",
-    "sass"
+    "sass",
+    "gsap"
   ],
   "author": "Punkbit",
   "license": "WTFPL",

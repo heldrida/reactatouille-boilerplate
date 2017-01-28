@@ -1,7 +1,7 @@
 {
 	"name": "reactatouille",
-	"version": "0.7.7",
-	"description": "Reactatouille is a command-line tool to help quickly start and build a new React project, using Redux, Webpack, Gulp (You can add your own tasks, yo!), HMR/Hot Module Reload, Sass (architecture best practices), Mocha, Enzyme, Chai and the Express server.",
+	"version": "0.7.71",
+	"description": "Reactatouille is a command-line tool to help quickly start and build a new React project, using Redux, Webpack, Gulp (You can add your own tasks, yo!), HMR/Hot Module Reload, Sass (architecture best practices), Mocha, Enzyme, Chai, gsap and the Express server.",
 	"main": "gulpfile.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
@@ -13,7 +13,7 @@
 	"keywords": [
 		"gulp",
 		"react",
-		"webpack",
+		"webpack2",
 		"boilerplate",
 		"ES6",
 		"ES2015",
@@ -21,7 +21,8 @@
 		"mocha",
 		"hmr",
 		"express",
-		"sass"
+		"sass",
+		"gsap"
 	],
 	"author": "Punkbit",
 	"license": "WTFPL",
