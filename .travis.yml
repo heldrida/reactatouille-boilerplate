@@ -1,5 +1,7 @@
 before_script:
   - npm install -g gulp
+  - npm install --save-dev gulp
+  - npm install -g webpack
 install:
   - npm install
 language: node_js
