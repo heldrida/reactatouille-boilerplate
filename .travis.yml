@@ -1,8 +1,10 @@
 before_script:
   - npm install -g gulp
   - npm install --save-dev gulp
-script: 
-  - cd ./template && npm install && npm test
+before_install:
+  - ls -la
+install:
+  - npm install
 language: node_js
 node_js:
   - '7'
