@@ -76,13 +76,14 @@ Find the source code under the `src` directory for javascript and `sass` for the
 ## Built With
 
 * ReactJS
-* Webpack
+* Webpack 2
 * SASS
 * ES2015
 * GULP
 * MOCHA
 * CHAI
 * ENZYME
+* GSAP
 
 ### Logo
 

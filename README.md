@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/heldrida/reactatouille-boilerplate/master/template/src/images/logo-reactatouille-boilerplate.png?201701241142" height="200">
 </p>
 <p align="left">
-	Reactatouille is a command-line tool to help quickly start and build a new React project, <code>using Redux, Webpack, Gulp (You can add your own tasks, yo!), HMR/Hot Module Reload, Sass (architecture best practices), Mocha, Enzyme, Chai and the Express server</code>.
+	Reactatouille is a command-line tool to help quickly start and build a new React project, <code>using Redux, Webpack, Gulp (You can add your own tasks, yo!), HMR/Hot Module Reload, Sass (architecture best practices), Mocha, Enzyme, Chai, gsap and the Express server</code>.
 </p>
 
 ### Pre-requisities
@@ -34,13 +34,14 @@ It'll generate the `project_name` directory for  you, with all the Boilerplate t
 ## Built With
 
 * ReactJS
-* Webpack
+* Webpack 2
 * SASS
 * ES2015
 * GULP
 * MOCHA
 * CHAI
 * ENZYME
+* GSAP
 
 ### Logo
 
