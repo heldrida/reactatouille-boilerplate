@@ -14,7 +14,7 @@ module.exports = {
 	output: {
 		path: __dirname + '/dist',
 		filename: 'bundle.js',
-		publicPath: '/assets/'
+		publicPath: '/assets'
 	},
 	devServer: {
 		historyApiFallback: true,
@@ -52,7 +52,7 @@ module.exports = {
 			{
 				test: /\.(jpg|png|gif|svg)$/i,
 				use: [
-					'file-loader?name=[path][name].[ext]?[hash]'
+					'file-loader?name=[path][name].[ext]?[hash]&outputPath=/assets/&publicPath=/assets/'
 				]
 			}
 		]
