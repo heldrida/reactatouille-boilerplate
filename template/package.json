@@ -4,8 +4,7 @@
   "description": "Reactatouille-Boilerplate built using Redux Webpack2 Gulp Sass Mocha Enzyme Chai gsap Boilerplate.",
   "main": "gulpfile.js",
   "scripts": {
-    //"test": "./node_modules/mocha/bin/mocha --compilers js:babel-register,css:nullCompiler.js  ./test/**/*.spec.js"
-    "test": "gulp test"
+    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-register,css:nullCompiler.js  ./test/**/*.spec.js"
   },
   "repository": {
     "type": "git",
@@ -49,7 +48,6 @@
     "gsap": "^1.19.1",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
-    "gulp-exit": "0.0.2",
     "gulp-git": "^1.12.0",
     "gulp-mocha": "^3.0.1",
     "gulp-plumber": "^1.1.0",

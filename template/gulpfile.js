@@ -7,7 +7,6 @@ var gulp = require('gulp'),
 	gutil = require('gulp-util'),
 	babel = require('babel-core/register'),
 	mocha = require('gulp-mocha'),
-	gExit = require('gulp-exit'),
 	spawn = require('child_process').spawn,
 	port = 3000,
 	open = require('open'),
@@ -78,10 +77,12 @@ gulp.task('unit_test', function () {
 				.once('error', function () {
 					process.exit(1);
 				})
+				// TODO: this exists gulp completely it seems
+				// so there's an NPM TEST script instead for Travis CI
+				// maybe find better solution in the future
 				// .once('end', function () {
 				// 	process.exit(1);
 				// })
-				.pipe(gExit());
 });
 
 // gulp.task('end2end_test', function () {
