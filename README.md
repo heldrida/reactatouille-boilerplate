@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/heldrida/reactatouille-boilerplate.svg?branch=master)](https://travis-ci.org/heldrida/reactatouille-boilerplate)
+
 <p align="center" style="margin: 30px 0;">
   <img src="https://raw.githubusercontent.com/heldrida/reactatouille-boilerplate/master/template/src/images/logo-reactatouille-boilerplate.png?201701241142" height="200">
 </p>
