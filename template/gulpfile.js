@@ -7,6 +7,7 @@ var gulp = require('gulp'),
 	gutil = require('gulp-util'),
 	babel = require('babel-core/register'),
 	mocha = require('gulp-mocha'),
+	gExit = require('gulp-exit'),
 	spawn = require('child_process').spawn,
 	port = 3000,
 	open = require('open'),
@@ -77,9 +78,10 @@ gulp.task('unit_test', function () {
 				.once('error', function () {
 					process.exit(1);
 				})
-				.once('end', function () {
-					process.exit(1);
-				});
+				// .once('end', function () {
+				// 	process.exit(1);
+				// })
+				.pipe(gExit());
 });
 
 // gulp.task('end2end_test', function () {
