@@ -14,7 +14,9 @@ var babel = require('babel-polyfill'),
 	webpackDevConfig = require('./webpack.dev.config'),
 	compiler = webpack(webpackDevConfig),
 	_ = require('lodash'),
-	chalk = require('chalk')
+	chalk = require('chalk'),
+	ReactDOMServer = require('react-dom/server'),
+	myApp = require('./src/js/index.js')
 
 process.on('uncaughtException', function (err) {
 	throw err;
@@ -24,6 +26,10 @@ process.on('SIGINT', function () {
 	serverInstance.close();
 	process.exit(0);
 })
+
+app.engine('ejs', require('ejs').__express);
+app.set('view engine', 'ejs');
+app.set('views', dist);
 
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -115,7 +121,12 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging')
 			return next()
 		};
 
-		res.sendFile(path.join(dist, 'index.html'));
+		// res.sendFile(path.join(dist, 'index.html'));	
+
+		res.render('index', {
+			app: ReactDOMServer.renderToString(ejs.render(myApp))
+		});
+
 	});
 }
 
