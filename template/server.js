@@ -1,3 +1,7 @@
+require('babel-register')({
+    presets: ['react']
+});
+
 var babel = require('babel-polyfill'),
 	express = require('express'),
 	path = require('path'),
@@ -15,6 +19,9 @@ var babel = require('babel-polyfill'),
 	compiler = webpack(webpackDevConfig),
 	_ = require('lodash'),
 	chalk = require('chalk')
+	fs = require('fs'),
+	htmlTemplateString = fs.readFileSync(dist + '/index.html', 'utf-8'),
+	ReactDOMServer = require('react-dom/server')
 
 process.on('uncaughtException', function (err) {
 	throw err;
@@ -115,7 +122,12 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging')
 			return next()
 		};
 
-		res.sendFile(path.join(dist, 'index.html'));
+		// res.sendFile(path.join(dist, 'index.html'));
+		// var myApp = require('./src/js/index.js')
+		var myApp = require('./src/js/index.js')
+		var r = ReactDOMServer.renderToString(myApp)
+		res.send(htmlTemplateString.replace('<div id="app">', '<div id="app">' + r))
+
 	});
 }
 

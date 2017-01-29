@@ -12,7 +12,7 @@ import { Provider } from 'react-redux';
 import configureStore from './store'
 
 // include the stylesheet entry point
-require('../sass/app.scss');
+//require('../sass/app.scss');
 
 const Root = (props) => {
     return (

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TweenLite } from "gsap";
 
-const img = require('../../images/logo-reactatouille-boilerplate.png')
+//const img = require('../../images/logo-reactatouille-boilerplate.png')
 
 class App extends Component {
 
@@ -15,7 +15,7 @@ class App extends Component {
 
 		return (
 			<div className="app">
-				<img ref='logo' src={ img } alt='' />
+				<p>232323</p>
 			</div>
 		);
 
