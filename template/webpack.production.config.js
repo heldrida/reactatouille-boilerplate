@@ -1,3 +1,4 @@
+var Config = require('./config');
 var path = require("path");
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -50,7 +51,8 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			inject: true,
 			template: __dirname + '/src/' + 'index.html',
-			filename: 'index.html'
+			filename: 'index.html',
+			build_name: Config.build_name
 		}),
 		new webpack.DefinePlugin({
 			'process.env': {

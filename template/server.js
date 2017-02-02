@@ -14,7 +14,8 @@ var babel = require('babel-polyfill'),
 	webpackDevConfig = require('./webpack.dev.config'),
 	compiler = webpack(webpackDevConfig),
 	_ = require('lodash'),
-	chalk = require('chalk')
+	chalk = require('chalk'),
+	open = require('open')
 
 process.on('uncaughtException', function (err) {
 	throw err;
@@ -80,6 +81,14 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging')
 		}
 	});
 
+	devMiddleware.waitUntilValid(function () {
+		if (process.env.NODE_ENV === 'development') {
+			open('http://localhost:' + port, function (err) {
+				if (err) throw err;
+			});
+		}
+	});
+
 	router.use(devMiddleware);
 
 	router.use(webpackHotMiddleware(compiler, {
@@ -108,8 +117,8 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging')
 
 	// any other is mapped here
 	router.get('*', function(req, res, next) {
-		
-		// Catch-all route after the ones you want to exclude like the example before '/' 
+
+		// Catch-all route after the ones you want to exclude like the example before '/'
 		// or exclude it here (this has the advantage of ordering however you'd like)
 		if (req.url === '/foo' || req.url === '/bar') {
 			return next()
@@ -127,5 +136,5 @@ serverInstance = app.listen(port, function (error) {
 	if (error) {
 		console.log(error); // eslint-disable-line no-console
 	}
-	console.log(chalk.green('[' + config.app_name + ' | ' + process.env.NODE_ENV + ' | ' + config.build_name + '] listening on port ' + port + '!'));
+	console.log(chalk.green('[' + config.build_name + '] listening on port ' + port + '!'));
 });

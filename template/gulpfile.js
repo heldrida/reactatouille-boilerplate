@@ -1,3 +1,14 @@
+var config = require('./config');
+var environments = ['staging', 'production'];
+var args = require('yargs').argv;
+
+// Ensure correct context before importing anything else (config file(s), etc)
+if (args.env && environments.indexOf(args.env) > -1) {
+	process.env.NODE_ENV = args.env;
+} else {
+	process.env.NODE_ENV = 'development';
+}
+
 var gulp = require('gulp'),
 	webpack = require("webpack"),
 	webpackDevServer = require("webpack-dev-server"),
@@ -8,28 +19,45 @@ var gulp = require('gulp'),
 	babel = require('babel-core/register'),
 	mocha = require('gulp-mocha'),
 	spawn = require('child_process').spawn,
-	port = 3000,
+	port = config.defaultDevPort,
 	open = require('open'),
 	git = require('gulp-git'),
-	config = require('./config'),
 	chalk = require('chalk'),
 	figlet = require('figlet'),
 	clean = require('gulp-clean'),
 	nullCompiler = require('./nullCompiler');
 
+function getDistributionDir() {
+	var baseDir = 'dist';
+	return baseDir + '/' + process.env.NODE_ENV;
+}
 
 gulp.task('html', function () {
-	var n = (['production', 'staging'].indexOf(process.argv[4]) > -1 && process.argv[4]) || 'staging';
-	return gulp.src('src/index.html')
-				.pipe(gulp.dest('dist/' + n));
+    return gulp.src('src/index.html')
+				.pipe(gulp.dest(getDistributionDir()));
 });
 
-gulp.task('build', ['clean', 'test', 'html'], function () {
-	var n = (['production', 'staging'].indexOf(process.argv[4]) > -1 && process.argv[4]) || 'staging';
-	gulp.start('build-' + n);
+gulp.task('images', function () {
+    return gulp.src('src/images/**/*')
+				.pipe(gulp.dest(getDistributionDir() + '/images'));
 });
 
-gulp.task("build-staging", function () {
+// the tasks html and images exist in the `_build-env` to avoid running
+// in parallel with the `clean` task
+gulp.task("build", ["test", "clean"], function () {
+	switch(process.env.NODE_ENV) {
+		case 'production':
+			gulp.start('_build-production');
+		break;
+		case 'staging':
+			gulp.start('_build-staging');
+		break;
+		default:
+			console.log('Please provide the environment argument!')
+	}
+});
+
+gulp.task("_build-staging", ["html", "images"], function (cb) {
     // run webpack
     webpack(webpackStagingConfig, function (err, stats) {
         if(err) throw new gutil.PluginError("webpack", err);
@@ -40,9 +68,10 @@ gulp.task("build-staging", function () {
 			colors: true
 		}));
 		console.log('webpack compile success.');
+		cb(err); // this does not gulp exit for some reason
     });
 });
-gulp.task("build-production", function () {
+gulp.task("_build-production", ["html", "images"], function (cb) {
     // run webpack
     webpack(webpackProductionConfig, function (err, stats) {
         if(err) throw new gutil.PluginError("webpack", err);
@@ -53,6 +82,7 @@ gulp.task("build-production", function () {
 			colors: true
 		}));
 		console.log('webpack compile success.');
+		cb(err); // this does not gulp exit for some reason
     });
 });
 
@@ -67,54 +97,33 @@ gulp.task('deploy', function(){
 	});
 });
 
-gulp.task('unit_test', function () {
-	return gulp.src('./test/unit_tests/**/*.spec.js', { read: false })
-				.pipe(mocha({
-					compilers: {
-						js: babel
-					}
-				}))
-				.once('error', function () {
-					process.exit(1);
-				})
-				// TODO: this exists gulp completely it seems
-				// so there's an NPM TEST script instead for Travis CI
-				// maybe find better solution in the future
-				// .once('end', function () {
-				// 	process.exit(1);
-				// })
+gulp.task('unit_test', function (cb) {
+	gulp.src('./test/unit_tests/**/*.spec.js', { read: false })
+		.pipe(mocha({
+			compilers: {
+				js: babel
+			}
+		}))
+		.once('error', function (err) {
+			cb(err);
+		})
+		.once('end', function () {
+			cb();
+		});
 });
-
-// gulp.task('end2end_test', function () {
-// 	return gulp.src('./test/end2end_tests/**/*.spec.js', { read: false })
-// 				.pipe(mocha({
-// 					timeout: 5000,
-// 					compilers: {
-// 						js: babel,
-// 						png: nullCompiler,
-// 						jpg: nullCompiler,
-// 						gif: nullCompiler,
-// 						svg: nullCompiler,
-// 						sass: nullCompiler,
-// 						css: nullCompiler
-// 					}
-// 				}))
-// 				.once('end', function () {
-// 					process.exit();
-// 				});
-// });
 
 gulp.task('test', ['unit_test']);
 
 gulp.task('openBrowser', function () {
-  open('http://localhost:' + port, function (err) {
-  	if (err) throw err;
-  });
+	open('http://localhost:' + port, function (err) {
+		if (err) throw err;
+	});
 });
 
 gulp.task('watch', function () {
 	gulp.watch('./src/index.html', ['html']);
 	gulp.watch('./src/js/**/*.js', ['test']);
+	gulp.watch('./src/images/**/*', ['images'])
 });
 
 gulp.task('node-server', function (cb) {
@@ -152,14 +161,6 @@ gulp.task('preview', function (cb) {
 
 });
 
-gulp.task('set-dev-env', function () {
-	return process.env.NODE_ENV = 'development';
-});
-
-gulp.task('set-prod-env', function () {
-	return process.env.NODE_ENV = 'production';
-});
-
 gulp.task('banner', function () {
 	spawn('clear', [null], { stdio: 'inherit' });
 	console.log(
@@ -174,9 +175,14 @@ gulp.task('banner', function () {
 });
 
 gulp.task('clean', function () {
-	var n = (['production', 'staging'].indexOf(process.argv[4]) > -1 && process.argv[4]) || false;
-	return gulp.src('./dist/' + n, { read: false })
-			.pipe(clean());
+	// returns a promise, so gulp will know when complete
+	return gulp.src(getDistributionDir(), { read: false })
+			.pipe(clean({force: true}));
 });
 
-gulp.task('default', ['banner', 'set-dev-env', 'node-server', 'watch']);
+// exit once all complete (avoid gulp-mocha to hang on complete)
+gulp.doneCallback = function (err) {
+	process.exit(err ? 1 : 0);
+}
+
+gulp.task('default', ['banner', 'node-server', 'watch']);
