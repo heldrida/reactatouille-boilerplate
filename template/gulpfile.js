@@ -114,12 +114,6 @@ gulp.task('unit_test', function (cb) {
 
 gulp.task('test', ['unit_test']);
 
-gulp.task('openBrowser', function () {
-	open('http://localhost:' + port, function (err) {
-		if (err) throw err;
-	});
-});
-
 gulp.task('watch', function () {
 	gulp.watch('./src/index.html', ['html']);
 	gulp.watch('./src/js/**/*.js', ['test']);
