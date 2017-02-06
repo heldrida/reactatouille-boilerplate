@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CompressionPlugin = require("compression-webpack-plugin");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var config = require('./config');
 
 module.exports = {
 	context: path.resolve(__dirname, 'src'),
@@ -50,7 +51,8 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			inject: true,
 			template: __dirname + '/src/' + 'index.html',
-			filename: 'index.html'
+			filename: 'index.html',
+			build_name: config.build_name
 		}),
 		new webpack.DefinePlugin({
 			'process.env': {
