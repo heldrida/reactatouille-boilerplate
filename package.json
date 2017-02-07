@@ -1,6 +1,6 @@
 {
   "name": "reactatouille",
-  "version": "0.8.1",
+  "version": "0.8.11",
   "description": "Reactatouille is a command-line tool to help quickly start and build a new React project, using Redux, Webpack, Gulp (You can add your own tasks, yo!), HMR/Hot Module Reload, Sass (architecture best practices), Mocha, Enzyme, Chai, gsap and the Express server.",
   "main": "gulpfile.js",
   "scripts": {
@@ -38,6 +38,7 @@
     "bluebird": "^3.4.7",
     "chai": "^3.5.0",
     "chalk": "^1.1.3",
+    "cli-clear": "^1.0.4",
     "commander": "^2.9.0",
     "figlet": "^1.2.0",
     "file-loader": "^0.9.0",
@@ -49,6 +50,5 @@
     "npm": ">=4.0.5"
   },
   "devDependencies": {
-    "cli-clear": "^1.0.4"
   }
 }
