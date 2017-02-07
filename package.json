@@ -1,51 +1,54 @@
 {
-	"name": "reactatouille",
-	"version": "0.8.0",
-	"description": "Reactatouille is a command-line tool to help quickly start and build a new React project, using Redux, Webpack, Gulp (You can add your own tasks, yo!), HMR/Hot Module Reload, Sass (architecture best practices), Mocha, Enzyme, Chai, gsap and the Express server.",
-	"main": "gulpfile.js",
-	"scripts": {
-		"test": "cd ./template && gulp test"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/heldrida/reactatouille-boilerplate.git"
-	},
-	"keywords": [
-		"gulp",
-		"react",
-		"webpack2",
-		"boilerplate",
-		"ES6",
-		"ES2015",
-		"babel",
-		"mocha",
-		"hmr",
-		"express",
-		"sass",
-		"gsap"
-	],
-	"author": "Punkbit",
-	"license": "WTFPL",
-	"bugs": {
-		"url": "https://github.com/heldrida/reactatouille-boilerplate/issues"
-	},
-	"bin": {
-		"reactatouille": "./bin/index.js"
-	},
-	"homepage": "https://github.com/heldrida/reactatouille-boilerplate#readme",
-	"dependencies": {
-		"babel-polyfill": "^6.22.0",
-		"bluebird": "^3.4.7",
-		"chai": "^3.5.0",
-		"chalk": "^1.1.3",
-		"commander": "^2.9.0",
-		"figlet": "^1.2.0",
-		"file-loader": "^0.9.0",
-		"fs-extra": "^2.0.0",
-		"superagent": "^3.3.2"
-	},
-	"engines" : {
-		"node" : ">=7.4.0",
-		"npm": ">=4.0.5"
-	}
+  "name": "reactatouille",
+  "version": "0.8.1",
+  "description": "Reactatouille is a command-line tool to help quickly start and build a new React project, using Redux, Webpack, Gulp (You can add your own tasks, yo!), HMR/Hot Module Reload, Sass (architecture best practices), Mocha, Enzyme, Chai, gsap and the Express server.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "cd ./template && gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heldrida/reactatouille-boilerplate.git"
+  },
+  "keywords": [
+    "gulp",
+    "react",
+    "webpack2",
+    "boilerplate",
+    "ES6",
+    "ES2015",
+    "babel",
+    "mocha",
+    "hmr",
+    "express",
+    "sass",
+    "gsap"
+  ],
+  "author": "Punkbit",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/heldrida/reactatouille-boilerplate/issues"
+  },
+  "bin": {
+    "reactatouille": "./bin/index.js"
+  },
+  "homepage": "https://github.com/heldrida/reactatouille-boilerplate#readme",
+  "dependencies": {
+    "babel-polyfill": "^6.22.0",
+    "bluebird": "^3.4.7",
+    "chai": "^3.5.0",
+    "chalk": "^1.1.3",
+    "commander": "^2.9.0",
+    "figlet": "^1.2.0",
+    "file-loader": "^0.9.0",
+    "fs-extra": "^2.0.0",
+    "superagent": "^3.3.2"
+  },
+  "engines": {
+    "node": ">=7.4.0",
+    "npm": ">=4.0.5"
+  },
+  "devDependencies": {
+    "cli-clear": "^1.0.4"
+  }
 }

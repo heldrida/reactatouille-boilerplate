@@ -10,10 +10,11 @@ var spawn = require('child_process').spawn,
 	fs = Promise.promisifyAll(require('fs-extra')),
 	path = require('path'),
 	rootDir = path.resolve(__dirname, '..'),
+	clear = require("cli-clear"),
 	projectName = ''
 
 // Clear the screen
-spawn('clear', [null], { stdio: 'inherit' })
+clear()
 
 // Show the startup banner
 console.log(
