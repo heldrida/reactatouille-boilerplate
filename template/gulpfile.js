@@ -1,4 +1,5 @@
 var args = require('yargs').argv;
+var clear = require('cli-clear');
 
 if (args.env && ['staging', 'production'].indexOf(args.env) > -1) {
 	process.env.NODE_ENV = args.env;
@@ -145,7 +146,7 @@ gulp.task('preview', function (cb) {
 });
 
 gulp.task('banner', function () {
-	spawn('clear', [null], { stdio: 'inherit' });
+	clear();
 	console.log(
 		chalk.magenta(
 			figlet.textSync('Reactatouille', { horizontalLayout: 'full' })
