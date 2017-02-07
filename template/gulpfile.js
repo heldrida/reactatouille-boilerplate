@@ -159,7 +159,7 @@ gulp.task('banner', function () {
 
 gulp.task('clean', function () {
 	return gulp.src(getDistributionDir(), { read: false })
-			.pipe(clean());
+			.pipe(clean({force: true}));
 });
 
 gulp.doneCallback = function (err) {

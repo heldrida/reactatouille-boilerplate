@@ -134,5 +134,5 @@ serverInstance = app.listen(port, function (error) {
 	if (error) {
 		console.log(error); // eslint-disable-line no-console
 	}
-	console.log(chalk.green('[' + config.app_name + ' | ' + process.env.NODE_ENV + ' | ' + config.build_name + '] listening on port ' + port + '!'));
+	console.log(chalk.green('[' + config.build_name + '] listening on port ' + port + '!'));
 });
