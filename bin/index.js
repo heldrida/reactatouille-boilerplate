@@ -8,7 +8,8 @@ var spawn = require('child_process').spawn,
 	program = require('commander'),
 	Promise = require("bluebird"),
 	fs = Promise.promisifyAll(require('fs-extra')),
-	rootDir = __dirname.replace(/\/bin/, ''),
+	path = require('path'),
+	rootDir = path.resolve(__dirname, '..'),
 	projectName = ''
 
 // Clear the screen
