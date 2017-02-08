@@ -38,6 +38,7 @@
     "babel-preset-react": "^6.11.1",
     "chai": "^3.5.0",
     "cheerio": "^0.22.0",
+    "cli-clear": "^1.0.4",
     "compression-webpack-plugin": "^0.3.2",
     "css-loader": "^0.26.1",
     "enzyme": "^2.4.1",
