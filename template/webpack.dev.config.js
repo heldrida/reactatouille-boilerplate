@@ -9,6 +9,7 @@ module.exports = {
 		'react-hot-loader/patch',
 		'webpack/hot/dev-server',
 		'webpack-hot-middleware/client',
+		'babel-polyfill',
 		'./js/index.js'
 	],
 	output: {
