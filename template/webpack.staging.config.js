@@ -7,9 +7,7 @@ var config = require('./config');
 
 module.exports = {
 	context: path.resolve(__dirname, 'src'),
-	entry: [
-		'./js/index.js'
-	],
+	entry: ['babel-polyfill', './js/index.js'],
 	output: {
 		path: __dirname + '/dist/staging',
 	    filename: 'js/bundle-[hash].js',
