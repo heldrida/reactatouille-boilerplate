@@ -12,11 +12,6 @@ module.exports = {
     'babel-polyfill',
     './js/index.js'
   ],
-  output: {
-    path: __dirname + '/dist',
-    filename: 'bundle.js',
-    publicPath: '/assets'
-  },
   devServer: {
     historyApiFallback: true,
     // enable HMR on the server
@@ -53,7 +48,7 @@ module.exports = {
       {
         test: /\.(jpg|png|gif|svg)$/i,
         use: [
-          'file-loader?name=[path][name].[ext]?[hash]&outputPath=/assets/&publicPath=/assets/'
+          'file-loader'
         ]
       }
     ]
