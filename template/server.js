@@ -8,12 +8,6 @@ var babel = require('babel-polyfill'),
   superagent = require('superagent'),
   config = require('./config'),
   serverInstance = null,
-	// webpack = require('webpack'),
-	// webpackDevMiddleware = require('webpack-dev-middleware'),
-	// webpackHotMiddleware = require('webpack-hot-middleware'),
-	// webpackDevConfig = require('./webpack.dev.config'),
-	// compiler = webpack(webpackDevConfig),
-	// _ = require('lodash'),
   chalk = require('chalk')
 
 process.on('uncaughtException', function (err) {
