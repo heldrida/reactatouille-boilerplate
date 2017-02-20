@@ -19,7 +19,7 @@ class App extends Component {
     let onComplete = () => {
       this.state.style = this.refs['logo'].getAttribute('style')
     }
-    TweenLite.fromTo(this.refs.logo, 0.8, { opacity: 0, x: 50 }, { opacity: 1, x: 0, ease: Bounce.easeOut, onComplete })
+    TweenLite.fromTo(this.refs.logo, 0.8, { opacity: 0, x: 50 }, { opacity: 1, x: 0, ease: Bounce.easeOut, onComplete }) // eslint-disable-line no-undef
   }
 
   render () {
