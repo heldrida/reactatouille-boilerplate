@@ -8,7 +8,7 @@ module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: ['babel-polyfill', './js/index.js'],
   output: {
-    path: __dirname + '/dist/staging',
+    path: path.join(__dirname, '/dist/staging'),
     filename: 'js/bundle-[hash].js',
     publicPath: '/assets'
   },

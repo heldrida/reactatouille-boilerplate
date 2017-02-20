@@ -111,7 +111,7 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging')
     if ([webpackDevConfig.output.filename, 'index.html'].indexOf(file) !== -1) {
       res.end(devMiddleware.fileSystem.readFileSync(path.join(webpackDevConfig.output.path, file)))
     } else if (file.indexOf('.') === -1) {
-       // if the url does not have an extension, assume they've navigated to something like /home and want index.html
+      // if the url does not have an extension, assume they've navigated to something like /home and want index.html
       res.end(devMiddleware.fileSystem.readFileSync(path.join(webpackDevConfig.output.path, 'index.html')))
     } else {
       next()
