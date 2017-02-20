@@ -1,31 +1,33 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { AppContainer as HotReload } from 'react-hot-loader'
+import Root from './root'
+import configureStore from './store'
 import { browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
-import { AppContainer as HotReload } from 'react-hot-loader'
-import configureStore from './store'
-import routes from './routes'
-import Root from './root'
 
 const store = configureStore({})
 const history = syncHistoryWithStore(browserHistory, store)
 
-render(
-  <HotReload>
-    <Root store={store} history={history} routes={routes} />
-  </HotReload>,
-  document.getElementById('app')
-)
+// render method for instantiation and Hot module reload
+const renderApp = (RootComponent, store, history) => {
+  let rootEl = document.getElementById('app')
+  render(
+    <HotReload>
+      <RootComponent store={store} history={history} />
+    </HotReload>,
+    rootEl,
+  )
+}
 
-if (module.hot) {
-  module.hot.accept('./routes', () => {
-    const newRoutes = require('./routes').default
-    render(
-      <HotReload>
-        <Root store={store} history={history} routes={newRoutes} />
-      </HotReload>,
-      document.getElementById('app')
-    )
+// create instance
+renderApp(Root, store, history)
+
+if (process.env.NODE_ENV === 'development' && module.hot) {
+  module.hot.accept('./root', () => {
+    const NextRoot = require('./root').default
+    // (re)render, the updated app
+    renderApp(NextRoot, store, history)
   })
 
   /**
