@@ -3,6 +3,13 @@ import path from 'path'
 import superagent from 'superagent'
 import chalk from 'chalk'
 
+import React from 'react'
+import { renderToString } from 'react-dom/server'
+import { Provider } from 'react-redux'
+
+import configureStore from '../src/js/store'
+import App from '../src/js/containers/app'
+
 const app = express()
 const router = express.Router()
 const port = process.env.PORT ? process.env.PORT : 3000
@@ -128,8 +135,41 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging')
     if (req.url === '/foo' || req.url === '/bar') {
       return next()
     };
-    res.sendFile(path.join(dist, 'index.html'))
+    // res.sendFile(path.join(dist, 'index.html'))
+
+    // Compile an initial state
+    const preloadedState = {'foobar': 1}
+    // Create a new Redux store instance
+    const store = configureStore(preloadedState)
+    // Render the component to a string
+    const html = renderToString(
+      <Provider store={store}>
+        <App />
+      </Provider>
+    )
+    // Grab the initial state from our Redux store
+    const finalState = store.getState()
+    // Send the rendered page back to the client
+    res.send(renderFullPage(html, finalState))
   })
+}
+
+function renderFullPage (html, preloadedState) {
+  return `
+    <!doctype html>
+    <html>
+      <head>
+        <title>Redux Universal Example</title>
+      </head>
+      <body>
+        <div id="app">${html}</div>
+        <script>
+          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\x3c')}
+        </script>
+        <script src="/static/bundle.js"></script>
+      </body>
+    </html>
+    `
 }
 
 app.disable('x-powered-by')
