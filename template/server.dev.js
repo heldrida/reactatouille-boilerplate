@@ -16,6 +16,8 @@ const port = process.env.PORT ? process.env.PORT : 3000
 var serverInstance = null
 var dist = path.join(__dirname, ('dist' + (process.env.NODE_ENV ? '/' + process.env.NODE_ENV : 'staging')))
 var config = null
+var fs = require('fs')
+var htmlTemplateString = ''
 
 /**
  * Environment settings
@@ -23,8 +25,10 @@ var config = null
 if (['staging', 'production'].indexOf(process.env.NODE_ENV) > -1) {
   dist = path.resolve(__dirname, process.env.NODE_ENV)
   config = require('../config')
+  htmlTemplateString = fs.readFileSync(dist + '/index.html', 'utf-8')
 } else {
   config = require('./config')
+  htmlTemplateString = fs.readFileSync('./src/index.html', 'utf-8')
 }
 
 /**
@@ -142,7 +146,7 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging')
     // Create a new Redux store instance
     const store = configureStore(preloadedState)
     // Render the component to a string
-    const html = renderToString(
+    const myAppHtml = renderToString(
       <Provider store={store}>
         <App />
       </Provider>
@@ -150,26 +154,12 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging')
     // Grab the initial state from our Redux store
     const finalState = store.getState()
     // Send the rendered page back to the client
-    res.send(renderFullPage(html, finalState))
+    let html = htmlTemplateString.replace('<div id="app">', '<div id="app">' + myAppHtml)
+    // Paste the state into the html
+    const preloadedStateScript = `<script>window.__PRELOADED_STATE__ = ${JSON.stringify(finalState).replace(/</g, '\\x3c')}</script>`
+    html = html.replace('</head>', preloadedStateScript)
+    res.send(html)
   })
-}
-
-function renderFullPage (html, preloadedState) {
-  return `
-    <!doctype html>
-    <html>
-      <head>
-        <title>Redux Universal Example</title>
-      </head>
-      <body>
-        <div id="app">${html}</div>
-        <script>
-          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\x3c')}
-        </script>
-        <script src="/static/bundle.js"></script>
-      </body>
-    </html>
-    `
 }
 
 app.disable('x-powered-by')
