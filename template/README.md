@@ -20,8 +20,6 @@ Use the `config.js` in the root to set any parameters, such as the `repository r
 Nodejs & NPM
 ```
 
-To use EditorConfig file, you will need to install a plugin available @ http://editorconfig.org/ for your favourite editor.
-
 ### Installing
 
 ```
@@ -87,6 +85,7 @@ Find the source code under the `src` directory for javascript and `sass` for the
 * CHAI
 * ENZYME
 * GSAP
+* STANDARDJS
 
 ### Logo
 

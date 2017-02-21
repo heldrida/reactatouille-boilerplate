@@ -14,8 +14,6 @@
 Nodejs & NPM
 ```
 
-To use EditorConfig file, you will need to install a plugin available @ http://editorconfig.org/ for your favourite editor.
-
 ## Getting Started
 
 These instructions will get you a copy of the command line tool, that you'll be able to use to generate or quick start a new project boilerplate. To do so please run the command below, that will install `reactatouille` has a global:
@@ -45,6 +43,7 @@ It'll generate the `project_name` directory for  you, with all the Boilerplate t
 * CHAI
 * ENZYME
 * GSAP
+* STANDARDJS
 
 ### Logo
 
