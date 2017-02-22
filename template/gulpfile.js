@@ -13,8 +13,6 @@ var webpack = require('webpack')
 var webpackStagingConfig = require('./webpack.staging.config.js')
 var webpackProductionConfig = require('./webpack.production.config.js')
 var gutil = require('gulp-util')
-var babel = require('babel-core/register')
-var mocha = require('gulp-mocha')
 var spawn = require('child_process').spawn
 var port = 3000
 var open = require('open')
@@ -103,16 +101,24 @@ gulp.task('deploy', function () {
   })
 })
 
+// gulp.task('unit_test', function (cb) {
+//   gulp.src('./test/unit_tests/**/*.spec.js', { read: false })
+//     .pipe(mocha({
+//       compilers: {
+//         js: babel
+//       }
+//     }))
+//     .once('end', function () {
+//       cb()
+//     })
+// })
+
 gulp.task('unit_test', function (cb) {
-  gulp.src('./test/unit_tests/**/*.spec.js', { read: false })
-    .pipe(mocha({
-      compilers: {
-        js: babel
-      }
-    }))
-    .once('end', function () {
-      cb()
-    })
+  var cmd = spawn('mocha', ['--compilers', 'js:babel-core/register', '--require', './nullCompiler.js', './test/**/*.spec.js'], { stdio: 'inherit' })
+  cmd.on('close', function (code) {
+    // console.log('Mocha tests completed!')
+    cb(code)
+  })
 })
 
 gulp.task('test', ['unit_test'])

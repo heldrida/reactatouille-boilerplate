@@ -50,7 +50,6 @@
     "gulp-babel": "^6.1.2",
     "gulp-clean": "^0.3.2",
     "gulp-git": "^2.0.0",
-    "gulp-mocha": "^3.0.1",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-standard": "^8.0.4",
