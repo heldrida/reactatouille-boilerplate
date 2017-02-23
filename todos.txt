@@ -12,3 +12,9 @@
  		https://hackernoon.com/my-journey-toward-a-maintainable-project-structure-for-react-redux-b05dfd999b5#.ltj5ma79j
 
  		https://medium.com/front-end-hacking/structuring-react-and-redux-applications-255361d24f84#.rgluzy6km
+
+    https://github.com/dimaip/server-side-rendering
+
+    https://medium.com/@liheyse/react-server-side-rendering-ssr-with-express-and-css-modules-722ef0cc8fa0#.qv6kzn87k
+
+    http://crypt.codemancers.com/posts/2016-09-16-react-server-side-rendering/
