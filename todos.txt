@@ -23,3 +23,11 @@
     is the routes being imported at all ?
     
     http://stackoverflow.com/questions/42163676/routing-and-rendering-react-components-server-side?rq=1
+
+
+    >>>> see 
+
+    http://stackoverflow.com/questions/42415102/how-to-transpile-all-react-es6-components-for-server-side-rendering-route-match/42416931#42416931
+
+    https://github.com/ctrlplusb/react-universally
+
