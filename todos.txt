@@ -18,3 +18,8 @@
     https://medium.com/@liheyse/react-server-side-rendering-ssr-with-express-and-css-modules-722ef0cc8fa0#.qv6kzn87k
 
     http://crypt.codemancers.com/posts/2016-09-16-react-server-side-rendering/
+
+
+    is the routes being imported at all ?
+    
+    http://stackoverflow.com/questions/42163676/routing-and-rendering-react-components-server-side?rq=1
