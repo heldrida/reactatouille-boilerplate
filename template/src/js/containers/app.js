@@ -32,6 +32,7 @@ class App extends Component {
     return (
       <div className='app'>
         <h1>Hello {this.state.test}</h1>
+        {this.props.children}
       </div>
     )
   }

@@ -5,10 +5,10 @@ import chalk from 'chalk'
 
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import { Provider } from 'react-redux'
+import { match, RouterContext } from 'react-router'
+import routes from './src/js/routes'
 
-import configureStore from '../src/js/store'
-import App from '../src/js/containers/app'
+import configureStore from './src/js/store'
 
 const app = express()
 const router = express.Router()
@@ -19,17 +19,14 @@ var config = null
 var fs = require('fs')
 var htmlTemplateString = ''
 
-/**
- * Environment settings
- */
-if (['staging', 'production'].indexOf(process.env.NODE_ENV) > -1) {
-  dist = path.resolve(__dirname, process.env.NODE_ENV)
-  config = require('../config')
-  htmlTemplateString = fs.readFileSync(dist + '/index.html', 'utf-8')
-} else {
-  config = require('./config')
-  htmlTemplateString = fs.readFileSync('./src/index.html', 'utf-8')
-}
+const webpack = require('webpack')
+const webpackHotMiddleware = require('webpack-hot-middleware')
+const webpackDevConfig = require('./webpack.dev.config')
+const compiler = webpack(require('./webpack.dev.config'))
+var webpackDevMiddleware = require('webpack-dev-middleware')
+
+config = require('./config')
+htmlTemplateString = fs.readFileSync('./dist/production/index.html', 'utf-8')
 
 /**
  * Process error handling
@@ -77,94 +74,49 @@ router.use('/api/test', (req, res) => {
     })
 })
 
-// HMR only in development
-if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'staging') {
-  console.log('Development environment: Starting webPack middleware...')
+app.use('/assets', express.static(dist))
 
-  const webpack = require('webpack')
-  const webpackHotMiddleware = require('webpack-hot-middleware')
-  const webpackDevConfig = require('./webpack.dev.config')
-  const compiler = webpack(webpackDevConfig)
-  const _ = require('lodash')
+// any other is mapped here
+app.get('*', (req, res, next) => {
+  console.log('req.url', req.url)
+  match({ routes: routes, location: req.url }, (error, redirectLocation, props) => {
+    if (error) {
+      res.status(500).send(error.message)
+    } else if (redirectLocation) {
+      res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+    } else if (props) {
+      const preloadedState = {'foobar': 1}
+            // Create a new Redux store instance
+      const store = configureStore(preloadedState)
+            // Render the component to a string
+      const myAppHtml = renderToString(<RouterContext {...props} />)
 
-  var webpackDevMiddleware = require('webpack-dev-middleware')
-  var devMiddleware = webpackDevMiddleware(compiler, {
-    noInfo: true,
-    publicPath: webpackDevConfig.output.publicPath,
-    stats: {
-      colors: true,
-      hash: false,
-      version: true,
-      timings: false,
-      assets: false,
-      chunks: false,
-      modules: false,
-      reasons: false,
-      children: false,
-      source: false,
-      errors: true,
-      errorDetails: true,
-      warnings: true,
-      publicPath: false
-    }
-  })
+            // Grab the initial state from our Redux store
+      const finalState = store.getState()
+            // Send the rendered page back to the client
+      let html = htmlTemplateString.replace('<div id="app">', '<div id="app">' + myAppHtml)
 
-  router.use(devMiddleware)
-
-  router.use(webpackHotMiddleware(compiler, {
-    log: console.log
-  }))
-
-  router.use((req, res, next) => {
-    const reqPath = req.url
-    // find the file that the browser is looking for
-    const file = _.last(reqPath.split('/'))
-    if ([webpackDevConfig.output.filename, 'index.html'].indexOf(file) !== -1) {
-      res.end(devMiddleware.fileSystem.readFileSync(path.join(webpackDevConfig.output.path, file)))
-    } else if (file.indexOf('.') === -1) {
-      // if the url does not have an extension, assume they've navigated to something like /home and want index.html
-      res.end(devMiddleware.fileSystem.readFileSync(path.join(webpackDevConfig.output.path, 'index.html')))
+            // Paste the state into the html
+      const preloadedStateScript = `<script>window.__PRELOADED_STATE__ = ${JSON.stringify(finalState).replace(/</g, '\\x3c')}</script>`
+      html = html.replace('</head>', preloadedStateScript)
+      res.status(200).send(html)
     } else {
-      next()
+      res.status(404).send('Not found')
     }
   })
-} else {
-  // Production needs physical files! (built via separate process)
-  router.use('/assets', express.static(dist))
+})
 
-  // any other is mapped here
-  router.get('*', (req, res, next) => {
-    // Catch-all route after the ones you want to exclude like the example before '/'
-    // or exclude it here (this has the advantage of ordering however you'd like)
-    if (req.url === '/foo' || req.url === '/bar') {
-      return next()
-    };
-    // res.sendFile(path.join(dist, 'index.html'))
+app.use(webpackDevMiddleware(compiler, {
+  noInfo: true,
+  publicPath: webpackDevConfig.output.publicPath,
+  stats: {
+    colors: true
+  }
+}))
 
-    // Compile an initial state
-    const preloadedState = {'foobar': 1}
-    // Create a new Redux store instance
-    const store = configureStore(preloadedState)
-    // Render the component to a string
-    const myAppHtml = renderToString(
-      <Provider store={store}>
-        <App />
-      </Provider>
-    )
-    // Grab the initial state from our Redux store
-    const finalState = store.getState()
-    // Send the rendered page back to the client
-    let html = htmlTemplateString.replace('<div id="app">', '<div id="app">' + myAppHtml)
-    // Paste the state into the html
-    const preloadedStateScript = `<script>window.__PRELOADED_STATE__ = ${JSON.stringify(finalState).replace(/</g, '\\x3c')}</script>`
-    html = html.replace('</head>', preloadedStateScript)
-    res.send(html)
-  })
-}
-
-app.disable('x-powered-by')
-
-app.use('/', router)
+app.use(webpackHotMiddleware(compiler, {
+  log: console.log
+}))
 
 serverInstance = app.listen(port, (error) => {
   if (error) {

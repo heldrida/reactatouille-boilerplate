@@ -6,21 +6,9 @@ module.exports = {
   devtool: 'inline-source-map',
   context: path.resolve(__dirname, 'src'),
   entry: [
-    'react-hot-loader/patch',
-    'webpack/hot/dev-server',
-    'webpack-hot-middleware/client',
     'babel-polyfill',
     './js/index.js'
   ],
-  devServer: {
-    historyApiFallback: true,
-    // enable HMR on the server
-    hot: true,
-    // match the output path
-    contentBase: path.resolve(__dirname, 'dist'),
-    // match the output `publicPath`
-    publicPath: '/'
-  },
   module: {
     rules: [
       {

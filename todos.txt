@@ -31,3 +31,9 @@
 
     https://github.com/ctrlplusb/react-universally
 
+    >>> quite good this tutorial
+    https://medium.com/@foxhound87/server-side-rendering-with-react-router-we-must-react-ep-04-ad03b6b9e05d#.6rtii9q0i
+
+    https://github.com/ReactTraining/react-router/blob/master/docs/guides/ServerRendering.md
+
+		http://crypt.codemancers.com/posts/2016-09-16-react-server-side-rendering/
