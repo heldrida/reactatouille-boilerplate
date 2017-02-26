@@ -16,7 +16,6 @@ var serverInstance = null
 var dist = path.join(__dirname, ('dist/production'))
 var config = null
 var fs = require('fs')
-var htmlTemplateString = ''
 
 const webpack = require('webpack')
 const webpackHotMiddleware = require('webpack-hot-middleware')
@@ -24,8 +23,9 @@ const webpackDevConfig = require('./webpack.dev.config')
 const compiler = webpack(require('./webpack.dev.config'))
 var webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackAssets = require('./webpack-assets.json')
+const ejs = require('ejs')
+
 config = require('./config')
-htmlTemplateString = fs.readFileSync('./dist/production/index.html', 'utf-8')
 
 /**
  * Process error handling
@@ -38,6 +38,9 @@ process.on('SIGINT', () => {
   serverInstance.close()
   process.exit(0)
 })
+
+app.set('views', path.join(__dirname, 'src'))
+app.set('view engine', 'ejs')
 
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
@@ -96,23 +99,14 @@ app.get('*', (req, res, next) => {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (props) {
       const preloadedState = {'foobar': 1}
-            // Create a new Redux store instance
+      // Create a new Redux store instance
       const store = configureStore(preloadedState)
-            // Render the component to a string
+      // Render the component to a string
       const myAppHtml = renderToString(<RouterContext {...props} />)
-
-            // Grab the initial state from our Redux store
+      // Grab the initial state from our Redux store
       const finalState = store.getState()
-            // Send the rendered page back to the client
-      let html = htmlTemplateString.replace('<div id="app">', '<div id="app">' + myAppHtml)
-
-            // Paste the state into the html
-      const preloadedStateScript = `<script>window.__PRELOADED_STATE__ = ${JSON.stringify(finalState).replace(/</g, '\\x3c')}</script>`
-      html = html.replace('</head>', preloadedStateScript)
-      // res.status(200).send(html)
-      // res.end(devMiddleware.fileSystem.readFileSync(path.join(webpackDevConfig.output.path, 'index.html')))
-      // res.status(200).send(html)
-      res.status(200).send(renderFullPage(myAppHtml, preloadedState, webpackAssets.main.js))
+      // res.status(200).send(renderFullPage(myAppHtml, preloadedState, webpackAssets.main.js))
+      res.render('index', { app: myAppHtml, state: JSON.stringify(preloadedState).replace(/</g, '\\x3c'), bundle: webpackAssets.main.js, build: config.build_name })
     } else {
       res.status(404).send('Not found')
     }

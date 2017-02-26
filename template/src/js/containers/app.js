@@ -29,7 +29,7 @@ class App extends Component {
   render () {
     return (
       <div className='app'>
-        <h1>Hello 1722, {this.state.test}</h1>
+        <h1>Hello, {this.state.test}</h1>
         {this.props.children}
       </div>
     )
