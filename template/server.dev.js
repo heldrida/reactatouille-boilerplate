@@ -23,7 +23,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackDevConfig = require('./webpack.dev.config')
 const compiler = webpack(require('./webpack.dev.config'))
 var webpackDevMiddleware = require('webpack-dev-middleware')
-
+const webpackAssets = require('./webpack-assets.json')
 config = require('./config')
 htmlTemplateString = fs.readFileSync('./dist/production/index.html', 'utf-8')
 
@@ -112,14 +112,14 @@ app.get('*', (req, res, next) => {
       // res.status(200).send(html)
       // res.end(devMiddleware.fileSystem.readFileSync(path.join(webpackDevConfig.output.path, 'index.html')))
       // res.status(200).send(html)
-      res.status(200).send(renderFullPage(myAppHtml, preloadedState))
+      res.status(200).send(renderFullPage(myAppHtml, preloadedState, webpackAssets.main.js))
     } else {
       res.status(404).send('Not found')
     }
   })
 })
 
-function renderFullPage (html, preloadedState) {
+function renderFullPage (html, preloadedState, bundle) {
   return `
     <!doctype html>
     <html>
@@ -131,7 +131,7 @@ function renderFullPage (html, preloadedState) {
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\x3c')}
         </script>
-        <script src="/assets/js/bundle.js"></script>
+        <script src="${bundle}"></script>
       </body>
     </html>
     `

@@ -1,6 +1,8 @@
 var path = require('path')
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var AssetsPlugin = require('assets-webpack-plugin')
+var assetsPluginInstance = new AssetsPlugin()
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -15,7 +17,7 @@ module.exports = {
   output: {
     path: __dirname,
     publicPath: '/assets/js/',
-    filename: 'bundle.js'
+    filename: 'bundle.js?[hash]'
   },
   module: {
     rules: [
@@ -55,6 +57,7 @@ module.exports = {
       'process.env': {
         'NODE_ENV': JSON.stringify('development')
       }
-    })
+    }),
+    assetsPluginInstance
   ]
 }
