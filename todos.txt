@@ -41,3 +41,6 @@
 		oficial
 
 		https://github.com/reactjs/redux/blob/master/examples/universal/server/server.js
+
+
+    https://medium.com/codingbox/react-for-beginners-adding-assets-to-your-isomorphic-application-using-webpack-isomorphic-tools-b6b636a79d96#.7y2atu11s

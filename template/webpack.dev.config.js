@@ -16,8 +16,8 @@ module.exports = {
   ],
   output: {
     path: __dirname,
-    publicPath: '/assets/js/',
-    filename: 'bundle.js?[hash]'
+    publicPath: '/assets/',
+    filename: 'js/bundle.js?[hash]'
   },
   module: {
     rules: [
@@ -46,7 +46,7 @@ module.exports = {
       {
         test: /\.(jpg|png|gif|svg)$/i,
         use: [
-          'file-loader'
+          'file-loader?emitFile=false&name=[path][name].[ext]'
         ]
       }
     ]

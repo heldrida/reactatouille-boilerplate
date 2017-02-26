@@ -6,3 +6,7 @@ export const styleObjectParser = (str) => {
   })
   return obj
 }
+
+export const isBrowser = () => {
+  return typeof window !== 'undefined' && ({}).toString.call(window) === '[object Window]'
+}
