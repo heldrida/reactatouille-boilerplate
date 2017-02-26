@@ -53,4 +53,11 @@
 
     http://vansande.org/2015/03/20/npm-link/
     https://egghead.io/lessons/node-js-using-npm-link-to-use-node-modules-that-are-in-progress
+
+    ----- issue with npm link real path
+
+    https://github.com/nodejs/node/issues/3402
+    http://stackoverflow.com/questions/22425395/node-js-require-does-not-look-in-parent-directory-when-using-npm-link
+    https://www.npmjs.com/package/parent-require
+
     https://github.com/halt-hammerzeit/webpack-isomorphic-tools#what-it-does

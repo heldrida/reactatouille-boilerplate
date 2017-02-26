@@ -6,11 +6,18 @@ module.exports = {
   loadImage: function (filename) {
     var img
     if (typeof window !== 'undefined' && ({}).toString.call(window) === '[object Window]') {
-      // img = require('../../src/images/' + filename) /* require('./template/src/images/' + filename) */
-      img = require('./template/src/images/' + filename)
+      try {
+        img = require('../../src/images/' + filename)
+      } catch (e) {
+        // Development only
+        img = require('./template/src/images/' + filename)
+      }
     } else {
       img = '/assets/images/' + filename
     }
     return img
+  },
+  isBrowser: function () {
+    return (typeof window !== 'undefined' && ({}).toString.call(window) === '[object Window]')
   }
 }

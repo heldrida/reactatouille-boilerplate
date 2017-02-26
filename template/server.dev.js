@@ -15,7 +15,6 @@ const port = process.env.PORT ? process.env.PORT : 3000
 var serverInstance = null
 var dist = path.join(__dirname, ('dist/production'))
 var config = null
-var fs = require('fs')
 
 const webpack = require('webpack')
 const webpackHotMiddleware = require('webpack-hot-middleware')
@@ -45,7 +44,20 @@ app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
   publicPath: webpackDevConfig.output.publicPath,
   stats: {
-    colors: true
+    colors: true,
+    hash: false,
+    version: true,
+    timings: false,
+    assets: false,
+    chunks: false,
+    modules: false,
+    reasons: false,
+    children: false,
+    source: false,
+    errors: true,
+    errorDetails: true,
+    warnings: true,
+    publicPath: false
   }
 }))
 
@@ -105,7 +117,12 @@ app.get('*', (req, res, next) => {
       // Grab the initial state from our Redux store
       const finalState = store.getState()
       // res.status(200).send(renderFullPage(myAppHtml, preloadedState, webpackAssets.main.js))
-      res.render('index', { app: myAppHtml, state: JSON.stringify(finalState).replace(/</g, '\\x3c'), bundle: webpackAssets.main.js, build: config.build_name })
+      res.render('index', {
+        app: myAppHtml,
+        state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
+        bundle: webpackAssets.main.js,
+        build: config.build_name
+      })
     } else {
       res.status(404).send('Not found')
     }
