@@ -11,10 +11,9 @@ import routes from './src/js/routes'
 import configureStore from './src/js/store'
 
 const app = express()
-const router = express.Router()
 const port = process.env.PORT ? process.env.PORT : 3000
 var serverInstance = null
-var dist = path.join(__dirname, ('dist' + (process.env.NODE_ENV ? '/' + process.env.NODE_ENV : 'staging')))
+var dist = path.join(__dirname, ('dist/production'))
 var config = null
 var fs = require('fs')
 var htmlTemplateString = ''
@@ -40,6 +39,18 @@ process.on('SIGINT', () => {
   process.exit(0)
 })
 
+app.use(webpackDevMiddleware(compiler, {
+  noInfo: true,
+  publicPath: webpackDevConfig.output.publicPath,
+  stats: {
+    colors: true
+  }
+}))
+
+app.use(webpackHotMiddleware(compiler, {
+  log: console.log
+}))
+
 /**
  * The Cross origin resource sharing rules
  */
@@ -63,7 +74,7 @@ app.use('/healthcheck', (req, res) => {
   res.end()
 })
 
-router.use('/api/test', (req, res) => {
+app.use('/api/test', (req, res) => {
   superagent
     .get('https://jsonip.com/')
     .end((err, response) => {
@@ -78,7 +89,6 @@ app.use('/assets', express.static(dist))
 
 // any other is mapped here
 app.get('*', (req, res, next) => {
-  console.log('req.url', req.url)
   match({ routes: routes, location: req.url }, (error, redirectLocation, props) => {
     if (error) {
       res.status(500).send(error.message)
@@ -99,24 +109,33 @@ app.get('*', (req, res, next) => {
             // Paste the state into the html
       const preloadedStateScript = `<script>window.__PRELOADED_STATE__ = ${JSON.stringify(finalState).replace(/</g, '\\x3c')}</script>`
       html = html.replace('</head>', preloadedStateScript)
-      res.status(200).send(html)
+      // res.status(200).send(html)
+      // res.end(devMiddleware.fileSystem.readFileSync(path.join(webpackDevConfig.output.path, 'index.html')))
+      // res.status(200).send(html)
+      res.status(200).send(renderFullPage(myAppHtml, preloadedState))
     } else {
       res.status(404).send('Not found')
     }
   })
 })
 
-app.use(webpackDevMiddleware(compiler, {
-  noInfo: true,
-  publicPath: webpackDevConfig.output.publicPath,
-  stats: {
-    colors: true
-  }
-}))
-
-app.use(webpackHotMiddleware(compiler, {
-  log: console.log
-}))
+function renderFullPage (html, preloadedState) {
+  return `
+    <!doctype html>
+    <html>
+      <head>
+        <title>Redux Universal Example</title>
+      </head>
+      <body>
+        <div id="app">${html}</div>
+        <script>
+          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\x3c')}
+        </script>
+        <script src="/assets/js/bundle.js"></script>
+      </body>
+    </html>
+    `
+}
 
 serverInstance = app.listen(port, (error) => {
   if (error) {

@@ -6,9 +6,17 @@ module.exports = {
   devtool: 'inline-source-map',
   context: path.resolve(__dirname, 'src'),
   entry: [
+    'react-hot-loader/patch',
+    'webpack/hot/dev-server',
+    'webpack-hot-middleware/client',
     'babel-polyfill',
     './js/index.js'
   ],
+  output: {
+    path: __dirname,
+    publicPath: '/assets/js/',
+    filename: 'bundle.js'
+  },
   module: {
     rules: [
       {
@@ -42,20 +50,11 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: path.join(__dirname, '/src/index.html'),
-      filename: 'index.html'
-    }),
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('development')
       }
-    }),
-    // enable HMR globally
-    new webpack.HotModuleReplacementPlugin(),
-    // prints more readable module names in the browser console on HMR updates
-    new webpack.NamedModulesPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    })
   ]
 }

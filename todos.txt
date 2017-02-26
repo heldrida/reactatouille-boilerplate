@@ -37,3 +37,7 @@
     https://github.com/ReactTraining/react-router/blob/master/docs/guides/ServerRendering.md
 
 		http://crypt.codemancers.com/posts/2016-09-16-react-server-side-rendering/
+
+		oficial
+
+		https://github.com/reactjs/redux/blob/master/examples/universal/server/server.js
