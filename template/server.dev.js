@@ -23,7 +23,6 @@ const webpackDevConfig = require('./webpack.dev.config')
 const compiler = webpack(require('./webpack.dev.config'))
 var webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackAssets = require('./webpack-assets.json')
-const ejs = require('ejs')
 
 config = require('./config')
 
@@ -106,30 +105,12 @@ app.get('*', (req, res, next) => {
       // Grab the initial state from our Redux store
       const finalState = store.getState()
       // res.status(200).send(renderFullPage(myAppHtml, preloadedState, webpackAssets.main.js))
-      res.render('index', { app: myAppHtml, state: JSON.stringify(preloadedState).replace(/</g, '\\x3c'), bundle: webpackAssets.main.js, build: config.build_name })
+      res.render('index', { app: myAppHtml, state: JSON.stringify(finalState).replace(/</g, '\\x3c'), bundle: webpackAssets.main.js, build: config.build_name })
     } else {
       res.status(404).send('Not found')
     }
   })
 })
-
-function renderFullPage (html, preloadedState, bundle) {
-  return `
-    <!doctype html>
-    <html>
-      <head>
-        <title>Redux Universal Example</title>
-      </head>
-      <body>
-        <div id="app">${html}</div>
-        <script>
-          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\x3c')}
-        </script>
-        <script src="${bundle}"></script>
-      </body>
-    </html>
-    `
-}
 
 serverInstance = app.listen(port, (error) => {
   if (error) {
