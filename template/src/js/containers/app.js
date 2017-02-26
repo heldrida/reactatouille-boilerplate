@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
 import { TweenLite } from 'gsap'
-import { styleObjectParser, isBrowser } from '../utils'
-
-var img
+import { styleObjectParser } from '../utils'
+import { loadImage } from 'reactatouille'
 
 if (typeof window !== 'undefined' && ({}).toString.call(window) === '[object Window]') {
-  img = require('../../images/logo-reactatouille-boilerplate.png')
   // include the stylesheet entry point
   require('../../sass/app.scss')
-} else {
-  img = '/assets/images/logo-reactatouille-boilerplate.png'
 }
+
+const img = loadImage('logo-reactatouille-boilerplate.png')
 
 class App extends Component {
   constructor (props) {

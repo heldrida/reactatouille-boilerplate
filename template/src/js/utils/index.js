@@ -11,7 +11,3 @@ export const isBrowser = () => {
   return typeof window !== 'undefined' && ({}).toString.call(window) === '[object Window]'
 }
 
-// TODO: Universal image loader
-export const loadImage = () => {
-
-}

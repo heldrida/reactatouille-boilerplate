@@ -44,3 +44,13 @@
 
 
     https://medium.com/codingbox/react-for-beginners-adding-assets-to-your-isomorphic-application-using-webpack-isomorphic-tools-b6b636a79d96#.7y2atu11s
+
+    https://github.com/diegohaz/arc/blob/universal-redux/src/server.js#L74
+
+    http://justjs.com/posts/npm-link-developing-your-own-npm-modules-without-tears
+
+    https://codurance.com/2016/12/21/how-to-use-npm-link/
+
+    http://vansande.org/2015/03/20/npm-link/
+    https://egghead.io/lessons/node-js-using-npm-link-to-use-node-modules-that-are-in-progress
+    https://github.com/halt-hammerzeit/webpack-isomorphic-tools#what-it-does
