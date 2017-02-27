@@ -9,7 +9,7 @@ module.exports = {
   entry: ['babel-polyfill', './js/index.js'],
   output: {
     path: path.join(__dirname, '/dist/staging'),
-    filename: 'js/bundle-[hash].js',
+    filename: 'js/bundle.js?[hash]',
     publicPath: '/assets'
   },
   module: {
@@ -28,26 +28,25 @@ module.exports = {
           loader: ['css-loader', 'sass-loader']
         })
       },
-      // { test: /\.scss$/, loader: ExtractTextPlugin.extract('style','css!sass') },
       {
         test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
         use: [
-          'file-loader?name=[path][name].[ext]&outputPath=/assets/fonts/&publicPath=/assets/fonts/'
+          'file-loader?name=[path][name].[ext]'
         ]
       },
       {
         test: /\.(jpg|png|gif|svg)$/i,
         use: [
-          'file-loader?name=[path][name].[ext]?[hash]&outputPath=/assets/&publicPath=/assets/'
+          'file-loader?name=[path][name].[ext]?[hash]'
         ]
       }
     ]
   },
   plugins: [
-    new ExtractTextPlugin('css/[name]-[hash].min.css'),
+    new ExtractTextPlugin('css/[name].min.css?[hash]'),
     new HtmlWebpackPlugin({
       inject: true,
-      template: __dirname + '/src/' + 'index.html',
+      template: path.join(__dirname, '/src/' + 'index.html'),
       filename: 'index.html',
       build_name: config.build_name
     }),

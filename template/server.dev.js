@@ -13,7 +13,8 @@ import configureStore from './src/js/store'
 const app = express()
 const port = process.env.PORT ? process.env.PORT : 3000
 var serverInstance = null
-var dist = path.join(__dirname, ('dist/production'))
+// var dist = path.join(__dirname, ('dist' + (process.env.NODE_ENV ? '/' + process.env.NODE_ENV : 'staging')))
+var dist = path.join(__dirname, ('dist/production')) // TODO: remove this line used under dev temporarily
 var config = null
 
 const webpack = require('webpack')
@@ -121,7 +122,8 @@ app.get('*', (req, res, next) => {
         app: myAppHtml,
         state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
         bundle: webpackAssets.main.js,
-        build: config.build_name
+        build: config.build_name,
+        css: '/assets/css/main.min.css'
       })
     } else {
       res.status(404).send('Not found')

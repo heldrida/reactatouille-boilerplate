@@ -2,6 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 var AssetsPlugin = require('assets-webpack-plugin')
 var assetsPluginInstance = new AssetsPlugin()
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -51,6 +52,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new ExtractTextPlugin('css/[name].min.css?[hash]'),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
