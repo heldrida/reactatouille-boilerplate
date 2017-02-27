@@ -44,6 +44,7 @@ It'll generate the `project_name` directory for  you, with all the Boilerplate t
 * ENZYME
 * GSAP
 * STANDARDJS
+* UNIVERSAL / ISOMORPHIC
 
 ### Logo
 
