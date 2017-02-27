@@ -22,7 +22,9 @@
     "hmr",
     "express",
     "sass",
-    "gsap"
+    "gsap",
+    "universal",
+    "isomorphic"
   ],
   "author": "Punkbit",
   "license": "WTFPL",
