@@ -10,13 +10,15 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      style: ''
+      style: 'opacity: 0'
     }
   }
 
   componentDidMount () {
     let onComplete = () => {
-      this.state.style = this.refs['logo'].getAttribute('style')
+      this.setState({
+        style: this.refs['logo'].getAttribute('style')
+      })
     }
     TweenLite.fromTo(this.refs.logo, 0.8, { opacity: 0, x: 50 }, { opacity: 1, x: 0, ease: Bounce.easeOut, onComplete }) // eslint-disable-line no-undef
   }
