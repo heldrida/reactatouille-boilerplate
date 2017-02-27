@@ -7,8 +7,8 @@
 module.exports = {
   loadImage: function (filename) {
     if (typeof window !== 'undefined' && ({}).toString.call(window) === '[object Window]') {
-      return (process.env.NPM_PACKAGE_DEV && require('./template/src/images/' + filename) ||
-            require('./template/src/images/' + filename))
+      return (process.env.NPM_PACKAGE_DEV === 1 && require('./template/src/images/' + filename) ||
+            require('../../src/images/' + filename))
     } else {
       return '/assets/images/' + filename
     }
