@@ -45,12 +45,13 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin('css/[name].min.css?[hash]'),
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: __dirname + '/src/' + 'index.html',
-      filename: 'index.html',
-      build_name: config.build_name
-    }),
+    // TODO: The node server provides the index output by default
+    // new HtmlWebpackPlugin({
+    //   inject: true,
+    //   template: __dirname + '/src/' + 'index.html',
+    //   filename: 'index.html',
+    //   build_name: config.build_name
+    // }),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')

@@ -13,10 +13,8 @@ import configureStore from './src/js/store'
 const app = express()
 const port = process.env.PORT ? process.env.PORT : 3000
 var serverInstance = null
-// var dist = path.join(__dirname, ('dist' + (process.env.NODE_ENV ? '/' + process.env.NODE_ENV : '/staging')))
-var dist = path.join(__dirname, (['staging', 'production'].indexOf(process.env.NODE_ENV) > -1 ? '/' + process.env.NODE_ENV : 'src'))
+var dist = path.join(__dirname, (['staging', 'production'].indexOf(process.env.NODE_ENV) > -1 ? 'dist/' + process.env.NODE_ENV : 'src'))
 var config = null
-console.log('dist: ', dist)
 const webpack = require('webpack')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackDevConfig = require('./webpack.dev.config')

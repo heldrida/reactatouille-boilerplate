@@ -31,15 +31,18 @@ function getDistributionDir () {
 }
 
 gulp.task('html', function () {
-  return gulp
-         .src('src/index.html')
-         .pipe(gulp.dest(getDistributionDir()))
+  // TODO: The node server provides the index output by default
+  // but probably best to generate the html from the ejs template for non nodejs web server users
+  // return gulp
+  //        .src('src/index.html')
+  //        .pipe(gulp.dest(getDistributionDir()))
 })
 
 gulp.task('images', function () {
-  return gulp
-         .src('src/images/**/*')
-         .pipe(gulp.dest(getDistributionDir() + '/images'))
+  // TODO: isn't this handled by webpack? not required
+  // return gulp
+  //        .src('src/images/**/*')
+  //        .pipe(gulp.dest(getDistributionDir() + '/images'))
 })
 
 gulp.task('build', ['clean', 'server-script-transpiler'], function () {
@@ -133,7 +136,7 @@ gulp.task('openBrowser', function () {
 })
 
 gulp.task('watch', function () {
-  gulp.watch('./src/index.html', ['html'])
+  // gulp.watch('./src/index.html', ['html'])
   gulp.watch('./src/js/**/*.js', ['test'])
   gulp.watch('./src/js/**/*.js')
     .on('change', function (ev) {
