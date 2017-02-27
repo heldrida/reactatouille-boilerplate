@@ -13,8 +13,7 @@ import configureStore from './src/js/store'
 const app = express()
 const port = process.env.PORT ? process.env.PORT : 3000
 var serverInstance = null
-// var dist = path.join(__dirname, ('dist' + (process.env.NODE_ENV ? '/' + process.env.NODE_ENV : 'staging')))
-var dist = path.join(__dirname, ('dist/production')) // TODO: remove this line used under dev temporarily
+var dist = path.join(__dirname, ('dist' + (process.env.NODE_ENV ? '/' + process.env.NODE_ENV : 'staging')))
 var config = null
 
 const webpack = require('webpack')
@@ -117,7 +116,6 @@ app.get('*', (req, res, next) => {
       const myAppHtml = renderToString(<RouterContext {...props} />)
       // Grab the initial state from our Redux store
       const finalState = store.getState()
-      // res.status(200).send(renderFullPage(myAppHtml, preloadedState, webpackAssets.main.js))
       res.render('index', {
         app: myAppHtml,
         state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
