@@ -39,10 +39,12 @@ gulp.task('html', function () {
 })
 
 gulp.task('images', function () {
-  // TODO: isn't this handled by webpack? not required
-  // return gulp
-  //        .src('src/images/**/*')
-  //        .pipe(gulp.dest(getDistributionDir() + '/images'))
+  // TODO: there's an issue when handling the images in webpack
+  // it's related with the helper loadImage, because node_modules are ignored
+  // would be nice if this is handled by webpack instead
+  return gulp
+         .src('src/images/**/*')
+         .pipe(gulp.dest(getDistributionDir() + '/images'))
 })
 
 gulp.task('build', ['clean', 'server-script-transpiler'], function () {

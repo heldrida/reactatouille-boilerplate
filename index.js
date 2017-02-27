@@ -6,7 +6,7 @@
 // http://stackoverflow.com/questions/42473864/work-around-to-unsolved-npm-link-symlink-requires/42476085
 module.exports = {
   loadImage: function (filename) {
-    if (typeof window !== 'undefined' && ({}).toString.call(window) === '[object Window]') {
+    if (process.env.NODE_ENV === 'development' && (typeof window !== 'undefined' && ({}).toString.call(window) === '[object Window]')) {
       return (process.env.NPM_PACKAGE_DEV === 1 && require('./template/src/images/' + filename) ||
             require('../../src/images/' + filename))
     } else {

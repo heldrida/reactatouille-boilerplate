@@ -36,7 +36,7 @@ module.exports = {
       },
       {
         test: /\.(jpg|png|gif|svg)$/i,
-        exclude: /node_modules/,
+        exclude: /(node_modules)/,
         use: [
           'file-loader?name=[path][name].[ext]?[hash]'
         ]
@@ -54,7 +54,8 @@ module.exports = {
     // }),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('staging')
+        'NODE_ENV': JSON.stringify('staging'),
+        'BUILDER': true
       }
     })
   ]
