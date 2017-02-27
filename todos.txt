@@ -12,3 +12,52 @@
  		https://hackernoon.com/my-journey-toward-a-maintainable-project-structure-for-react-redux-b05dfd999b5#.ltj5ma79j
 
  		https://medium.com/front-end-hacking/structuring-react-and-redux-applications-255361d24f84#.rgluzy6km
+
+    https://github.com/dimaip/server-side-rendering
+
+    https://medium.com/@liheyse/react-server-side-rendering-ssr-with-express-and-css-modules-722ef0cc8fa0#.qv6kzn87k
+
+    http://crypt.codemancers.com/posts/2016-09-16-react-server-side-rendering/
+
+
+    is the routes being imported at all ?
+    
+    http://stackoverflow.com/questions/42163676/routing-and-rendering-react-components-server-side?rq=1
+
+
+    >>>> see 
+
+    http://stackoverflow.com/questions/42415102/how-to-transpile-all-react-es6-components-for-server-side-rendering-route-match/42416931#42416931
+
+    https://github.com/ctrlplusb/react-universally
+
+    >>> quite good this tutorial
+    https://medium.com/@foxhound87/server-side-rendering-with-react-router-we-must-react-ep-04-ad03b6b9e05d#.6rtii9q0i
+
+    https://github.com/ReactTraining/react-router/blob/master/docs/guides/ServerRendering.md
+
+		http://crypt.codemancers.com/posts/2016-09-16-react-server-side-rendering/
+
+		oficial
+
+		https://github.com/reactjs/redux/blob/master/examples/universal/server/server.js
+
+
+    https://medium.com/codingbox/react-for-beginners-adding-assets-to-your-isomorphic-application-using-webpack-isomorphic-tools-b6b636a79d96#.7y2atu11s
+
+    https://github.com/diegohaz/arc/blob/universal-redux/src/server.js#L74
+
+    http://justjs.com/posts/npm-link-developing-your-own-npm-modules-without-tears
+
+    https://codurance.com/2016/12/21/how-to-use-npm-link/
+
+    http://vansande.org/2015/03/20/npm-link/
+    https://egghead.io/lessons/node-js-using-npm-link-to-use-node-modules-that-are-in-progress
+
+    ----- issue with npm link real path
+
+    https://github.com/nodejs/node/issues/3402
+    http://stackoverflow.com/questions/22425395/node-js-require-does-not-look-in-parent-directory-when-using-npm-link
+    https://www.npmjs.com/package/parent-require
+
+    https://github.com/halt-hammerzeit/webpack-isomorphic-tools#what-it-does

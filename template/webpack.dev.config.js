@@ -1,6 +1,8 @@
 var path = require('path')
 var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+var AssetsPlugin = require('assets-webpack-plugin')
+var assetsPluginInstance = new AssetsPlugin()
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -12,23 +14,19 @@ module.exports = {
     'babel-polyfill',
     './js/index.js'
   ],
-  devServer: {
-    historyApiFallback: true,
-    // enable HMR on the server
-    hot: true,
-    // match the output path
-    contentBase: path.resolve(__dirname, 'dist'),
-    // match the output `publicPath`
-    publicPath: '/'
+  output: {
+    path: __dirname,
+    publicPath: '/assets/',
+    filename: 'js/bundle.js?[hash]'
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: [
-          'babel-loader'
-        ]
+        exclude: /(node_modules)/,
+        use: [{
+          loader: 'babel-loader'
+        }]
       },
       {
         test: /\.scss$/,
@@ -48,26 +46,19 @@ module.exports = {
       {
         test: /\.(jpg|png|gif|svg)$/i,
         use: [
-          'file-loader'
+          'file-loader?emitFile=false&name=[path][name].[ext]'
         ]
       }
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: path.join(__dirname, '/src/index.html'),
-      filename: 'index.html'
-    }),
+    new ExtractTextPlugin('css/[name].min.css?[hash]'),
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('development')
       }
     }),
-    // enable HMR globally
-    new webpack.HotModuleReplacementPlugin(),
-    // prints more readable module names in the browser console on HMR updates
-    new webpack.NamedModulesPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    assetsPluginInstance
   ]
 }

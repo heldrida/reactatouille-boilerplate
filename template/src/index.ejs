@@ -1,14 +1,21 @@
 <!DOCTYPE html>
+<!-- <%- build %> -->
 <html lang="en">
 <head>
-	<!-- <%=htmlWebpackPlugin.options.build_name %> -->
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Reactatouille Boilerplate</title>
+	<% if (css) { %>
+	  <link rel="stylesheet" href="<%- css %>">
+	<% } %>	
 </head>
 <body>
 	<!-- start: app -->
-	<div id="app"></div>
+	<div id="app"><%- app %></div>
 	<!-- end: app -->
+	<script>
+	window.__PRELOADED_STATE__ = <%- state %>
+	</script>
+	<script src="<%- bundle %>"></script>
 </body>
 </html>

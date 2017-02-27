@@ -14,6 +14,7 @@ var webpackStagingConfig = require('./webpack.staging.config.js')
 var webpackProductionConfig = require('./webpack.production.config.js')
 var gutil = require('gulp-util')
 var babel = require('babel-core/register')
+var gbabel = require('gulp-babel')
 var mocha = require('gulp-mocha')
 var spawn = require('child_process').spawn
 var port = 3000

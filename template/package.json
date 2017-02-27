@@ -1,6 +1,6 @@
 {
   "name": "reactatouille-boilerplate",
-  "version": "0.7.8b",
+  "version": "0.7.9",
   "description": "Reactatouille-Boilerplate built using Redux Webpack2 Gulp Sass Mocha Enzyme Chai gsap Boilerplate.",
   "main": "gulpfile.js",
   "scripts": {
@@ -31,9 +31,11 @@
   },
   "homepage": "https://github.com/heldrida/reactatouille-boilerplate#readme",
   "devDependencies": {
+    "assets-webpack-plugin": "^3.5.1",
     "babel-core": "^6.13.2",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.5",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-react": "^6.11.1",
     "chai": "^3.5.0",
@@ -41,6 +43,7 @@
     "cli-clear": "^1.0.4",
     "compression-webpack-plugin": "^0.3.2",
     "css-loader": "^0.26.1",
+    "ejs": "^2.5.6",
     "enzyme": "^2.4.1",
     "extract-text-webpack-plugin": "^2.0.0-rc.1",
     "figlet": "^1.2.0",
