@@ -1,6 +1,6 @@
 {
   "name": "reactatouille-boilerplate",
-  "version": "0.8.0",
+  "version": "0.8.0b",
   "description": "Reactatouille-Boilerplate built using Redux Webpack2 Gulp Sass Mocha Enzyme Chai gsap Boilerplate.",
   "main": "gulpfile.js",
   "scripts": {
@@ -75,6 +75,7 @@
     "react-redux": "^5.0.2",
     "react-router": "^3.0.2",
     "react-router-redux": "^4.0.5",
+    "reactatouille": "^0.8.6-a",
     "redux": "^3.5.2",
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
