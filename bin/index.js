@@ -18,20 +18,20 @@ clear()
 
 // Show the startup banner
 console.log(
-	chalk.magenta(
-		figlet.textSync('Reactatouille', { horizontalLayout: 'full' })
-	),
-	chalk.yellow.bold('\n' + ' ' + 'Boilerplate CLI'),
-	chalk.yellow('by Punkbit'),
-	'\n',
-	'\n'
+  chalk.magenta(
+    figlet.textSync('Reactatouille', { horizontalLayout: 'full' })
+  ),
+  chalk.yellow.bold('\n' + ' ' + 'Boilerplate CLI'),
+  chalk.yellow('by Punkbit'),
+  '\n',
+  '\n'
 )
 
 // Set command line program parameters
 program
-	.version(require('../package.json').version)
-	.usage('[project name]')
-	.parse(process.argv)
+  .version(require('../package.json').version)
+  .usage('[project name]')
+  .parse(process.argv)
 
 // Set the name
 projectName = program.args[0]
@@ -40,21 +40,21 @@ projectName = program.args[0]
 if (!projectName) {
   program.help()
 } else {
-	//
+  //
   fs.copyAsync(rootDir + '/template', projectName, { clobber: true })
-		.then(function (err) {
-			// Show the initialisation text, white space added to text align
-  console.log(chalk.blue(' ' + 'Creating the project directory `' + projectName + '`...'))
-  console.log('\n')
+    .then(function (err) {
+      // Show the initialization text, white space added to text align
+      console.log(chalk.blue(' ' + 'Creating the project directory `' + projectName + '`...'))
+      console.log('\n')
 
-  if (err) {
-    return console.error(chalk.red.bold(err))
-  } else {
-    console.log(chalk.green(' ' + 'Success! Your project boilerplate is ready!'))
-    console.log(chalk.yellow(' ' + 'Remember to `cd ' + projectName + '` and run the `npm install`'))
-    console.log(chalk.yellow(' ' + 'Also there, you will find the boilerplate README file containing instructions to run the server, build, etc.'))
-    console.log(chalk.green(' ' + 'Happy coding yo!'))
-    console.log('\n')
-  }
-})
+      if (err) {
+        return console.error(chalk.red.bold(err))
+      } else {
+        console.log(chalk.green(' ' + 'Success! Your project boilerplate is ready!'))
+        console.log(chalk.yellow(' ' + 'Remember to `cd ' + projectName + '` and run the `npm install`'))
+        console.log(chalk.yellow(' ' + 'There, you\'ll find the boilerplate README file containing instructions to run the server, build, etc.'))
+        console.log(chalk.green(' ' + 'Happy coding yo!'))
+        console.log('\n')
+      }
+    })
 }
