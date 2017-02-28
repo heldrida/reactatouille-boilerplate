@@ -22,6 +22,10 @@ These instructions will get you a copy of the command line tool, that you'll be 
 npm install -g reactatouille
 ```
 
+## Quick look
+
+<img align="center" style="margin: 30px 0;" src="https://raw.githubusercontent.com/heldrida/reactatouille-boilerplate/master/media/cli-gif-animation.gif?201702281714" width="500">
+
 ## Usage
 
 The following command will generate a new boilerplate for you in your desired location:

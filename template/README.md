@@ -26,6 +26,10 @@ Nodejs & NPM
 npm install
 ```
 
+## Quick look
+
+<img align="center" style="margin: 30px 0;" src="https://raw.githubusercontent.com/heldrida/reactatouille-boilerplate/master/media/cli-gif-animation.gif?201702281714" width="500">
+
 ### Build for distribution
 
 You must run the build commands to generate a bundle js, css, images, fonts, etc, to distribute it into your test, staging or production environments. To so, you can run the commands below, that will generate the files under the `/dist` directory.
