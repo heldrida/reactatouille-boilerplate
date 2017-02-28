@@ -24,9 +24,9 @@ npm install -g reactatouille
 
 ## Quick look
 
-<div style="width: 100%; text-align: center;">
-  <a href="https://raw.githubusercontent.com/heldrida/reactatouille-boilerplate/master/media/cli-gif-animation.gif?201702281714" target="_blank"><img align="center" src="https://raw.githubusercontent.com/heldrida/reactatouille-boilerplate/master/media/cli-gif-animation.gif?201702281714" width="500"></a>
-</div>
+<p align="center" style="margin: 30px 0;">
+  <img align="center" src="https://raw.githubusercontent.com/heldrida/reactatouille-boilerplate/master/media/cli-gif-animation.gif?201702281714" width="500">
+</p>
 
 ## Usage
 
