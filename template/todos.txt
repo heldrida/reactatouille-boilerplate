@@ -1,0 +1,8 @@
+
+  - Apply Jack Hsu code organization approach
+    https://jaysoo.ca/2016/02/28/applying-code-organization-rules-to-concrete-redux-code/
+
+  - Move to ReactRouter v4
+    https://github.com/ReactTraining/react-router/releases
+    https://ebaytech.berlin/universal-web-apps-with-react-router-4-15002bb30ccb
+    https://github.com/technology-ebay-de/universal-react-router4/blob/master/src/server/index.js
