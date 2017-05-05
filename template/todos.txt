@@ -6,3 +6,4 @@
     https://github.com/ReactTraining/react-router/releases
     https://ebaytech.berlin/universal-web-apps-with-react-router-4-15002bb30ccb
     https://github.com/technology-ebay-de/universal-react-router4/blob/master/src/server/index.js
+    https://reacttraining.com/react-router/web/guides/server-rendering
