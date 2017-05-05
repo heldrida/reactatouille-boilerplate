@@ -16,7 +16,7 @@ const renderApp = (RootComponent, store, history) => {
     <HotReload>
       <RootComponent store={store} history={history} />
     </HotReload>,
-    rootEl,
+    rootEl
   )
 }
 
