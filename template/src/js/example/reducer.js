@@ -8,7 +8,9 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case t.REPLAY:
-      return [...state, action.payload]
+      console.log('example/reducer/switch:t.REPLAY/state: ', state)
+      console.log('example/reducer/switch:t.REPLAY/action.payload: ', action.payload)
+      return action.payload
     default:
       return state
   }

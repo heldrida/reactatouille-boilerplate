@@ -4,6 +4,8 @@ import { styleObjectParser } from '../../utils'
 import { loadImage, isBrowser } from 'reactatouille'
 import Logo from '../components/logo'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { replay } from '../actions'
 // include the stylesheet entry-point
 isBrowser() && require('../../../sass/app.scss')
 
@@ -13,6 +15,10 @@ class App extends Component {
     this.state = {
       style: 'opacity: 0'
     }
+    setTimeout(() => {
+      console.log('containers/app/constructor/setTimeout:4000/this.props.replay=call')
+      this.props.replay()
+    }, 4000)
   }
 
   componentDidMount () {
@@ -23,6 +29,11 @@ class App extends Component {
       })
     }
     TweenLite.fromTo(myLogo, 0.8, { opacity: 0, x: 50 }, { opacity: 1, x: 0, ease: Bounce.easeOut, onComplete }) // eslint-disable-line no-undef
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    console.log('example/containers/app/componentDidUpdate/prevProps:', prevProps)
+    console.log('example/containers/app/componentDidUpdate/this.props:', this.props)
   }
 
   render () {
@@ -44,4 +55,10 @@ function mapStateToProps (state, ownProps) {
   }
 }
 
-export default connect(mapStateToProps)(App)
+function matchDispatchToProps (dispatch) {
+  return bindActionCreators({
+    replay: replay
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(App)

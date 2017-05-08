@@ -10,7 +10,6 @@ export default function configureStore (initialState) {
     applyMiddleware(thunk),
     applyMiddleware(routerMiddleware(browserHistory))
   )
-
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('./rootReducer', () => {
@@ -18,6 +17,5 @@ export default function configureStore (initialState) {
       store.replaceReducer(nextRootReducer)
     })
   }
-
   return store
 }

@@ -6,11 +6,12 @@ import configureStore from './rootStore'
 import { browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
-const store = configureStore({})
+const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)
 
 // render method for instantiation and Hot module reload
 const renderApp = (RootComponent, store, history) => {
+  console.log('~ ~ ~ store.getState()', store.getState())
   let rootEl = document.getElementById('app')
   render(
     <HotReload>
