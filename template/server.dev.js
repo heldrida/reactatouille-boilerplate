@@ -9,6 +9,7 @@ import { match, RouterContext } from 'react-router'
 import routes from './src/js/routes'
 
 import configureStore from './src/js/rootStore'
+import { Provider } from 'react-redux'
 
 const app = express()
 const port = process.env.PORT ? process.env.PORT : 3000
@@ -112,7 +113,7 @@ app.get('*', (req, res, next) => {
       // Create a new Redux store instance
       const store = configureStore(preloadedState)
       // Render the component to a string
-      const myAppHtml = renderToString(<RouterContext {...props} />)
+      const myAppHtml = renderToString(<Provider store={store}><RouterContext {...props} /></Provider>)
       // Grab the initial state from our Redux store
       const finalState = store.getState()
       res.render('index', {

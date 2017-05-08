@@ -3,6 +3,7 @@ import { TweenLite } from 'gsap'
 import { styleObjectParser } from '../../utils'
 import { loadImage, isBrowser } from 'reactatouille'
 import Logo from '../components/logo'
+import { connect } from 'react-redux'
 // include the stylesheet entry-point
 isBrowser() && require('../../../sass/app.scss')
 
@@ -36,4 +37,11 @@ class App extends Component {
   }
 }
 
-export default App
+// export default App
+function mapStateToProps (state, ownProps) {
+  return {
+    example: state.example
+  }
+}
+
+export default connect(mapStateToProps)(App)
