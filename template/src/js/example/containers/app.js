@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { TweenLite } from 'gsap'
 import { styleObjectParser } from '../../utils'
 import { loadImage, isBrowser } from 'reactatouille'
-
+import Logo from '../components/logo'
 // include the stylesheet entry-point
 isBrowser() && require('../../../sass/app.scss')
 
@@ -15,18 +15,22 @@ class App extends Component {
   }
 
   componentDidMount () {
+    const myLogo = document.querySelector('img.logo')
     let onComplete = () => {
       this.setState({
-        style: this.refs['logo'].getAttribute('style')
+        style: myLogo.getAttribute('style')
       })
     }
-    TweenLite.fromTo(this.refs.logo, 0.8, { opacity: 0, x: 50 }, { opacity: 1, x: 0, ease: Bounce.easeOut, onComplete }) // eslint-disable-line no-undef
+    TweenLite.fromTo(myLogo, 0.8, { opacity: 0, x: 50 }, { opacity: 1, x: 0, ease: Bounce.easeOut, onComplete }) // eslint-disable-line no-undef
   }
 
   render () {
+    const image = loadImage('logo-reactatouille-boilerplate.png')
+    const style = styleObjectParser(this.state.style)
     return (
       <div className='app'>
-        <img ref='logo' src={loadImage('logo-reactatouille-boilerplate.png')} alt='' style={styleObjectParser(this.state.style)} />
+        <Logo image={image} style={style} />
+        { this.props.children }
       </div>
     )
   }
