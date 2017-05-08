@@ -8,7 +8,7 @@ import { renderToString } from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
 import routes from './src/js/routes'
 
-import configureStore from './src/js/store'
+import configureStore from './src/js/rootStore'
 
 const app = express()
 const port = process.env.PORT ? process.env.PORT : 3000
