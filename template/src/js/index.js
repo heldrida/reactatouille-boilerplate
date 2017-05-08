@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { AppContainer as HotReload } from 'react-hot-loader'
 import Root from './root'
-import configureStore from './store'
+import configureStore from './rootStore'
 import { browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
