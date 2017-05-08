@@ -1,11 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class Logo extends Component {
-  render () {
-    return (
-      <img className='logo' src={this.props.image} alt='' style={this.props.style} />
-    )
-  }
+const Logo = ({image, style}) => {
+  return (
+    <img className='logo' src={image} style={style} alt='My logo!' />
+  )
 }
 
 export default Logo
