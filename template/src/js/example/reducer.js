@@ -2,7 +2,7 @@
 import * as t from './actionTypes'
 
 const initialState = {
-  dateLastUpdated: 0
+  lastUpdated: 0
 }
 
 export default (state = initialState, action) => {
