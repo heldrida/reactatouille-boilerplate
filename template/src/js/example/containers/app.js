@@ -16,7 +16,6 @@ class App extends Component {
       style: 'opacity: 0'
     }
     setTimeout(() => {
-      console.log('containers/app/constructor/setTimeout:4000/this.props.replay=call')
       this.props.replay()
     }, 4000)
   }
@@ -29,11 +28,6 @@ class App extends Component {
       })
     }
     TweenLite.fromTo(myLogo, 0.8, { opacity: 0, x: 50 }, { opacity: 1, x: 0, ease: Bounce.easeOut, onComplete }) // eslint-disable-line no-undef
-  }
-
-  componentDidUpdate (prevProps, prevState) {
-    console.log('example/containers/app/componentDidUpdate/prevProps:', prevProps)
-    console.log('example/containers/app/componentDidUpdate/this.props:', this.props)
   }
 
   render () {
