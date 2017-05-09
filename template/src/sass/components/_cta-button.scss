@@ -1,0 +1,22 @@
+.cta-button-container {
+  &:hover {
+    background: #de6570;
+    color: #fff;
+  }
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  border: 1px solid #de6570;
+  color: #de6570;
+  border-radius: 4px;
+  @include transform(translateX(-50%));
+  button {
+    line-height: 18px;
+    padding: 6px 20px;
+    color: inherit;
+    text-transform: uppercase;
+    border: none;
+    background: none;
+    @include transition(all 0.3s);
+  }
+}
