@@ -6,6 +6,7 @@
         http://stackoverflow.com/questions/17614123/node-js-how-to-write-an-array-to-file
         https://www.npmjs.com/package/line-by-line
         https://www.npmjs.com/package/array-to-txt-file
+    probably, for https://www.npmjs.com/package/array-to-txt-file and create version without stringify
 
  > Review the React hot loader 3 examples, to avoid having to apply the hack in the entry point:
   
