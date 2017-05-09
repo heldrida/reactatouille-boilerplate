@@ -24,10 +24,10 @@ class App extends Component {
     const myLogo = document.querySelector('img.logo')
     let onComplete = () => {
       this.setState({
-        style: myLogo.getAttribute('style')
+        style: myLogo.getAttribute('style').replace('z-index', 'zIndex')
       })
     }
-    TweenLite.fromTo(myLogo, 0.8, { opacity: 0, x: 50 }, { opacity: 1, x: 0, ease: Bounce.easeOut, onComplete }) // eslint-disable-line no-undef
+    TweenLite.fromTo(myLogo, 0.8, { opacity: 0, x: 50, zIndex: 'auto' }, { opacity: 1, x: 0, zIndex: 'auto', ease: Bounce.easeOut, onComplete }) // eslint-disable-line no-undef
   }
 
   render () {
