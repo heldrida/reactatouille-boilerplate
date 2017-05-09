@@ -76,12 +76,15 @@ function createNewComponent (name) {
     fs.copyAsync(originDir, distDir, { clobber: true })
       .then(function (err) {
           // Show the initialization text, white space added to text align
-        console.log(chalk.green(' ' + 'Creating the React component directory `' + name + '`...'))
+        console.log(chalk.blue(' ' + 'Creating the React component directory `' + name + '`...'))
         console.log('\n')
         if (err) {
           return console.error(chalk.red.bold(err))
         } else {
           console.log(chalk.green(' ' + 'The component was created successfully!'))
+          console.log(chalk.yellow(' ' + 'This is a work in progress, so meanwhile you have to add the component to `root/src/js/rootReducer.js`'))
+          console.log(chalk.yellow(' ' + 'and also modify the name in the `root/src/js/[component]/constants.js`, etc. My apologies!'))
+          console.log(chalk.green(' ' + 'Thank you!'))
           console.log('\n')
         }
       })
@@ -100,19 +103,16 @@ function findJsPath (name) {
 
   // User may be in the project [ROOT]
   if (isDir(listCwd, validateRootDir)) {
-    console.log(chalk.green('User seems to be in the project [root]'))
     return path.resolve('./src/js' + '/' + name)
   }
 
   // User may be in the dir [root/src]
   if (isDir(listParent, validateSrcDir)) {
-    console.log(chalk.green('User seems to be in the project [src]'))
     return path.resolve('./js' + '/' + name)
   }
 
   // Use may be in the dir [root/src/js]
   if (isDir(listCwd, validateJsDir)) {
-    console.log(chalk.green('User seems to be in the project [root/src/js]'))
     return path.resolve('./' + name)
   }
 }
