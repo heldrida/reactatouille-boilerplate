@@ -44,6 +44,12 @@ To generate a new Component, make sure you are in the Project root, src or js di
 reactatouille -c <Name...>
 ```
 
+or, more verbose
+
+```
+reactatouille --create-component <Name...>
+```
+
 A new component is generated in the [projectRoot]/src/js/<newComponent>. This is work in progress, so you still have to make modifications, such as, include the reducer for this component (if required) in [projectRoot]/src/js/rootReducer.js and also change the name in the <newComponent>/constants.js, etc.
 
 ## Built With
