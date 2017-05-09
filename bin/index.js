@@ -56,7 +56,6 @@ function createNewProject (projectName) {
         // Show the initialization text, white space added to text align
         console.log(chalk.blue(' ' + 'Creating the project directory `' + projectName + '`...'))
         console.log('\n')
-
         if (err) {
           return console.error(chalk.red.bold(err))
         } else {
@@ -71,5 +70,104 @@ function createNewProject (projectName) {
 }
 
 function createNewComponent (name) {
-  console.log('TODO: createNewComponent')
+  var originDir = rootDir + '/template/src/js/example'
+  var distDir = findJsPath(name) // find the path for the user
+  if (distDir) {
+    fs.copyAsync(originDir, distDir, { clobber: true })
+      .then(function (err) {
+          // Show the initialization text, white space added to text align
+        console.log(chalk.green(' ' + 'Creating the React component directory `' + name + '`...'))
+        console.log('\n')
+        if (err) {
+          return console.error(chalk.red.bold(err))
+        } else {
+          console.log(chalk.green(' ' + 'The component was created successfully!'))
+          console.log('\n')
+        }
+      })
+  } else {
+    console.log(chalk.red('Oops! Are you in a Reactatouille Project root, source or js directory?'))
+    console.log('\n')
+  }
+}
+
+function findJsPath (name) {
+  // Known directories
+  var cwd = path.resolve('./')
+  var parentDir = path.resolve('../')
+  var listCwd = getDirectoryFileList(cwd)
+  var listParent = getDirectoryFileList(parentDir)
+
+  // User may be in the project [ROOT]
+  if (isDir(listCwd, validateRootDir)) {
+    console.log(chalk.green('User seems to be in the project [root]'))
+    return path.resolve('./src/js' + '/' + name)
+  }
+
+  // User may be in the dir [root/src]
+  if (isDir(listParent, validateSrcDir)) {
+    console.log(chalk.green('User seems to be in the project [src]'))
+    return path.resolve('./js' + '/' + name)
+  }
+
+  // Use may be in the dir [root/src/js]
+  if (isDir(listCwd, validateJsDir)) {
+    console.log(chalk.green('User seems to be in the project [root/src/js]'))
+    return path.resolve('./' + name)
+  }
+}
+
+function getDirectoryFileList (srcpath) {
+  return fs.readdirSync(srcpath)
+    .filter(file => fs.lstatSync(path.join(srcpath, file)))
+}
+
+function isDir (ls, cb) {
+  return typeof cb === 'function' && cb(ls)
+}
+
+function validateRootDir (ls) {
+  try {
+    var pkg = require(path.resolve('./') + '/package.json') || {}
+    var devDependencies = JSON.stringify(pkg.devDependencies).toLowerCase()
+    return ls.indexOf('src') > -1 &&
+            ls.indexOf('server.dev.js') > -1 &&
+            ls.indexOf('webpack.dev.config.js') > -1 &&
+            devDependencies.indexOf('react') > -1 &&
+            devDependencies.indexOf('reactatouille') > -1
+  } catch (e) {
+    return false
+  }
+}
+
+function validateSrcDir (ls) {
+  try {
+    var pkg = require(path.resolve('../') + '/package.json') || {}
+    var devDependencies = JSON.stringify(pkg.devDependencies).toLowerCase()
+    var cwd = path.resolve('./')
+    var listCwd = getDirectoryFileList(cwd)
+    return ls.indexOf('src') > -1 &&
+            ls.indexOf('server.dev.js') > -1 &&
+            ls.indexOf('webpack.dev.config.js') > -1 &&
+            listCwd.indexOf('js') > -1 &&
+            listCwd.indexOf('index.ejs') > -1 &&
+            devDependencies.indexOf('react') > -1 &&
+            devDependencies.indexOf('reactatouille') > -1
+  } catch (e) {
+    return false
+  }
+}
+
+function validateJsDir (ls) {
+  try {
+    var pkg = require(path.resolve('../../') + '/package.json') || {}
+    var devDependencies = JSON.stringify(pkg.devDependencies).toLowerCase()
+    return ls.indexOf('index.js') > -1 &&
+            ls.indexOf('root.js') > -1 &&
+            ls.indexOf('routes.js') > -1 &&
+            devDependencies.indexOf('react') > -1 &&
+            devDependencies.indexOf('reactatouille') > -1
+  } catch (e) {
+    return false
+  }
 }
