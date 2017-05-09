@@ -38,6 +38,14 @@ reactatouille [project name]
 
 It'll generate the `project_name` directory for  you, with all the Boilerplate template files, where you'll also find a README file containing further instructions to: run the development server, build for staging or production, test, etc.
 
+To generate a new Component, make sure you are in the Project root, src or js directory, then run the command:
+
+```
+reactatouille -c <Name...>
+```
+
+A new component is generated in the [projectRoot]/src/js/<newComponent>. This is work in progress, so you still have to make modifications, such as, include the reducer for this component (if required) in [projectRoot]/src/js/rootReducer.js and also change the name in the <newComponent>/constants.js, etc.
+
 ## Built With
 
 * ReactJS
