@@ -5,7 +5,8 @@
         http://stackoverflow.com/questions/16732166/read-txt-files-lines-in-js-node-js
         http://stackoverflow.com/questions/17614123/node-js-how-to-write-an-array-to-file
         https://www.npmjs.com/package/line-by-line
-        
+        https://www.npmjs.com/package/array-to-txt-file
+
  > Review the React hot loader 3 examples, to avoid having to apply the hack in the entry point:
   
     https://github.com/gaearon/react-hot-loader/blob/master/docs/README.md
