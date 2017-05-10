@@ -3,6 +3,8 @@ const path = require('path')
 const findUp = require('find-up')
 const fs = require('fs')
 var filePath
+var chalk = require('chalk')
+var figlet = require('figlet')
 
 module.exports = function (name, errCallback) {
   function readFile (filePath, strToInsert, cb) {
@@ -23,7 +25,8 @@ module.exports = function (name, errCallback) {
         console.error(err)
         return
       }
-      console.log('Successfully wrote to txt file')
+      console.log(chalk.yellow(' ' + 'Updated the rootReducer.js with the new component info!'))
+      console.log('\n')
     })
   }
 
@@ -68,7 +71,7 @@ module.exports = function (name, errCallback) {
   strToInsert[0] = tabSpace + strToInsert + ','
   strToInsert[1] = 'import ' + name + ' from \'./' + name + '\''
 
-  findUp(['src/js/rootReducerz.js']).then(function (path) {
+  findUp(['src/js/rootReducer.js']).then(function (path) {
     if (path) {
       filePath = path
       readFile(filePath, strToInsert, handleFile)

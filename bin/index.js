@@ -12,6 +12,7 @@ var rootDir = path.resolve(__dirname, '..')
 var clear = require('cli-clear')
 var version = require('../package.json').version
 var modifyRootReducer = require('./helpers/modifyRootReducer')
+var findAndReplace = require('find-and-replace')
 
 // Set options
 program
@@ -89,8 +90,10 @@ function createNewComponent (name) {
             console.log(chalk.yellow(' ' + 'My apologies!'))
             console.log('\n')
           })
-          renameComponentName(name, function () {
-            // TODO: show error if failed to modify name(s)
+          renameComponentName(name, distDir, function (name) {
+            console.log(chalk.yellow(' ' + 'Updated the new ' + name + ' with the new component name'))
+          }, function (err) {
+            console.log(chalk.yellow(' ' + 'Oops! Failed to rename the component name in the actions, reducers, etc'))
           })
           console.log(chalk.green(' ' + 'The component was created successfully!'))
           console.log('\n')
@@ -180,6 +183,41 @@ function validateJsDir (ls) {
   }
 }
 
-function renameComponentName (name) {
-  return true
+function renameComponentName (name, path, successCallback, errCallback) {
+  var list = getDirectoryFileList(path)
+  list.forEach(function (v) {
+    if (v.indexOf('.js') > -1) {
+      replace({
+        src: path + '/' + v,
+        dest: path + '/' + v,
+        name: name,
+        successCallback: successCallback,
+        errCallback: errCallback
+      })
+    } else {
+      renameComponentName(name, path + '/' + v, successCallback, errCallback)
+    }
+  })
+}
+
+function replace (params) {
+  findAndReplace
+    .src(params.src)
+    .dest(params.dest)
+    .replace({
+      'example': params.name
+    })
+    .complete(function (txt) {
+      // console.log('Finished! Here is the completed text: ' + txt)
+      if (typeof params.successCallback === 'function') {
+        var arr = params.dest.split('/')
+        var fileName = arr[arr.length - 1]
+        params.successCallback(fileName)
+      }
+    })
+    .error(function (err) {
+      if (typeof params.errCallback === 'function') {
+        params.errCallback(err)
+      }
+    })
 }
