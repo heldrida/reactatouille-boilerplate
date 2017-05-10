@@ -11,6 +11,7 @@ var path = require('path')
 var rootDir = path.resolve(__dirname, '..')
 var clear = require('cli-clear')
 var version = require('../package.json').version
+var modifyRootReducer = require('./helpers/modifyRootReducer')
 
 // Set options
 program
@@ -81,10 +82,17 @@ function createNewComponent (name) {
         if (err) {
           return console.error(chalk.red.bold(err))
         } else {
+          modifyRootReducer(name, function () {
+            console.log(chalk.yellow(' ' + 'Oops! Failed to add the import and reducer into `root/src/js/rootReducer.js`'))
+            console.log(chalk.yellow(' ' + 'This is a work in progress, so meanwhile you have to add the component to `root/src/js/rootReducer.js`'))
+            console.log(chalk.yellow(' ' + 'and also modify the name in the `root/src/js/[component]/constants.js`, etc.'))
+            console.log(chalk.yellow(' ' + 'My apologies!'))
+            console.log('\n')
+          })
+          renameComponentName(name, function () {
+            // TODO: show error if failed to modify name(s)
+          })
           console.log(chalk.green(' ' + 'The component was created successfully!'))
-          console.log(chalk.yellow(' ' + 'This is a work in progress, so meanwhile you have to add the component to `root/src/js/rootReducer.js`'))
-          console.log(chalk.yellow(' ' + 'and also modify the name in the `root/src/js/[component]/constants.js`, etc. My apologies!'))
-          console.log(chalk.green(' ' + 'Thank you!'))
           console.log('\n')
         }
       })
@@ -170,4 +178,8 @@ function validateJsDir (ls) {
   } catch (e) {
     return false
   }
+}
+
+function renameComponentName (name) {
+  return true
 }

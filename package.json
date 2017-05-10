@@ -36,6 +36,7 @@
   },
   "homepage": "https://github.com/heldrida/reactatouille-boilerplate#readme",
   "dependencies": {
+    "array-to-txt-file": "^1.0.2",
     "babel-polyfill": "^6.22.0",
     "bluebird": "^3.4.7",
     "chai": "^3.5.0",
@@ -44,6 +45,7 @@
     "commander": "^2.9.0",
     "figlet": "^1.2.0",
     "file-loader": "^0.9.0",
+    "find-up": "^2.1.0",
     "fs-extra": "^2.0.0",
     "superagent": "^3.3.2"
   },
@@ -51,6 +53,5 @@
     "node": ">=7.4.0",
     "npm": ">=4.0.5"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
