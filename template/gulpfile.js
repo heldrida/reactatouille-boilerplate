@@ -23,6 +23,7 @@ var figlet = require('figlet')
 var clean = require('gulp-clean')
 var standard = require('gulp-standard')
 var rename = require('gulp-rename')
+var Moment = require('moment')
 
 function getDistributionDir () {
   var dir = process.env.NODE_ENV === 'production' ? 'dist/production' : 'dist/staging'
@@ -201,11 +202,12 @@ gulp.task('server-script-transpiler', function () {
         }))
         .pipe(gulp.dest(getDistributionDir()))
 })
-// babel src --out-dir lib
+
 gulp.task('create-library', function (cb) {
-  var cmd = spawn('babel', ['src/js', '--out-dir', getDistributionDir() + '/lib'], { stdio: 'inherit' })
+  var now = new Moment()
+  var cmd = spawn('babel', ['src/js', '--out-dir', getDistributionDir() + '/lib'], { stdio: 'ignore' })
   cmd.on('close', function (code) {
-    console.log('my-task exited with code ' + code)
+    console.log('[' + now.format('HH:mm:ss') + '] Transpiled the source code into the distribution lib directory')
     cb(code)
   })
 })
