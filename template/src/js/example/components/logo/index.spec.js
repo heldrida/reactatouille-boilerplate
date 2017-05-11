@@ -2,7 +2,7 @@
 
 import React from 'react'
 import {shallow, mount} from 'enzyme'
-import Logo from './logo'
+import Logo from './index'
 
 test('Renders the logo', () => {
   it('should not crash', () => {
