@@ -16,9 +16,9 @@ const port = process.env.PORT ? process.env.PORT : 3000
 var serverInstance = null
 var dist = path.resolve(__dirname)
 var config = null
-const webpackAssets = require('../../webpack-assets.json')
+const webpackAssets = require('./webpack-assets.json') // TODO: copy
 
-config = require('../../config')
+config = require('./config') // TODO: copy
 
 /**
  * Process error handling
@@ -32,7 +32,7 @@ process.on('SIGINT', () => {
   process.exit(0)
 })
 
-app.set('views', path.resolve(__dirname, '../../src'))
+app.set('views', path.resolve(__dirname))
 app.set('view engine', 'ejs')
 
 /**

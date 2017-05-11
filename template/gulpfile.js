@@ -47,7 +47,15 @@ gulp.task('images', function () {
          .pipe(gulp.dest(getDistributionDir() + '/images'))
 })
 
-gulp.task('build', ['clean', 'server-script-transpiler', 'create-library'], function () {
+gulp.task('copy-files', function () {
+  var list = ['./webpack-assets.json', './config.js', './src/index.ejs']
+  list.forEach(function (v) {
+    gulp.src(v)
+        .pipe(gulp.dest(getDistributionDir()))
+  })
+})
+
+gulp.task('build', ['clean', 'server-script-transpiler', 'create-library', 'copy-files'], function () {
   switch (process.env.NODE_ENV) {
     case 'production':
       gulp.start('_build-production')
@@ -149,7 +157,7 @@ gulp.task('node-server', function (cb) {
 })
 
 gulp.task('preview', function (cb) {
-  var cmd = spawn('node', ['server.js'], { stdio: 'inherit' })
+  var cmd = spawn('node', [getDistributionDir() + '/' + 'server.js'], { stdio: 'inherit' })
 
   cmd.on('close', function (code) {
     console.log('my-task exited with code ' + code)
