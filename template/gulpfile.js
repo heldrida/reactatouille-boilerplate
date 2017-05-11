@@ -46,7 +46,7 @@ gulp.task('images', function () {
          .pipe(gulp.dest(getDistributionDir() + '/images'))
 })
 
-gulp.task('build', ['clean', 'server-script-transpiler'], function () {
+gulp.task('build', ['clean', 'server-script-transpiler', 'create-library'], function () {
   switch (process.env.NODE_ENV) {
     case 'production':
       gulp.start('_build-production')
@@ -190,16 +190,24 @@ gulp.task('standardjs', function () {
 })
 
 gulp.task('server-script-transpiler', function () {
-  return gulp.src('./server.dev.js')
+  return gulp.src('./server.prod.js')
         .pipe(gbabel({
           presets: ['es2015']
         }))
         .pipe(rename({
           basename: 'server',
-          suffix: '.prod',
+          suffix: '',
           extname: '.js'
         }))
-        .pipe(gulp.dest('./dist'))
+        .pipe(gulp.dest(getDistributionDir()))
+})
+// babel src --out-dir lib
+gulp.task('create-library', function (cb) {
+  var cmd = spawn('babel', ['src/js', '--out-dir', getDistributionDir() + '/lib'], { stdio: 'inherit' })
+  cmd.on('close', function (code) {
+    console.log('my-task exited with code ' + code)
+    cb(code)
+  })
 })
 
 gulp.doneCallback = function (err) {

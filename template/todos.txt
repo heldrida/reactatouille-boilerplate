@@ -1,3 +1,7 @@
+  - Create new task, pre `build` to generate transpiled /lib files from /src, for staging and production
+    babel src --out-dir lib
+    babel server.prod.js --out-dir lib
+    cp src/index.ejs lib
 
   - Apply Jack Hsu code organization approach
     https://jaysoo.ca/2016/02/28/applying-code-organization-rules-to-concrete-redux-code/
