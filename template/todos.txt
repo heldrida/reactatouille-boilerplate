@@ -1,3 +1,11 @@
+  - Improve JEST unit tests coverage
+    https://www.netguru.co/tips/flawless-react/redux-testing-with-the-jest-framework-part-1
+    https://www.sitepoint.com/test-react-components-jest/
+    https://medium.com/javascript-inside/some-thoughts-on-testing-react-redux-applications-8571fbc1b78f
+    https://medium.com/caffeine-and-testing/testing-react-redux-applications-fee79ac0087f
+    https://facebook.github.io/jest/docs/en/getting-started.html#content
+    http://airbnb.io/enzyme/docs/api/index.html
+
   - Create new task, pre `build` to generate transpiled /lib files from /src, for staging and production
     babel src --out-dir lib
     babel server.prod.js --out-dir lib
