@@ -108,6 +108,14 @@ gulp.task('deploy', function () {
 
 gulp.task('test', ['unit_test'])
 
+gulp.task('unit_test', function (cb) {
+  var cmd = spawn('npm', ['test'], { stdio: 'inherit' })
+  cmd.on('close', function (code) {
+    // console.log('Mocha tests completed!')
+    cb(code)
+  })
+})
+
 gulp.task('openBrowser', function () {
   open('http://localhost:' + port, function (err) {
     if (err) {
