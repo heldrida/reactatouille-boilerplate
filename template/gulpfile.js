@@ -21,7 +21,6 @@ var git = require('gulp-git')
 var chalk = require('chalk')
 var figlet = require('figlet')
 var clean = require('gulp-clean')
-var nullCompiler = require('./nullCompiler') // nullCompiler var won't be used (keep require)
 var standard = require('gulp-standard')
 var rename = require('gulp-rename')
 
@@ -104,26 +103,6 @@ gulp.task('deploy', function () {
         throw err
       }
     })
-  })
-})
-
-// gulp.task('unit_test', function (cb) {
-//   gulp.src('./test/unit_tests/**/*.spec.js', { read: false })
-//     .pipe(mocha({
-//       compilers: {
-//         js: babel
-//       }
-//     }))
-//     .once('end', function () {
-//       cb()
-//     })
-// })
-
-gulp.task('unit_test', function (cb) {
-  var cmd = spawn('mocha', ['--compilers', 'js:babel-core/register', '--require', './nullCompiler.js', './test/**/*.spec.js'], { stdio: 'inherit' })
-  cmd.on('close', function (code) {
-    // console.log('Mocha tests completed!')
-    cb(code)
   })
 })
 

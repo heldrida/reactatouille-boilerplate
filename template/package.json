@@ -1,7 +1,7 @@
 {
   "name": "reactatouille-boilerplate",
   "version": "0.8.9d",
-  "description": "Reactatouille-Boilerplate built using Redux Webpack2 Gulp Sass Mocha Enzyme Chai gsap Boilerplate.",
+  "description": "Reactatouille-Boilerplate built using Redux Webpack2 Gulp Sass Jest Enzyme gsap Boilerplate.",
   "main": "gulpfile.js",
   "scripts": {
     "test": "./node_modules/jest/bin/jest.js  ./src/js"
@@ -18,7 +18,8 @@
     "ES6",
     "ES2015",
     "babel",
-    "mocha",
+    "jest",
+    "enzyme",
     "hmr",
     "express",
     "sass",

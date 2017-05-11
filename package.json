@@ -1,10 +1,10 @@
 {
   "name": "reactatouille",
   "version": "0.8.9d",
-  "description": "Reactatouille is a command-line tool to help quickly start and build a new React project, using Redux, Webpack, Gulp (You can add your own tasks, yo!), HMR/Hot Module Reload, Sass (architecture best practices), Mocha, Enzyme, Chai, gsap and the Express server.",
+  "description": "Reactatouille is a command-line tool to help quickly start and build a new React project, using Redux, Webpack, Gulp (You can add your own tasks, yo!), HMR/Hot Module Reload, Sass (architecture best practices), Jest, Enzyme, gsap and the Express server.",
   "main": "index.js",
   "scripts": {
-    "test": "cd ./template && gulp test"
+    "test": "cd ./template && npm test"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,8 @@
     "ES6",
     "ES2015",
     "babel",
-    "mocha",
+    "jest",
+    "enzyme",
     "hmr",
     "express",
     "sass",

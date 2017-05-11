@@ -81,8 +81,7 @@ Find the source code under the `src` directory for javascript and `sass` for the
 * SASS
 * ES2015
 * GULP
-* MOCHA
-* CHAI
+* JEST
 * ENZYME
 * GSAP
 * STANDARDJS
