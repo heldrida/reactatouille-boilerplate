@@ -16,11 +16,6 @@ const port = process.env.PORT ? process.env.PORT : 3000
 var serverInstance = null
 var dist = path.resolve(__dirname)
 var config = null
-const webpack = require('webpack')
-const webpackHotMiddleware = require('webpack-hot-middleware')
-const webpackDevConfig = require('../../webpack.dev.config')
-const compiler = webpack(require('../../webpack.dev.config'))
-var webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackAssets = require('../../webpack-assets.json')
 
 config = require('../../config')
@@ -39,31 +34,6 @@ process.on('SIGINT', () => {
 
 app.set('views', path.resolve(__dirname, '../../src'))
 app.set('view engine', 'ejs')
-
-app.use(webpackDevMiddleware(compiler, {
-  noInfo: true,
-  publicPath: webpackDevConfig.output.publicPath,
-  stats: {
-    colors: true,
-    hash: false,
-    version: true,
-    timings: false,
-    assets: false,
-    chunks: false,
-    modules: false,
-    reasons: false,
-    children: false,
-    source: false,
-    errors: true,
-    errorDetails: true,
-    warnings: true,
-    publicPath: false
-  }
-}))
-
-app.use(webpackHotMiddleware(compiler, {
-  log: console.log
-}))
 
 /**
  * The Cross origin resource sharing rules
