@@ -1,3 +1,1 @@
-import app from './app'
-
-export const App = app
+export { default as App } from './app'
