@@ -117,7 +117,7 @@ app.get('*', (req, res) => {
       // Render the component to a string
     const myAppHtml = renderToString(<StaticRouter context={{}} location={req.url}>
       <Provider store={store}>
-        <MyApp store={store} />
+        <MyApp />
       </Provider>
     </StaticRouter>)
       // Grab the initial state from our Redux store
