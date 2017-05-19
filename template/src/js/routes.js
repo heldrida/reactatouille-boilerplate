@@ -1,7 +1,10 @@
 import React from 'react'
-import { Route } from 'react-router'
+import { Router, Route } from 'react-router'
 import example from './example'
 
 export default (
-  <Route path='/' component={example.containers.App} />
+  <div>
+    <Route path='/' component={example.containers.App} />
+    <Route path='/myOther' component={example.containers.App} />
+  </div>
 )

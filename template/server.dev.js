@@ -103,58 +103,33 @@ app.use('/api/test', (req, res) => {
 
 app.use('/assets', express.static(dist))
 
-// any other is mapped here
-// app.get('*', (req, res, next) => {
-//   match({ routes: routes, location: req.url }, (error, redirectLocation, props) => {
-//     if (error) {
-//       res.status(500).send(error.message)
-//     } else if (redirectLocation) {
-//       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
-//     } else if (props) {
-//       const preloadedState = {'foobar': 1}
-//       // Create a new Redux store instance
-//       const store = configureStore(preloadedState)
-//       // Render the component to a string
-//       const myAppHtml = renderToString(<Provider store={store}><RouterContext {...props} /></Provider>)
-//       // Grab the initial state from our Redux store
-//       const finalState = store.getState()
-//       res.render('index', {
-//         app: myAppHtml,
-//         state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
-//         bundle: webpackAssets.main.js,
-//         build: config.build_name,
-//         css: '/assets/css/main.min.css'
-//       })
-//     } else {
-//       res.status(404).send('Not found')
-//     }
-//   })
-// })
-
 app.get('*', (req, res) => {
-  // const match = routes.reduce((acc, route) => matchPath(req.url, route, { exact: true }) || acc, null)
-  // if (!match) {
-  //   res.status(404).send('Not found')
-  //   return
-  // }
-  const preloadedState = {'foobar': 1}
-    // Create a new Redux store instance
-  const store = configureStore(preloadedState)
-    // Render the component to a string
-  const myAppHtml = renderToString(<StaticRouter context={{}} location={req.url}>
-    <Provider store={store}>
-      <MyApp store={store} />
-    </Provider>
-  </StaticRouter>)
-    // Grab the initial state from our Redux store
-  const finalState = store.getState()
-  res.render('index', {
-    app: myAppHtml,
-    state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
-    bundle: webpackAssets.main.js,
-    build: config.build_name,
-    css: '/assets/css/main.min.css'
+  // (wip) migration to react-router v4 temporary solution
+  const matches = routes.props.children.find((v) => {
+    return v.props.path === req.url
   })
+  if (!matches) {
+    res.status(404).send('Not found')
+  } else {
+    const preloadedState = {'foobar': 1}
+      // Create a new Redux store instance
+    const store = configureStore(preloadedState)
+      // Render the component to a string
+    const myAppHtml = renderToString(<StaticRouter context={{}} location={req.url}>
+      <Provider store={store}>
+        <MyApp store={store} />
+      </Provider>
+    </StaticRouter>)
+      // Grab the initial state from our Redux store
+    const finalState = store.getState()
+    res.render('index', {
+      app: myAppHtml,
+      state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
+      bundle: webpackAssets.main.js,
+      build: config.build_name,
+      css: '/assets/css/main.min.css'
+    })
+  }
 })
 
 serverInstance = app.listen(port, (error) => {
