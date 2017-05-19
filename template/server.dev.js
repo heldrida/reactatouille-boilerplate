@@ -5,11 +5,13 @@ import chalk from 'chalk'
 
 import React from 'react'
 import { renderToString } from 'react-dom/server'
-import { match, RouterContext } from 'react-router'
+import { StaticRouter, matchPath } from 'react-router'
 import routes from './src/js/routes'
 
 import configureStore from './src/js/rootStore'
 import { Provider } from 'react-redux'
+
+import MyApp from './src/js/example/containers/app'
 
 const app = express()
 const port = process.env.PORT ? process.env.PORT : 3000
@@ -102,30 +104,56 @@ app.use('/api/test', (req, res) => {
 app.use('/assets', express.static(dist))
 
 // any other is mapped here
-app.get('*', (req, res, next) => {
-  match({ routes: routes, location: req.url }, (error, redirectLocation, props) => {
-    if (error) {
-      res.status(500).send(error.message)
-    } else if (redirectLocation) {
-      res.redirect(302, redirectLocation.pathname + redirectLocation.search)
-    } else if (props) {
-      const preloadedState = {'foobar': 1}
-      // Create a new Redux store instance
-      const store = configureStore(preloadedState)
-      // Render the component to a string
-      const myAppHtml = renderToString(<Provider store={store}><RouterContext {...props} /></Provider>)
-      // Grab the initial state from our Redux store
-      const finalState = store.getState()
-      res.render('index', {
-        app: myAppHtml,
-        state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
-        bundle: webpackAssets.main.js,
-        build: config.build_name,
-        css: '/assets/css/main.min.css'
-      })
-    } else {
-      res.status(404).send('Not found')
-    }
+// app.get('*', (req, res, next) => {
+//   match({ routes: routes, location: req.url }, (error, redirectLocation, props) => {
+//     if (error) {
+//       res.status(500).send(error.message)
+//     } else if (redirectLocation) {
+//       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+//     } else if (props) {
+//       const preloadedState = {'foobar': 1}
+//       // Create a new Redux store instance
+//       const store = configureStore(preloadedState)
+//       // Render the component to a string
+//       const myAppHtml = renderToString(<Provider store={store}><RouterContext {...props} /></Provider>)
+//       // Grab the initial state from our Redux store
+//       const finalState = store.getState()
+//       res.render('index', {
+//         app: myAppHtml,
+//         state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
+//         bundle: webpackAssets.main.js,
+//         build: config.build_name,
+//         css: '/assets/css/main.min.css'
+//       })
+//     } else {
+//       res.status(404).send('Not found')
+//     }
+//   })
+// })
+
+app.get('*', (req, res) => {
+  // const match = routes.reduce((acc, route) => matchPath(req.url, route, { exact: true }) || acc, null)
+  // if (!match) {
+  //   res.status(404).send('Not found')
+  //   return
+  // }
+  const preloadedState = {'foobar': 1}
+    // Create a new Redux store instance
+  const store = configureStore(preloadedState)
+    // Render the component to a string
+  const myAppHtml = renderToString(<StaticRouter context={{}} location={req.url}>
+    <Provider store={store}>
+      <MyApp store={store} />
+    </Provider>
+  </StaticRouter>)
+    // Grab the initial state from our Redux store
+  const finalState = store.getState()
+  res.render('index', {
+    app: myAppHtml,
+    state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
+    bundle: webpackAssets.main.js,
+    build: config.build_name,
+    css: '/assets/css/main.min.css'
   })
 })
 

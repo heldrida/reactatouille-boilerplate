@@ -3,11 +3,11 @@ import { render } from 'react-dom'
 import { AppContainer as HotReload } from 'react-hot-loader'
 import Root from './root'
 import configureStore from './rootStore'
-import { browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
+import { createBrowserHistory } from 'history'
 
 const store = configureStore()
-const history = syncHistoryWithStore(browserHistory, store)
+const history = syncHistoryWithStore(createBrowserHistory(), store)
 
 // render method for instantiation and Hot module reload
 const renderApp = (RootComponent, store, history) => {
