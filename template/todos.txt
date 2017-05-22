@@ -4,6 +4,7 @@
     http://rants.broonix.ca/updated-upgrading-to-react-router-v4-2/
     https://brunolm.wordpress.com/2017/03/17/migrating-to-react-router-4-with-redux/
     https://github.com/FortechRomania/react-redux-complete-example/blob/master/src/server/index.js
+    http://stackoverflow.com/questions/41474134/nested-routes-with-react-router-v4
 
   - Improve JEST unit tests coverage
     https://www.netguru.co/tips/flawless-react/redux-testing-with-the-jest-framework-part-1

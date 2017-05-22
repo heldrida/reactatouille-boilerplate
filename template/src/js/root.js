@@ -1,15 +1,20 @@
 import React from 'react'
-import { Router } from 'react-router'
+import { Switch } from 'react-router'
+import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import routes from './routes'
 import { renderRoutes } from 'react-router-config'
 
+// { routes.map(route => <Route key={route.path} {...route} />) }
+
 const Root = ({store, history}) => {
   return (
     <Provider store={store}>
-      <Router history={history}>
-        { renderRoutes(routes) }
-      </Router>
+      <BrowserRouter history={history}>
+        <Switch>
+          { renderRoutes(routes) }
+        </Switch>
+      </BrowserRouter>
     </Provider>
   )
 }

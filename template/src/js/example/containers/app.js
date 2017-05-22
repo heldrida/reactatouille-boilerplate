@@ -8,6 +8,8 @@ import { bindActionCreators } from 'redux'
 import { replay } from '../actions'
 import CtaButton from '../components/ctaButton'
 import { withRouter } from 'react-router'
+import routes from '../../routes'
+import { renderRoutes } from 'react-router-config'
 
 // include the stylesheet entry-point
 isBrowser() && require('../../../sass/app.scss')
@@ -50,8 +52,9 @@ class App extends Component {
     return (
       <div className='app'>
         <Logo image={image} style={style} />
-        { this.props.children }
+        { renderRoutes(routes[0].routes) }
         <CtaButton callback={() => this.replayAnimation()} />
+        { console.log('this.props: ', this.props) }
       </div>
     )
   }
