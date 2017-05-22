@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { replay } from '../actions'
 import CtaButton from '../components/ctaButton'
-import { withRouter } from 'react-router'
+import { withRouter, Route } from 'react-router'
 import routes from '../../routes'
 import { renderRoutes } from 'react-router-config'
 
@@ -52,9 +52,8 @@ class App extends Component {
     return (
       <div className='app'>
         <Logo image={image} style={style} />
-        { renderRoutes(routes[0].routes) }
+        <Route path='/logo' component={Logo} />
         <CtaButton callback={() => this.replayAnimation()} />
-        { console.log('this.props: ', this.props) }
       </div>
     )
   }
