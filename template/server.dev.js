@@ -105,9 +105,15 @@ app.use('/assets', express.static(dist))
 
 app.get('*', (req, res) => {
   // (wip) migration to react-router v4 temporary solution
-  const matches = routes.props.children.find((v) => {
-    return v.props.path === req.url
-  })
+  // let matches
+  // if (typeof routes.props.children !== 'undefined' && Array.isArray(routes.props.children)) {
+  //   matches = routes.props.children.find((v) => {
+  //     return v.props.path === req.url
+  //   })
+  // } else {
+  //   matches = routes.props.children.props.path === req.url
+  // }
+  let matches = true
   if (!matches) {
     res.status(404).send('Not found')
   } else {

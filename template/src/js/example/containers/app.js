@@ -7,6 +7,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { replay } from '../actions'
 import CtaButton from '../components/ctaButton'
+import { withRouter } from 'react-router'
+
 // include the stylesheet entry-point
 isBrowser() && require('../../../sass/app.scss')
 
@@ -68,4 +70,4 @@ function matchDispatchToProps (dispatch) {
   }, dispatch)
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(App)
+export default connect(mapStateToProps, matchDispatchToProps)(withRouter(App))
