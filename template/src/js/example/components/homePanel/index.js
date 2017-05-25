@@ -3,7 +3,7 @@ import CtaButton from '../ctaButton'
 import Logo from '../logo'
 
 const HomePanel = ({image, style, routes, replay}) => (
-  <div className='app'>
+  <div className='app home-panel'>
     <Logo image={image} style={style} />
     <CtaButton callback={() => replay()} />
   </div>
