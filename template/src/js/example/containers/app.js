@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import { styleObjectParser } from '../../utils'
+import { Animations, Helpers } from '../../utils'
 import { loadImage } from 'reactatouille'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { replay } from '../actions'
 import { withRouter, Route } from 'react-router'
 import HomePanel from '../components/homePanel'
-import { onHomePanelReveal } from '../../utils/animations'
+
+console.log('Animations: ', Animations)
+console.log('Helpers: ', Helpers)
 
 class App extends Component {
   constructor (props) {
@@ -15,7 +17,7 @@ class App extends Component {
       style: 'opacity: 0'
     }
     this.image = loadImage('logo-reactatouille-boilerplate.png')
-    this.style = styleObjectParser(this.state.style)
+    this.style = Helpers.styleObjectParser(this.state.style)
   }
 
   componentDidMount () {
@@ -30,7 +32,7 @@ class App extends Component {
 
   logoAnimation () {
     const el = document.querySelector('img.logo')
-    onHomePanelReveal({
+    Animations.onHomePanelReveal({
       el: el,
       onComplete: () => {
         this.setState({
