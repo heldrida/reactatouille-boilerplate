@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Switch } from 'react-router'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import routes from './routes'
+import rootRoutes from './rootRoutes'
 
 const setRoute = (route) => {
   const MyComponent = route.component
@@ -14,7 +14,7 @@ const Root = ({store, history}) => {
     <Provider store={store}>
       <BrowserRouter history={history}>
         <Switch>
-          { routes.map(route => setRoute(route)) }
+          { rootRoutes.map(route => setRoute(route)) }
         </Switch>
       </BrowserRouter>
     </Provider>

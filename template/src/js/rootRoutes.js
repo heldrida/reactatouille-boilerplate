@@ -1,6 +1,6 @@
 import example from './example'
 
-const routes = [
+const rootRoutes = [
   {
     path: '/',
     component: example.containers.App,
@@ -12,4 +12,4 @@ const routes = [
   }
 ]
 
-export default routes
+export default rootRoutes

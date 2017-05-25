@@ -6,7 +6,6 @@ import chalk from 'chalk'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter, matchPath } from 'react-router'
-import routes from './src/js/routes'
 
 import configureStore from './src/js/rootStore'
 import { Provider } from 'react-redux'

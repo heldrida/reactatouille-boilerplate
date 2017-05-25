@@ -1,3 +1,4 @@
+// (WIP) moving to react router V4, see server.dev.js (where that work already started, thanks!)
 import express from 'express'
 import path from 'path'
 import superagent from 'superagent'
