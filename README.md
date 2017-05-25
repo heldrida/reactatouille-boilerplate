@@ -55,6 +55,7 @@ A new component is generated in the [projectRoot]/src/js/<newComponent>. This is
 ## Built With
 
 * ReactJS
+* React Router 4
 * Webpack 2
 * SASS
 * ES2015

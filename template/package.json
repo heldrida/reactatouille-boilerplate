@@ -25,7 +25,8 @@
     "sass",
     "gsap",
     "universal",
-    "isomorphic"
+    "isomorphic",
+    "react router 4"
   ],
   "author": "Punkbit",
   "license": "WTFPL",
