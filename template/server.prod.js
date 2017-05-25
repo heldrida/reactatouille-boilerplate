@@ -7,10 +7,12 @@ import chalk from 'chalk'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
-import routes from './lib/routes'
+import { StaticRouter } from 'react-router'
 
 import configureStore from './lib/rootStore'
 import { Provider } from 'react-redux'
+
+import MyApp from './lib/example/containers/app'
 
 const app = express()
 const port = process.env.PORT ? process.env.PORT : 3000
@@ -72,32 +74,39 @@ app.use('/api/test', (req, res) => {
 
 app.use('/assets', express.static(dist))
 
-// any other is mapped here
-app.get('*', (req, res, next) => {
-  match({ routes: routes, location: req.url }, (error, redirectLocation, props) => {
-    if (error) {
-      res.status(500).send(error.message)
-    } else if (redirectLocation) {
-      res.redirect(302, redirectLocation.pathname + redirectLocation.search)
-    } else if (props) {
-      const preloadedState = {'foobar': 1}
+app.get('*', (req, res) => {
+  // (wip) migration to react-router v4 temporary solution
+  // let matches
+  // if (typeof routes.props.children !== 'undefined' && Array.isArray(routes.props.children)) {
+  //   matches = routes.props.children.find((v) => {
+  //     return v.props.path === req.url
+  //   })
+  // } else {
+  //   matches = routes.props.children.props.path === req.url
+  // }
+  let matches = true
+  if (!matches) {
+    res.status(404).send('Not found')
+  } else {
+    const preloadedState = {'foobar': 1}
       // Create a new Redux store instance
-      const store = configureStore(preloadedState)
+    const store = configureStore(preloadedState)
       // Render the component to a string
-      const myAppHtml = renderToString(<Provider store={store}><RouterContext {...props} /></Provider>)
+    const myAppHtml = renderToString(<StaticRouter context={{}} location={req.url}>
+      <Provider store={store}>
+        <MyApp />
+      </Provider>
+    </StaticRouter>)
       // Grab the initial state from our Redux store
-      const finalState = store.getState()
-      res.render('index', {
-        app: myAppHtml,
-        state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
-        bundle: webpackAssets.main.js,
-        build: config.build_name,
-        css: '/assets/css/main.min.css'
-      })
-    } else {
-      res.status(404).send('Not found')
-    }
-  })
+    const finalState = store.getState()
+    res.render('index', {
+      app: myAppHtml,
+      state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
+      bundle: webpackAssets.main.js,
+      build: config.build_name,
+      css: '/assets/css/main.min.css'
+    })
+  }
 })
 
 serverInstance = app.listen(port, (error) => {
