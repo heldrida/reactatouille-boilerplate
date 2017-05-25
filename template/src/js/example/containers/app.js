@@ -7,9 +7,6 @@ import { replay } from '../actions'
 import { withRouter, Route } from 'react-router'
 import HomePanel from '../components/homePanel'
 
-console.log('Animations: ', Animations)
-console.log('Helpers: ', Helpers)
-
 class App extends Component {
   constructor (props) {
     super(props)
