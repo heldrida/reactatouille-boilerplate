@@ -52,7 +52,7 @@ class App extends Component {
     return (
       <div className='app'>
         <Logo image={image} style={style} />
-        <Route path='/logo' component={Logo} />
+        { Array.isArray(this.props.routes) && this.props.routes.map(route => <Route key={route.path} {...route} />) }
         <CtaButton callback={() => this.replayAnimation()} />
       </div>
     )
