@@ -1,18 +1,12 @@
 import React, { Component } from 'react'
 import { TweenLite } from 'gsap'
 import { styleObjectParser } from '../../utils'
-import { loadImage, isBrowser } from 'reactatouille'
-import Logo from '../components/logo'
+import { loadImage } from 'reactatouille'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { replay } from '../actions'
-import CtaButton from '../components/ctaButton'
 import { withRouter, Route } from 'react-router'
-import routes from '../../routes'
-import { renderRoutes } from 'react-router-config'
-
-// include the stylesheet entry-point
-isBrowser() && require('../../../sass/app.scss')
+import HomePanel from '../components/homePanel'
 
 class App extends Component {
   constructor (props) {
@@ -20,6 +14,8 @@ class App extends Component {
     this.state = {
       style: 'opacity: 0'
     }
+    this.image = loadImage('logo-reactatouille-boilerplate.png')
+    this.style = styleObjectParser(this.state.style)
   }
 
   componentDidMount () {
@@ -42,18 +38,12 @@ class App extends Component {
     TweenLite.fromTo(myLogo, 0.8, { opacity: 0, x: 50, zIndex: 'auto' }, { opacity: 1, x: 0, zIndex: 'auto', ease: Bounce.easeOut, onComplete }) // eslint-disable-line no-undef
   }
 
-  replayAnimation () {
-    this.props.replay()
-  }
-
   render () {
-    const image = loadImage('logo-reactatouille-boilerplate.png')
-    const style = styleObjectParser(this.state.style)
     return (
-      <div className='app'>
-        <Logo image={image} style={style} />
-        { Array.isArray(this.props.routes) && this.props.routes.map(route => <Route key={route.path} {...route} />) }
-        <CtaButton callback={() => this.replayAnimation()} />
+      <div>
+        <HomePanel image={this.image} style={this.style} replay={this.props.replay}>
+          { Array.isArray(this.props.routes) && this.props.routes.map(route => <Route key={route.path} {...route} />) }
+        </HomePanel>
       </div>
     )
   }
