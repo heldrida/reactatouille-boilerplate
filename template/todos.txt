@@ -1,3 +1,6 @@
+  - change task runner to bash scripts or the `runjs` lib
+    https://github.com/pawelgalazka/runjs#get-started
+
   - markup mismatch
     https://stackoverflow.com/questions/33521047/warning-react-attempted-to-reuse-markup-in-a-container-but-the-checksum-was-inv
     https://stackoverflow.com/questions/38923805/what-is-react-empty
