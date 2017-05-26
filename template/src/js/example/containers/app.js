@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import * as Utils from '../../utils'
-import { loadImage } from 'reactatouille'
+import { loadImage, isBrowser } from 'reactatouille'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { replay } from '../actions'
@@ -10,20 +10,21 @@ import HomePanel from '../components/homePanel'
 class App extends Component {
   constructor (props) {
     super(props)
+    this.isBrowser = isBrowser()
     this.state = {
-      style: 'opacity: 0'
+      style: this.isBrowser ? 'opacity: 0' : ''
     }
     this.image = loadImage('logo-reactatouille-boilerplate.png')
     this.style = Utils.helpers.styleObjectParser(this.state.style)
   }
 
   componentDidMount () {
-    this.logoAnimation()
+    this.isBrowser && this.logoAnimation()
   }
 
   componentDidUpdate (prevProps, prevState) {
     if (prevProps.example.lastUpdated !== this.props.example.lastUpdated) {
-      this.logoAnimation()
+      this.isBrowser && this.logoAnimation()
     }
   }
 
