@@ -12,7 +12,7 @@ class App extends Component {
     super(props)
     this.isBrowser = isBrowser()
     this.state = {
-      style: this.isBrowser ? 'opacity: 0' : ''
+      style: ''
     }
     this.image = loadImage('logo-reactatouille-boilerplate.png')
     this.style = Utils.helpers.styleObjectParser(this.state.style)
