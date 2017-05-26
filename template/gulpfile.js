@@ -10,6 +10,7 @@ if (args.env && ['staging', 'production'].indexOf(args.env) > -1) {
 var config = require('./config')
 var gulp = require('gulp')
 var webpack = require('webpack')
+var webpackDevelopmentConfig = require('./webpack.dev.config.js')
 var webpackStagingConfig = require('./webpack.staging.config.js')
 var webpackProductionConfig = require('./webpack.production.config.js')
 var gutil = require('gulp-util')
@@ -26,17 +27,9 @@ var rename = require('gulp-rename')
 var Moment = require('moment')
 
 function getDistributionDir () {
-  var dir = process.env.NODE_ENV === 'production' ? 'dist/production' : 'dist/staging'
+  var dir = 'dist' + '/' + process.env.NODE_ENV
   return dir
 }
-
-gulp.task('html', function () {
-  // TODO: The node server provides the index output by default
-  // but probably best to generate the html from the ejs template for non nodejs web server users
-  // return gulp
-  //        .src('src/index.html')
-  //        .pipe(gulp.dest(getDistributionDir()))
-})
 
 gulp.task('images', function () {
   // TODO: there's an issue when handling the images in webpack
@@ -63,12 +56,32 @@ gulp.task('build', ['clean', 'server-script-transpiler', 'create-library', 'copy
     case 'staging':
       gulp.start('_build-staging')
       break
+    case 'development':
+      gulp.start('_build-development')
+      break
     default:
       console.log('Please provide the environment argument!')
   }
 })
 
-gulp.task('_build-staging', ['test', 'html', 'images'], function (cb) {
+gulp.task('_build-development', ['test', 'images'], function (cb) {
+  // run webpack
+  webpack(webpackDevelopmentConfig, function (err, stats) {
+    if (err) {
+      throw new gutil.PluginError('webpack', err)
+    }
+    gutil.log('[webpack:errors]', stats.compilation.errors.toString({
+      colors: true
+    }))
+    gutil.log('[webpack:warnings]', stats.compilation.warnings.toString({
+      colors: true
+    }))
+    console.log('webpack compile success.')
+    cb(err)
+  })
+})
+
+gulp.task('_build-staging', ['test', 'images'], function (cb) {
   // run webpack
   webpack(webpackStagingConfig, function (err, stats) {
     if (err) {
@@ -85,7 +98,7 @@ gulp.task('_build-staging', ['test', 'html', 'images'], function (cb) {
   })
 })
 
-gulp.task('_build-production', ['test', 'html', 'images'], function (cb) {
+gulp.task('_build-production', ['test', 'images'], function (cb) {
   // run webpack
   webpack(webpackProductionConfig, function (err, stats) {
     if (err) {

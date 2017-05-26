@@ -15,7 +15,7 @@ module.exports = {
     './js/index.js'
   ],
   output: {
-    path: __dirname,
+    path: path.join(__dirname, '/dist/development'),
     publicPath: '/assets/',
     filename: 'js/bundle.js?[hash]'
   },
@@ -30,23 +30,21 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        exclude: /node_modules/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader']
+        })
       },
       {
         test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
         use: [
-          'file-loader'
+          'file-loader?name=[path][name].[ext]'
         ]
       },
       {
         test: /\.(jpg|png|gif|svg)$/i,
         use: [
-          'file-loader?emitFile=false&name=[path][name].[ext]'
+          'file-loader?name=[path][name].[ext]?[hash]&emitFile=false'
         ]
       }
     ]

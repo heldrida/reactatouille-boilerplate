@@ -15,7 +15,7 @@ import MyApp from './src/js/example/containers/app'
 const app = express()
 const port = process.env.PORT ? process.env.PORT : 3000
 var serverInstance = null
-var dist = path.join(__dirname, (['staging', 'production'].indexOf(process.env.NODE_ENV) > -1 ? 'dist/' + process.env.NODE_ENV : 'src'))
+var dist = path.join(__dirname, 'dist/' + process.env.NODE_ENV)
 var config = null
 const webpack = require('webpack')
 const webpackHotMiddleware = require('webpack-hot-middleware')
@@ -23,6 +23,8 @@ const webpackDevConfig = require('./webpack.dev.config')
 const compiler = webpack(require('./webpack.dev.config'))
 var webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackAssets = require('./webpack-assets.json')
+
+console.log('dist:', dist)
 
 config = require('./config')
 

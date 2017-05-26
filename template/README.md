@@ -31,6 +31,14 @@ npm install
 You must run the build commands to generate a bundle js, css, images, fonts, etc, to distribute it into your test, staging or production environments. To so, you can run the commands below, that will generate the files under the `/dist` directory.
 
 ```
+gulp build --env development
+```
+
+*this one in particular is only relevant if you wish to have stylesheets for server-side rendering, when in development. Otherwise, you'll see the components not styled.
+
+Or,
+
+```
 gulp build --env staging
 ```
 

@@ -1,8 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var config = require('./config')
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
@@ -45,13 +43,6 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin('css/[name].min.css?[hash]'),
-    // TODO: The node server provides the index output by default
-    // new HtmlWebpackPlugin({
-    //   inject: true,
-    //   template: path.join(__dirname, '/src/' + 'index.html'),
-    //   filename: 'index.html',
-    //   build_name: config.build_name
-    // }),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('staging'),
