@@ -44,7 +44,7 @@ module.exports = {
       {
         test: /\.(jpg|png|gif|svg)$/i,
         use: [
-          'file-loader?name=[path][name].[ext]?[hash]&emitFile=false'
+          'file-loader?name=[path][name].[ext]&emitFile=false'
         ]
       }
     ]
