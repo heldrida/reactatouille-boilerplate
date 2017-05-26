@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Animations, Helpers } from '../../utils'
+import * as Utils from '../../utils'
 import { loadImage } from 'reactatouille'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -14,7 +14,7 @@ class App extends Component {
       style: 'opacity: 0'
     }
     this.image = loadImage('logo-reactatouille-boilerplate.png')
-    this.style = Helpers.styleObjectParser(this.state.style)
+    this.style = Utils.helpers.styleObjectParser(this.state.style)
   }
 
   componentDidMount () {
@@ -29,7 +29,7 @@ class App extends Component {
 
   logoAnimation () {
     const el = document.querySelector('img.logo')
-    Animations.onHomePanelReveal({
+    Utils.animations.onHomePanelReveal({
       el: el,
       onComplete: () => {
         this.setState({

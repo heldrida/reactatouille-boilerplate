@@ -1,4 +1,4 @@
-import * as Animations from './animations'
-import * as Helpers from './helpers'
+import * as animations from './animations'
+import * as helpers from './helpers'
 
-export { Animations, Helpers }
+export { animations, helpers }
