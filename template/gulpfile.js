@@ -237,4 +237,4 @@ gulp.doneCallback = function (err) {
   process.exit(err ? 1 : 0)
 }
 
-gulp.task('default', ['banner', 'node-server', 'watch'])
+gulp.task('default', ['banner', '_build-development', 'node-server', 'watch'])
