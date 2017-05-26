@@ -26,3 +26,12 @@ const renderApp = (RootComponent, store, history) => {
 
 // create instance
 renderApp(Root, store, history)
+
+// Hot Module Replacement API
+if (process.env.NODE_ENV === 'development' && module.hot) {
+  module.hot.accept('./root', () => {
+    const NextRoot = require('./root').default
+    // (re)render, the updated app
+    renderApp(NextRoot, store, history)
+  })
+}

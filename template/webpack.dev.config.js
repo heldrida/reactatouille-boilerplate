@@ -5,7 +5,6 @@ var assetsPluginInstance = new AssetsPlugin()
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
-  devtool: 'inline-source-map',
   context: path.resolve(__dirname, 'src'),
   entry: [
     'react-hot-loader/patch',
@@ -18,6 +17,14 @@ module.exports = {
     path: path.join(__dirname, '/dist/development'),
     publicPath: '/assets/',
     filename: 'js/bundle.js?[hash]'
+  },
+  devtool: 'inline-source-map',
+  devServer: {
+    hot: true,
+    // match the output path
+    contentBase: path.join(__dirname, '/dist/development'),
+    // match the output `publicPath`
+    publicPath: '/assets/'
   },
   module: {
     rules: [
@@ -52,6 +59,7 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin('css/[name].min.css?[hash]'),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('development')
