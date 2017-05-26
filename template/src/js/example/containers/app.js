@@ -17,7 +17,6 @@ class App extends Component {
   }
 }
 
-// export default App
 function mapStateToProps (state, ownProps) {
   return {
     example: state.example
