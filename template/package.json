@@ -1,6 +1,6 @@
 {
   "name": "reactatouille-boilerplate",
-  "version": "0.9.0f",
+  "version": "0.9.0g",
   "description": "Reactatouille-Boilerplate built using Redux Webpack2 Gulp Sass Jest Enzyme gsap Boilerplate.",
   "main": "gulpfile.js",
   "scripts": {
@@ -26,7 +26,8 @@
     "gsap",
     "universal",
     "isomorphic",
-    "react router 4"
+    "react router 4",
+    "redux-devtools-extension"
   ],
   "author": "Punkbit",
   "license": "WTFPL",

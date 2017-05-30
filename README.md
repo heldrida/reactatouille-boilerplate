@@ -65,6 +65,7 @@ A new component is generated in the [projectRoot]/src/js/<newComponent>. This is
 * GSAP
 * STANDARDJS
 * UNIVERSAL / ISOMORPHIC
+* REDUX DEVTOOLS (Browser extension support)
 
 ### Logo
 

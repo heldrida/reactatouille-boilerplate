@@ -95,6 +95,7 @@ Find the source code under the `src` directory for javascript and `sass` for the
 * GSAP
 * STANDARDJS
 * UNIVERSAL / ISOMORPHIC
+* REDUX DEVTOOLS (Browser extension support)
 
 ### Logo
 

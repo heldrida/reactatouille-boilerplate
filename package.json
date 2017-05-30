@@ -1,7 +1,7 @@
 {
   "name": "reactatouille",
-  "version": "0.9.0f",
-  "description": "Reactatouille is a command-line tool to help quickly start and build a new React project, using Redux, Webpack, Gulp (You can add your own tasks, yo!), HMR/Hot Module Reload, Sass (architecture best practices), Jest, Enzyme, gsap and the Express server.",
+  "version": "0.9.0g",
+  "description": "Reactatouille is a command-line tool to help quickly start and build a new React project, using Redux, Webpack, Gulp (You can add your own tasks, yo!), HMR/Hot Module Reload, Sass (architecture best practices), Jest, Enzyme, gsap, Redux devtools (browser ext support) and the Express server.",
   "main": "index.js",
   "scripts": {
     "test": "cd ./template && npm test"
@@ -26,7 +26,8 @@
     "gsap",
     "universal",
     "isomorphic",
-    "react router 4"
+    "react router 4",
+    "redux-devtools-extension"
   ],
   "author": "Punkbit",
   "license": "WTFPL",
