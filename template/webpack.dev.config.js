@@ -53,7 +53,6 @@ module.exports = {
     ]
   },
   plugins: [
-    // new ExtractTextPlugin('css/[name].min.css?[hash]'),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
