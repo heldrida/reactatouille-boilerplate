@@ -1,6 +1,6 @@
 {
   "name": "reactatouille-boilerplate",
-  "version": "0.9.1b",
+  "version": "0.9.1c",
   "description": "Reactatouille-Boilerplate built using Redux Webpack2 Gulp Sass Jest Enzyme gsap Boilerplate.",
   "main": "gulpfile.js",
   "scripts": {

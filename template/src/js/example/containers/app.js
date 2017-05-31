@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <div>
         <HomePanel replay={this.props.replay} lastUpdated={this.props.example.lastUpdated}>
-          { Array.isArray(this.props.routes) && this.props.routes.map(route => <Route key={route.path} {...route} />) }
+          { Array.isArray(this.props.routes) && this.props.routes.map(route => <Route key={route.path} exact={route.exact} path={route.path} component={route.component} />) }
         </HomePanel>
       </div>
     )
