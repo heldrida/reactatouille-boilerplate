@@ -1,7 +1,7 @@
 import { browserHistory } from 'react-router'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
-import rootReducer from './rootReducer'
+import rootReducer from './reducer'
 import thunk from 'redux-thunk'
 
 export default function configureStore (initialState) {
@@ -16,7 +16,7 @@ export default function configureStore (initialState) {
   )
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
-    module.hot.accept('./rootReducer', () => {
+    module.hot.accept('./reducer', () => {
       const nextRootReducer = rootReducer
       store.replaceReducer(nextRootReducer)
     })

@@ -9,7 +9,7 @@ import { renderToString } from 'react-dom/server'
 import { match, RouterContext } from 'react-router'
 import { StaticRouter } from 'react-router'
 
-import configureStore from './lib/rootStore'
+import configureStore from './lib/root/store'
 import { Provider } from 'react-redux'
 
 import MyApp from './lib/example/containers/app'
