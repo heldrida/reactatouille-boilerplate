@@ -5,10 +5,6 @@ import Root from './root'
 import configureStore from './root/store'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { createBrowserHistory } from 'history'
-import { isBrowser } from 'reactatouille'
-
-// include the stylesheet entry-point
-isBrowser() && require('../sass/app.scss')
 
 const store = configureStore()
 const history = syncHistoryWithStore(createBrowserHistory(), store)

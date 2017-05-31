@@ -4,6 +4,10 @@ import { bindActionCreators } from 'redux'
 import { replay } from '../actions'
 import { withRouter, Route } from 'react-router'
 import HomePanel from '../components/homePanel'
+import { isBrowser } from 'reactatouille'
+
+// include the stylesheet entry-point
+isBrowser() && require('../../../sass/app.scss')
 
 class App extends Component {
   render () {
