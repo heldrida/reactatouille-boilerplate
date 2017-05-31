@@ -12,6 +12,9 @@ import { Provider } from 'react-redux'
 
 import MyApp from './src/js/example/containers/app'
 
+import Routes from './src/js/root/routes'
+
+const myAppChildRoutes = Routes[0].routes
 const app = express()
 const port = process.env.PORT ? process.env.PORT : 3000
 var serverInstance = null
@@ -23,8 +26,6 @@ const webpackDevConfig = require('./webpack.dev.config')
 const compiler = webpack(require('./webpack.dev.config'))
 var webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackAssets = require('./webpack-assets.json')
-
-console.log('dist:', dist)
 
 config = require('./config')
 
@@ -124,7 +125,7 @@ app.get('*', (req, res) => {
       // Render the component to a string
     const myAppHtml = renderToString(<StaticRouter context={{}} location={req.url}>
       <Provider store={store}>
-        <MyApp />
+        <MyApp routes={myAppChildRoutes} />
       </Provider>
     </StaticRouter>)
       // Grab the initial state from our Redux store
