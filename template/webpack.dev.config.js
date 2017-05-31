@@ -2,6 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 var AssetsPlugin = require('assets-webpack-plugin')
 var assetsPluginInstance = new AssetsPlugin()
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
@@ -36,7 +37,10 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader']
+        }))
       },
       {
         test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
@@ -53,6 +57,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new ExtractTextPlugin('css/[name].min.css?[hash]'),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
