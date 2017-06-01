@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router'
+import { Route, Switch } from 'react-router'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import rootRoutes from './routes'
@@ -13,9 +13,9 @@ const Root = ({store, history}) => {
   return (
     <Provider store={store}>
       <BrowserRouter history={history}>
-        <div>
+        <Switch>
           { rootRoutes.map(route => setRoute(route)) }
-        </div>
+        </Switch>
       </BrowserRouter>
     </Provider>
   )
