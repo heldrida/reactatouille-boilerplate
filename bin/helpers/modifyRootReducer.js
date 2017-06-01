@@ -1,10 +1,8 @@
 const arrayToTxtFile = require('array-to-txt-file')
-const path = require('path')
 const findUp = require('find-up')
 const fs = require('fs')
 var filePath
 var chalk = require('chalk')
-var figlet = require('figlet')
 
 module.exports = function (name, errCallback) {
   function readFile (filePath, strToInsert, cb) {
@@ -69,9 +67,9 @@ module.exports = function (name, errCallback) {
   var strToInsert = []
   strToInsert[0] = getReducerTextInsert(name)
   strToInsert[0] = tabSpace + strToInsert + ','
-  strToInsert[1] = 'import ' + name + ' from \'./' + name + '\''
+  strToInsert[1] = 'import ' + name + ' from \'../' + name + '\''
 
-  findUp(['src/js/rootReducer.js']).then(function (path) {
+  findUp(['src/js/root/reducer.js']).then(function (path) {
     if (path) {
       filePath = path
       readFile(filePath, strToInsert, handleFile)
