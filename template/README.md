@@ -82,6 +82,10 @@ gulp preview --env production
 
 Find the source code under the `src` directory for javascript and `sass` for the stylesheets. Before modifying ensure that the development watcher is running by running the development watch command (see development notes). The `dist` directory holds the files ready for distribution.
 
+## Organizing the Redux application
+
+The first time you browse the javascript source directory you may find the way files are organized unusual. The approach Reactatouille exposes is based on an article published by Jack Hsu; A very good read, that explains how to better organize code in the context of a React and Redux application but not exclusively ( https://jaysoo.ca/2016/02/28/organizing-redux-application/ ). While opinionated, you may want to organize it differently, as it was in previous versions of Reactatouille.
+
 ## Built With
 
 * ReactJS

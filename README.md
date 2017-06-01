@@ -52,6 +52,10 @@ reactatouille --create-component <Name...>
 
 A new component is generated in the [projectRoot]/src/js/<newComponent>. This is work in progress, so you still have to make modifications, such as, include the reducer for this component (if required) in [projectRoot]/src/js/rootReducer.js and also change the name in the <newComponent>/constants.js, etc.
 
+## Organizing the Redux application
+
+The first time you browse the javascript source directory you may find the way files are organized unusual. The approach Reactatouille exposes is based on an article published by Jack Hsu; A very good read, that explains how to better organize code in the context of a React and Redux application but not exclusively ( https://jaysoo.ca/2016/02/28/organizing-redux-application/ ). While opinionated, you may want to organize it differently, as it was in previous versions of Reactatouille.
+
 ## Built With
 
 * ReactJS
