@@ -1,3 +1,6 @@
+  - instead of webpack resolve use:
+    use `https://www.npmjs.com/package/babel-plugin-module-alias`
+
   - change task runner to bash scripts or the `runjs` lib
     https://github.com/pawelgalazka/runjs#get-started
 
