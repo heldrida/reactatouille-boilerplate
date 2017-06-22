@@ -1,6 +1,6 @@
 import express from 'express'
 import path from 'path'
-import request from 'request'
+import axios from 'axios'
 import chalk from 'chalk'
 
 import React from 'react'
@@ -94,12 +94,12 @@ app.use('/healthcheck', (req, res) => {
 
 app.use('/api/test', (req, res) => {
   const URL = 'https://jsonip.com/'
-  request(URL, (error, response, body) => {
-    if (error) {
-      console.log(error)
-    }
-    res.send(body)
+  axios({
+    method: 'get',
+    url: URL,
+    responseType: 'json'
   })
+  .then((response) => res.send(response.data))
 })
 
 app.use('/assets', express.static(dist))
