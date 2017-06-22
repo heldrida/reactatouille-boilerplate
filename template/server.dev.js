@@ -1,6 +1,6 @@
 import express from 'express'
 import path from 'path'
-import superagent from 'superagent'
+import request from 'request'
 import chalk from 'chalk'
 
 import React from 'react'
@@ -93,14 +93,13 @@ app.use('/healthcheck', (req, res) => {
 })
 
 app.use('/api/test', (req, res) => {
-  superagent
-    .get('https://jsonip.com/')
-    .end((err, response) => {
-      if (err) {
-        console.log('api test err', err)
-      }
-      res.send(response.body)
-    })
+  const URL = 'https://jsonip.com/'
+  request(URL, (error, response, body) => {
+    if (error) {
+      console.log(error)
+    }
+    res.send(body)
+  })
 })
 
 app.use('/assets', express.static(dist))
