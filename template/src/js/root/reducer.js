@@ -1,11 +1,11 @@
 // rootReducer.js
 import { combineReducers } from 'redux'
 import { routerReducer as routing } from 'react-router-redux'
-import example from '../example'
+import main from 'modules/main'
 
 const rootReducer = combineReducers({
   routing: routing,
-  [example.constants.NAME]: example.reducer
+  [main.constants.NAME]: main.reducer
 })
 
 export default rootReducer

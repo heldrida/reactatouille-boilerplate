@@ -1,13 +1,13 @@
-import example from '../example'
+import main from 'modules/main'
 
 const rootRoutes = [
   {
     path: '/',
-    component: example.containers.App,
+    component: main.containers.App,
     exact: true,
     routes: [{
       path: '/logo',
-      component: example.components.Logo
+      component: main.components.Logo
     }]
   }
 ]

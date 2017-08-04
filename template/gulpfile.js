@@ -7,16 +7,16 @@ if (args.env && ['staging', 'production'].indexOf(args.env) > -1) {
   process.env.NODE_ENV = 'development'
 }
 
-var config = require('./config')
+var config = require('./config/app')
 var gulp = require('gulp')
 var webpack = require('webpack')
-var webpackDevelopmentConfig = require('./webpack.dev.config.js')
-var webpackStagingConfig = require('./webpack.staging.config.js')
-var webpackProductionConfig = require('./webpack.production.config.js')
+var webpackDevelopmentConfig = require('./config/webpack.dev.config.js')
+var webpackStagingConfig = require('./config/webpack.staging.config.js')
+var webpackProductionConfig = require('./config/webpack.production.config.js')
 var gutil = require('gulp-util')
-var gbabel = require('gulp-babel')
+// var gbabel = require('gulp-babel')
 var spawn = require('child_process').spawn
-var port = 3000
+var port = process.env.PORT ? process.env.PORT : config.defaultPort
 var open = require('open')
 var git = require('gulp-git')
 var chalk = require('chalk')
@@ -24,12 +24,32 @@ var figlet = require('figlet')
 var clean = require('gulp-clean')
 var standard = require('gulp-standard')
 var rename = require('gulp-rename')
-var Moment = require('moment')
+// var Moment = require('moment')
+var ejs = require('gulp-ejs')
 
 function getDistributionDir () {
   var dir = 'dist' + '/' + process.env.NODE_ENV
   return dir
 }
+
+gulp.task('html', function () {
+  return gulp.src('./src/index.ejs')
+          .pipe(
+            ejs({
+              build: config.build_name,
+              bundle: 'js/bundle.js',
+              css: 'css/main.min.css',
+              app: '<!-- CLIENT SIDE ONLY -->',
+              state: false
+            })
+          )
+          .pipe(
+            rename({
+              extname: '.html'
+            })
+          )
+          .pipe(gulp.dest(getDistributionDir()))
+})
 
 gulp.task('images', function () {
   // TODO: there's an issue when handling the images in webpack
@@ -40,15 +60,21 @@ gulp.task('images', function () {
          .pipe(gulp.dest(getDistributionDir() + '/images'))
 })
 
+gulp.task('videos', function () {
+  return gulp
+         .src('src/videos/**/*')
+         .pipe(gulp.dest(getDistributionDir() + '/videos'))
+})
+
 gulp.task('copy-files', function () {
-  var list = ['./webpack-assets.json', './config.js', './src/index.ejs']
+  var list = ['./config/webpack-assets.json', './src/index.ejs']
   list.forEach(function (v) {
     gulp.src(v)
         .pipe(gulp.dest(getDistributionDir()))
   })
 })
 
-gulp.task('build', ['clean', 'server-script-transpiler', 'create-library', 'copy-files'], function () {
+gulp.task('build', ['clean', 'copy-files'], function () {
   switch (process.env.NODE_ENV) {
     case 'production':
       gulp.start('_build-production')
@@ -64,7 +90,7 @@ gulp.task('build', ['clean', 'server-script-transpiler', 'create-library', 'copy
   }
 })
 
-gulp.task('_build-development', ['test', 'images'], function (cb) {
+gulp.task('_build-development', ['test', 'images', 'videos'], function (cb) {
   // run webpack
   webpack(webpackDevelopmentConfig, function (err, stats) {
     if (err) {
@@ -81,7 +107,7 @@ gulp.task('_build-development', ['test', 'images'], function (cb) {
   })
 })
 
-gulp.task('_build-staging', ['test', 'images'], function (cb) {
+gulp.task('_build-staging', ['test', 'images', 'videos', 'html'], function (cb) {
   // run webpack
   webpack(webpackStagingConfig, function (err, stats) {
     if (err) {
@@ -98,7 +124,7 @@ gulp.task('_build-staging', ['test', 'images'], function (cb) {
   })
 })
 
-gulp.task('_build-production', ['test', 'images'], function (cb) {
+gulp.task('_build-production', ['test', 'images', 'videos', , 'html'], function (cb) {
   // run webpack
   webpack(webpackProductionConfig, function (err, stats) {
     if (err) {
@@ -170,7 +196,7 @@ gulp.task('node-server', function (cb) {
 })
 
 gulp.task('preview', function (cb) {
-  var cmd = spawn('node', [getDistributionDir() + '/' + 'server.js'], { stdio: 'inherit' })
+  var cmd = spawn('node', ['server.js'], { stdio: 'inherit' })
 
   cmd.on('close', function (code) {
     console.log('my-task exited with code ' + code)
@@ -211,27 +237,27 @@ gulp.task('standardjs', function () {
     }))
 })
 
-gulp.task('server-script-transpiler', function () {
-  return gulp.src('./server.prod.js')
-        .pipe(gbabel({
-          presets: ['es2015']
-        }))
-        .pipe(rename({
-          basename: 'server',
-          suffix: '',
-          extname: '.js'
-        }))
-        .pipe(gulp.dest(getDistributionDir()))
-})
+// gulp.task('server-script-transpiler', function () {
+//   return gulp.src('./server.prod.js')
+//         .pipe(gbabel({
+//           presets: ['es2015']
+//         }))
+//         .pipe(rename({
+//           basename: 'server',
+//           suffix: '',
+//           extname: '.js'
+//         }))
+//         .pipe(gulp.dest(getDistributionDir()))
+// })
 
-gulp.task('create-library', function (cb) {
-  var now = new Moment()
-  var cmd = spawn('babel', ['src/js', '--out-dir', getDistributionDir() + '/lib'], { stdio: 'ignore' })
-  cmd.on('close', function (code) {
-    console.log('[' + now.format('HH:mm:ss') + '] Transpiled the source code into the distribution lib directory')
-    cb(code)
-  })
-})
+// gulp.task('create-library', function (cb) {
+//   var now = new Moment()
+//   var cmd = spawn('babel', ['src/js', '--out-dir', getDistributionDir() + '/lib'], { stdio: 'ignore' })
+//   cmd.on('close', function (code) {
+//     console.log('[' + now.format('HH:mm:ss') + '] Transpiled the source code into the distribution lib directory')
+//     cb(code)
+//   })
+// })
 
 gulp.doneCallback = function (err) {
   process.exit(err ? 1 : 0)

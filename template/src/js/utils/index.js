@@ -1,4 +1,4 @@
 import * as animations from './animations'
 import * as helpers from './helpers'
 
-export { animations, helpers }
+export default { animations, helpers }

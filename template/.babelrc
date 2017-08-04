@@ -1,10 +1,23 @@
 {
-	"presets": [
-		"react",
-		"es2015"
-	],
-	"plugins": [
-		"react-hot-loader/babel",
-		"syntax-dynamic-import"
-	]
+  "presets": [
+    "react",
+    "es2015"
+  ],
+  "plugins": [
+    "react-hot-loader/babel",
+    "syntax-dynamic-import",
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "images": "./src/images",
+        "videos": "./src/videos",
+        "modules": "./src/js/modules",
+        "utils": './src/js/utils',
+        "texts": './config/texts',
+        "config": './config/app',
+        "mocks": "./src/mocks",
+        "services": "./src/js/services"
+      }
+    }]
+  ]
 }

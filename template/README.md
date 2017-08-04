@@ -51,6 +51,12 @@ gulp build --env production
 ### Development
 
 ```
+npm start
+```
+
+or,
+
+```
 gulp
 ```
 
