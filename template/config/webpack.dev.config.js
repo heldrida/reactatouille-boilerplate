@@ -9,7 +9,6 @@ var fs = require('fs')
 
 // This will take the config based and save it to the distribution dir as config.js
 // The webpack alias below will then build that file into the client build
-// fs.copySync(path.resolve(rootDir, 'config/client.js'), path.resolve(rootDir, 'dist/development/config.js'))
 fs.writeFileSync(path.resolve(rootDir, 'dist/development/config.js'), 'module.exports = ' + JSON.stringify(config))
 
 module.exports = {
