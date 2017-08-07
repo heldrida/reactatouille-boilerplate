@@ -1,3 +1,6 @@
+/*
+ * Create separate clientSideOnly config file, to NOT expose credentials or other private data
+ */
 var config = {
   param1: '', // example
   param2: process.env.NODE_ENV === 'production' ? 'foo' : 'bar', // example
