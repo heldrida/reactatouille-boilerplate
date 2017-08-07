@@ -95,7 +95,7 @@
     "redux-mock-store": "^1.2.3",
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.5",
-    "standard": "^10.0.2",
+    "standard": "^10.0.3",
     "style-loader": "^0.18.1",
     "webpack": "^3.0.0",
     "webpack-dev-middleware": "^1.10.2",
@@ -107,7 +107,7 @@
     "axios": "^0.16.2",
     "babel-polyfill": "^6.23.0",
     "chalk": "^2.0.1",
-    "express": "^4.15.3"
+    "express": "^4.15.4"
   },
   "engines": {
     "node": ">=7.4.0",
