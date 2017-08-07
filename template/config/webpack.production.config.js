@@ -2,7 +2,6 @@ var path = require('path')
 var webpack = require('webpack')
 var CompressionPlugin = require('compression-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
-// var config = require('./app')
 var rootDir = path.resolve(__dirname, '../')
 
 module.exports = {
@@ -53,13 +52,6 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin('css/[name].min.css?[hash]'),
-    // TODO: The node server provides the index output by default
-    // new HtmlWebpackPlugin({
-    //   inject: true,
-    //   template: __dirname + '/src/' + 'index.html',
-    //   filename: 'index.html',
-    //   build_name: config.build_name
-    // }),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')

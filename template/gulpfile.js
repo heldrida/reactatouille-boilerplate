@@ -7,7 +7,7 @@ if (args.env && ['staging', 'production'].indexOf(args.env) > -1) {
   process.env.NODE_ENV = 'development'
 }
 
-var config = require('config')
+var config = require('./config')
 var gulp = require('gulp')
 var webpack = require('webpack')
 var webpackDevelopmentConfig = require('./config/webpack.dev.config.js')

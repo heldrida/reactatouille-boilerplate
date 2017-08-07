@@ -10,8 +10,6 @@ import * as actions from '../actions'
 import * as components from '../components'
 import * as constants from '../constants'
 
-console.log('[debug] Config: ', Config)
-
 const API = {
   actions,
   components,

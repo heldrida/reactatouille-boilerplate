@@ -9,6 +9,7 @@
     ["module-resolver", {
       "root": ["./src"],
       "alias": {
+        "config": "./config",
         "images": "./src/images",
         "videos": "./src/videos",
         "modules": "./src/js/modules",

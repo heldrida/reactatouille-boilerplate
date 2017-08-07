@@ -50,7 +50,6 @@
     "babel-preset-react": "^6.24.1",
     "cli-clear": "^1.0.4",
     "compression-webpack-plugin": "^1.0.0",
-    "config": "^1.26.1",
     "css-hot-loader": "^1.1.1",
     "css-loader": "^0.28.3",
     "ejs": "^2.5.6",
