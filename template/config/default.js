@@ -6,7 +6,11 @@ var config = {
   },
   appName: 'reactatouille Boilerplate', // your app name here
   buildName: 'Reactatouille Boilerplate' + ' | ' + (process.env.NODE_ENV || 'development') + ' | ' + '201708041331',
-  defaultPort: 3000
+  defaultPort: 3000,
+  myParamNotForClientSide: {
+    prop1: 'foobar',
+    prop2: 'barfoo'
+  }
 }
 
 // Modified production configuration parameters

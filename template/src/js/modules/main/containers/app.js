@@ -5,9 +5,12 @@ import { replay } from '../actions'
 import { withRouter, Route } from 'react-router'
 import HomePanel from '../components/homePanel'
 import Utils from 'utils'
+import Config from 'config'
 import * as actions from '../actions'
 import * as components from '../components'
 import * as constants from '../constants'
+
+console.log('[debug] Config: ', Config)
 
 const API = {
   actions,

@@ -1,11 +1,22 @@
+var config = require('./client')
 var path = require('path')
 var webpack = require('webpack')
 var AssetsPlugin = require('assets-webpack-plugin')
 var assetsPluginInstance = new AssetsPlugin({ path: path.resolve(__dirname), update: true })
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var rootDir = path.resolve(__dirname, '../')
+var fs = require('fs-extra')
+
+// This will take the config based and save it to the distribution dir as config.js
+// The webpack alias below will then build that file into the client build
+fs.copySync(path.resolve(rootDir, 'config/client.js'), path.resolve(rootDir, 'dist/development/config.js'))
 
 module.exports = {
+  resolve: {
+    alias: {
+      config: path.resolve(rootDir, 'dist/development/config.js')
+    }
+  },
   context: path.resolve(rootDir, 'src'),
   entry: [
     'react-hot-loader/patch',
