@@ -41,7 +41,7 @@ app.use('/health', function (req, res) {
     'env': {
       'NODE_ENV': process.env.NODE_ENV
     },
-    'build_name': config.build_name
+    'build_name': config.buildName
   })
   // Close the response
   res.end()
@@ -64,5 +64,5 @@ serverInstance = app.listen(port, (error) => {
   if (error) {
     console.log(error) // eslint-disable-line no-console
   }
-  console.log(chalk.green('[' + config.build_name + '] listening on port ' + port + '!'))
+  console.log(chalk.green('[' + config.buildName + '] listening on port ' + port + '!'))
 })

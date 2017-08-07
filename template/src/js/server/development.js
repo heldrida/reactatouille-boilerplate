@@ -29,7 +29,7 @@ const compiler = webpack(require('../../../config/webpack.dev.config'))
 var webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackAssets = require('../../../config/webpack-assets.json')
 
-config = require('../../../config/app')
+config = require('config')
 
 /**
  * Process error handling
@@ -135,7 +135,7 @@ app.get('*', (req, res) => {
       app: mainHtml,
       state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
       bundle: webpackAssets.main.js,
-      build: config.build_name,
+      build: config.buildName,
       css: '/assets/css/main.min.css'
     })
   }
@@ -145,5 +145,5 @@ serverInstance = app.listen(port, (error) => {
   if (error) {
     console.log(error) // eslint-disable-line no-console
   }
-  console.log(chalk.green('[' + config.build_name + '] listening on port ' + port + '!'))
+  console.log(chalk.green('[' + config.buildName + '] listening on port ' + port + '!'))
 })

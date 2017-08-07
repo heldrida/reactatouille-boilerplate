@@ -67,7 +67,7 @@ module.exports = function (name, errCallback) {
   var strToInsert = []
   strToInsert[0] = getReducerTextInsert(name)
   strToInsert[0] = tabSpace + strToInsert + ','
-  strToInsert[1] = 'import ' + name + ' from \'../' + name + '\''
+  strToInsert[1] = 'import ' + name + ' from \'modules/' + name + '\''
 
   findUp(['src/js/root/reducer.js']).then(function (path) {
     if (path) {

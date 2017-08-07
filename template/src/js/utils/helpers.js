@@ -1,5 +1,3 @@
-import Config from 'config'
-
 export const styleObjectParser = (str) => {
   var obj = {}
   str.split(';').forEach(function (str) {
