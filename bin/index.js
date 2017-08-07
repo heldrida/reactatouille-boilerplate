@@ -53,7 +53,7 @@ function createNewProject (projectName) {
     program.help()
   } else {
     //
-    fs.copyAsync(rootDir + '/template', projectName, { clobber: true })
+    fs.copyAsync(rootDir + '/template', projectName, { overwrite: true, errorOnExist: true, dereference: true, filter: filterCopy })
       .then(function (err) {
         // Show the initialization text, white space added to text align
         console.log(chalk.blue(' ' + 'Creating the project directory `' + projectName + '`...'))
@@ -72,10 +72,10 @@ function createNewProject (projectName) {
 }
 
 function createNewComponent (name) {
-  var originDir = rootDir + '/template/src/js/example'
+  var originDir = rootDir + '/template/src/js/main'
   var distDir = findJsPath(name) // find the path for the user
   if (distDir) {
-    fs.copyAsync(originDir, distDir, { clobber: true })
+    fs.copy(originDir, distDir, { clobber: true })
       .then(function (err) {
           // Show the initialization text, white space added to text align
         console.log(chalk.blue(' ' + 'Creating the React component directory `' + name + '`...'))
@@ -220,4 +220,8 @@ function replace (params) {
         params.errCallback(err)
       }
     })
+}
+
+function filterCopy (src, des) {
+  return src.indexOf('node_modules') === -1
 }
