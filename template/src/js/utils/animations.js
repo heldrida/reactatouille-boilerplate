@@ -1,5 +1,18 @@
-import { TweenLite, Bounce } from 'gsap'
+import { tween, css, transform } from 'popmotion';
+
+const { interpolate } = transform
 
 export const onHomePanelReveal = (params) => {
-  TweenLite.fromTo(params.el, 0.8, { opacity: 0, x: 50, zIndex: 'auto' }, { opacity: 1, x: 0, zIndex: 'auto', ease: Bounce.easeOut, onComplete: params.onComplete })
+  const elRenderer = css(params.el)
+  tween({
+    from: 50,
+    to: 0,
+    duration: 600,
+    onUpdate: (x) => {
+      elRenderer.set({
+        'x': x,
+        'opacity': interpolate([0, 50], [1, 0])(x)
+      })
+    }
+  }).start()
 }
