@@ -66,7 +66,7 @@ The first time you browse the javascript source directory you may find the way f
 * GULP
 * JEST
 * ENZYME
-* GSAP
+* POPMOTION
 * STANDARDJS
 * UNIVERSAL / ISOMORPHIC
 * REDUX DEVTOOLS (Browser extension support)
