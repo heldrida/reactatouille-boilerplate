@@ -1,7 +1,7 @@
 {
   "name": "reactatouille-boilerplate",
   "version": "0.9.6",
-  "description": "Reactatouille-Boilerplate built using Redux Webpack2 Gulp Sass Jest Enzyme gsap Boilerplate.",
+  "description": "Reactatouille-Boilerplate built using Redux Webpack2 Gulp Sass Jest Enzyme popmotion Boilerplate.",
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp",
@@ -24,7 +24,7 @@
     "hmr",
     "express",
     "sass",
-    "gsap",
+    "popmotion",
     "universal",
     "isomorphic",
     "react router 4",
