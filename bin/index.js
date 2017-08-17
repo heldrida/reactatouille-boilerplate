@@ -205,7 +205,8 @@ function replace (params) {
     .src(params.src)
     .dest(params.dest)
     .replace({
-      'main/': params.name + '/'
+      'main/': params.name + '/',
+      "export const NAME = 'main'": `export const NAME = '${params.name}'`
     })
     .complete(function (txt) {
       // console.log('Finished! Here is the completed text: ' + txt)
