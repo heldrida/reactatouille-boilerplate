@@ -1,6 +1,6 @@
 if (['staging', 'production'].indexOf(process.env.NODE_ENV) > -1) {
-  require('./dist/' + process.env.NODE_ENV + '/server.js')
+  require('./src/js/server/production.js')
 } else {
   require('babel-register')
-  require('./server.dev.js')
+  require('./src/js/server/development.js')
 }

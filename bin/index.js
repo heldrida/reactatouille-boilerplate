@@ -82,10 +82,10 @@ function createNewProject (projectName) {
 }
 
 function createNewComponent (name) {
-  var originDir = rootDir + '/template/src/js/example'
+  var originDir = rootDir + '/template/src/js/modules/main'
   var distDir = findJsPath(name) // find the path for the user
   if (distDir) {
-    fs.copyAsync(originDir, distDir, { clobber: true })
+    fs.copy(originDir, distDir, { overwrite: true, errorOnExist: true, dereference: true, filter: filterCopy })
       .then(function (err) {
           // Show the initialization text, white space added to text align
         console.log(chalk.blue(' ' + 'Creating the React component directory `' + name + '`...'))
@@ -124,17 +124,17 @@ function findJsPath (name) {
 
   // User may be in the project [ROOT]
   if (isDir(listCwd, validateRootDir)) {
-    return path.resolve('./src/js' + '/' + name)
+    return path.resolve('./src/js/modules/' + name)
   }
 
   // User may be in the dir [root/src]
   if (isDir(listParent, validateSrcDir)) {
-    return path.resolve('./js' + '/' + name)
+    return path.resolve('./js/modules/' + name)
   }
 
   // Use may be in the dir [root/src/js]
   if (isDir(listCwd, validateJsDir)) {
-    return path.resolve('./' + name)
+    return path.resolve('./modules/' + name)
   }
 }
 
@@ -151,11 +151,11 @@ function validateRootDir (ls) {
   try {
     var pkg = require(path.resolve('./') + '/package.json') || {}
     var devDependencies = JSON.stringify(pkg.devDependencies).toLowerCase()
+
     return ls.indexOf('src') > -1 &&
-            ls.indexOf('server.dev.js') > -1 &&
-            ls.indexOf('webpack.dev.config.js') > -1 &&
-            devDependencies.indexOf('react') > -1 &&
-            devDependencies.indexOf('reactatouille') > -1
+            ls.indexOf('server.js') > -1 &&
+            ls.indexOf('config') > -1 &&
+            devDependencies.indexOf('react') > -1
   } catch (e) {
     return false
   }
@@ -215,7 +215,8 @@ function replace (params) {
     .src(params.src)
     .dest(params.dest)
     .replace({
-      'example': params.name
+      'main/': params.name + '/',
+      "export const NAME = 'main'": `export const NAME = '${params.name}'`
     })
     .complete(function (txt) {
       // console.log('Finished! Here is the completed text: ' + txt)
@@ -230,4 +231,8 @@ function replace (params) {
         params.errCallback(err)
       }
     })
+}
+
+function filterCopy (src, des) {
+  return src.indexOf('node_modules') === -1
 }

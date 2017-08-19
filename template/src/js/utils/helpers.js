@@ -10,3 +10,13 @@ export const styleObjectParser = (str) => {
 export const isBrowser = () => {
   return typeof window !== 'undefined' && ({}).toString.call(window) === '[object Window]'
 }
+
+export const loadImage = (filename) => {
+  if (process.env.NODE_ENV === 'development' &&
+      (typeof window !== 'undefined' && ({}).toString.call(window) === '[object Window]') &&
+      process.env.NPM_PACKAGE_DEV === 1) {
+    return require('../../images/' + filename)
+  } else {
+    return '/assets/images/' + filename
+  }
+}

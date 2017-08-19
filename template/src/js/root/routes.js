@@ -1,13 +1,19 @@
-import example from '../example'
+import main from 'modules/main'
+import about from 'modules/about'
 
 const rootRoutes = [
   {
     path: '/',
-    component: example.containers.App,
+    component: main.containers.App,
     exact: true,
     routes: [{
-      path: '/logo',
-      component: example.components.Logo
+      path: '/',
+      component: about.containers.HomePanel,
+      exact: true
+    }, {
+      path: '/about',
+      component: about.containers.App,
+      exact: true
     }]
   }
 ]
