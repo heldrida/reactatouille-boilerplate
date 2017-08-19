@@ -52,22 +52,32 @@ function createNewProject (projectName) {
   if (!projectName) {
     program.help()
   } else {
-    //
-    fs.copyAsync(rootDir + '/template', projectName, { clobber: true })
-      .then(function (err) {
-        // Show the initialization text, white space added to text align
-        console.log(chalk.blue(' ' + 'Creating the project directory `' + projectName + '`...'))
-        console.log('\n')
-        if (err) {
-          return console.error(chalk.red.bold(err))
-        } else {
-          console.log(chalk.green(' ' + 'Success! Your project boilerplate is ready!'))
-          console.log(chalk.yellow(' ' + 'Remember to `cd ' + projectName + '` and run the `npm install`'))
-          console.log(chalk.yellow(' ' + 'There, you\'ll find the boilerplate README file containing instructions to run the server, build, etc.'))
-          console.log(chalk.green(' ' + 'Happy coding yo!'))
-          console.log('\n')
-        }
-      })
+    var tempateRootDir = rootDir + '/template'
+    fs.stat(tempateRootDir, function (err, stats) {
+      if (err) {
+        console.log('Error found while trying to createNewProject!');
+      }
+      if (!stats.isDirectory()) {
+        // This isn't a directory!
+        callback(new Error('The template directory does not exist!'));
+      } else {
+        fs.copyAsync(rootDir + '/template', projectName, { clobber: true })
+          .then(function (err) {
+            // Show the initialization text, white space added to text align
+            console.log(chalk.blue(' ' + 'Creating the project directory `' + projectName + '`...'))
+            console.log('\n')
+            if (err) {
+              return console.error(chalk.red.bold(err))
+            } else {
+              console.log(chalk.green(' ' + 'Success! Your project boilerplate is ready!'))
+              console.log(chalk.yellow(' ' + 'Remember to `cd ' + projectName + '` and run the `npm install`'))
+              console.log(chalk.yellow(' ' + 'There, you\'ll find the boilerplate README file containing instructions to run the server, build, etc.'))
+              console.log(chalk.green(' ' + 'Happy coding yo!'))
+              console.log('\n')
+            }
+          })
+      }
+    })
   }
 }
 
