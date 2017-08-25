@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { replay } from '../../actions'
-import { withRouter, Route } from 'react-router'
-import HomePanel from '../../components/homePanel'
-import Utils from 'utils'
-import Config from 'config'
 import * as actions from '../../actions'
 import * as components from '../../components'
 import * as constants from '../../constants'
@@ -35,8 +30,8 @@ function mapStateToProps (state, ownProps) {
 
 function matchDispatchToProps (dispatch) {
   return bindActionCreators({
-    replay: replay
+    replay: actions.replay
   }, dispatch)
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(withRouter(App))
+export default connect(mapStateToProps, matchDispatchToProps)(App)

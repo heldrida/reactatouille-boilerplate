@@ -1,21 +1,9 @@
 import React from 'react'
 import { Provider } from 'react-redux'
+import MainApi from 'modules/main'
+import AboutApi from 'modules/about'
 
-// const Root = ({store, history}) => {
-//   return (
-//     <Provider store={store}>
-//       <BrowserRouter history={history}>
-//         <Switch>
-//           { rootRoutes.map(route => setRoute(route)) }
-//         </Switch>
-//       </BrowserRouter>
-//     </Provider>
-//   )
-// }
-
-const App = ({callback}) => {
-  return (<div>APP: Hello world!</div>)
-}
+const App = AboutApi.containers.HomePanel
 
 const Root = ({store, history}) => {
   return (
