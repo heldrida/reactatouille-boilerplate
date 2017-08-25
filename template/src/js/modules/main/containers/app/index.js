@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { replay } from '../../actions'
-import { withRouter, Route } from 'react-router'
 import Utils from 'utils'
-import Config from 'config'
 import * as actions from '../../actions'
 import * as components from '../../components'
 import * as constants from '../../constants'
@@ -23,9 +21,7 @@ class App extends Component {
   render () {
     return (
       <div>
-        {
-          Array.isArray(this.props.routes) && this.props.routes.map(route => <Route key={route.path} exact={route.exact} path={route.path} component={route.component} />)
-        }
+        <h1>Hello world!</h1>
       </div>
     )
   }
@@ -43,4 +39,4 @@ function matchDispatchToProps (dispatch) {
   }, dispatch)
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(withRouter(App))
+export default connect(mapStateToProps, matchDispatchToProps)(App)

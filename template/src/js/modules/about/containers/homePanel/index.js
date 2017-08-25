@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { replay } from '../../actions'
 import HomePanel from '../../components/homePanel'
 import * as actions from '../../actions'
 import * as components from '../../components'
@@ -17,7 +16,7 @@ class HomePanelContainer extends Component {
   render () {
     return (
       <div>
-        <HomePanel replay={this.props.replay} lastUpdated={this.props[API.constants.NAME].lastUpdated} />
+        <HomePanel replay={this.props.replay} lastUpdated={0} />
       </div>
     )
   }
@@ -31,7 +30,7 @@ function mapStateToProps (state, ownProps) {
 
 function matchDispatchToProps (dispatch) {
   return bindActionCreators({
-    replay: replay
+    replay: actions.replay
   }, dispatch)
 }
 
