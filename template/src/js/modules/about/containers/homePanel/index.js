@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import HomePanel from '../../components/homePanel'
-import * as actions from '../../actions'
-import * as components from '../../components'
-import * as constants from '../../constants'
+import * as actions from 'modules/about/actions'
+import * as components from 'modules/about/components'
+import * as constants from 'modules/about/constants'
 
 const API = {
   actions,
   components,
   constants
 }
+
+const { HomePanel } = components
 
 class HomePanelContainer extends Component {
   render () {
@@ -22,14 +23,11 @@ class HomePanelContainer extends Component {
   }
 }
 
-function mapStateToProps (state, ownProps) {
-  console.log('state: ', state)
-  return {
-    [API.constants.NAME]: state[API.constants.NAME]
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  [API.constants.NAME]: state[API.constants.NAME]
+})
 
-function matchDispatchToProps (dispatch) {
+const matchDispatchToProps = (dispatch) => {
   return bindActionCreators({
     replay: actions.replay
   }, dispatch)

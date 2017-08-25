@@ -7,7 +7,6 @@ import { createBrowserHistory } from 'history'
 
 const history = createBrowserHistory()
 const store = configureStore(history)
-console.log('store:', store)
 
 // render method for instantiation and Hot module reload
 const renderApp = (RootComponent, store, history) => {
