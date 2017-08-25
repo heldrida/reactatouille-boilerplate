@@ -16,13 +16,14 @@ class HomePanelContainer extends Component {
   render () {
     return (
       <div>
-        <HomePanel replay={this.props.replay} lastUpdated={0} />
+        <HomePanel replay={this.props.replay} lastUpdated={this.props[API.constants.NAME].lastUpdated} />
       </div>
     )
   }
 }
 
 function mapStateToProps (state, ownProps) {
+  console.log('state: ', state)
   return {
     [API.constants.NAME]: state[API.constants.NAME]
   }
