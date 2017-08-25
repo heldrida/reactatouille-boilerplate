@@ -1,25 +1,21 @@
-import { browserHistory } from 'react-router'
-import { createStore, applyMiddleware, compose } from 'redux'
-import { routerMiddleware } from 'react-router-redux'
-import rootReducer from './reducer'
-import thunk from 'redux-thunk'
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
+import { connectRoutes } from 'redux-first-router'
+import routes from './routes'
+// import * as reducers from './reducers'
+// import * as actionCreators from './actions'
 
-export default function configureStore (initialState) {
-  const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose
-  const enchancers = composeEnhancers(
-    applyMiddleware(thunk),
-    applyMiddleware(routerMiddleware(browserHistory))
-  )
-  const store = createStore(
-    rootReducer,
-    enchancers
-  )
-  if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept('./reducer', () => {
-      const nextRootReducer = rootReducer
-      store.replaceReducer(nextRootReducer)
-    })
-  }
-  return store
+const reducers = []
+const actionCreators = []
+
+export default history => {
+  const { reducer, middleware, enhancer } = connectRoutes(history, routes.map, routes.options)
+  const rootReducer = combineReducers({ location: reducer })
+  const middlewares = applyMiddleware(middleware)
+  const enhancers = composeEnhancers(enhancer, middlewares)
+
+  return createStore(rootReducer, enhancers)
 }
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ actionCreators })
+  : compose
