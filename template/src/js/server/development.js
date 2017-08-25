@@ -8,7 +8,7 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router'
 
-import configureStore from '../root/store'
+// import configureStore from '../root/store'
 import { Provider } from 'react-redux'
 
 import App from '../modules/main/containers/App'
@@ -107,38 +107,15 @@ app.use('/api/test', (req, res) => {
 app.use('/assets', express.static(dist))
 
 app.get('*', (req, res) => {
-  // (wip) migration to react-router v4 temporary solution
-  // let matches
-  // if (typeof routes.props.children !== 'undefined' && Array.isArray(routes.props.children)) {
-  //   matches = routes.props.children.find((v) => {
-  //     return v.props.path === req.url
-  //   })
-  // } else {
-  //   matches = routes.props.children.props.path === req.url
-  // }
-  let matches = true
-  if (!matches) {
-    res.status(404).send('Not found')
-  } else {
-    const preloadedState = {'foobar': 1}
-      // Create a new Redux store instance
-    const store = configureStore(preloadedState)
-      // Render the component to a string
-    const mainHtml = renderToString(<StaticRouter context={{}} location={req.url}>
-      <Provider store={store}>
-        <App routes={mainChildRoutes} />
-      </Provider>
-    </StaticRouter>)
-      // Grab the initial state from our Redux store
-    const finalState = store.getState()
-    res.render('index', {
-      app: mainHtml,
-      state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
-      bundle: webpackAssets.main.js,
-      build: config.buildName,
-      css: '/assets/css/main.min.css'
-    })
-  }
+    // Grab the initial state from our Redux store
+  const finalState = {}
+  res.render('index', {
+    app: '',
+    state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
+    bundle: webpackAssets.main.js,
+    build: config.buildName,
+    css: '/assets/css/main.min.css'
+  })
 })
 
 serverInstance = app.listen(port, (error) => {
