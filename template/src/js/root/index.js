@@ -7,15 +7,7 @@ const App = AboutApi.containers.HomePanel
 const Root = ({store, history}) => {
   return (
     <Provider store={store}>
-<<<<<<< HEAD
-      <BrowserRouter>
-        <Switch>
-          { rootRoutes.map(route => setRoute(route)) }
-        </Switch>
-      </BrowserRouter>
-=======
       <App />
->>>>>>> (wip) moving to redux first router
     </Provider>
   )
 }
