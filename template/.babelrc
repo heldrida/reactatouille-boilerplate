@@ -6,6 +6,7 @@
   "plugins": [
     "react-hot-loader/babel",
     "syntax-dynamic-import",
+    "transform-object-rest-spread",
     ["module-resolver", {
       "root": ["./src"],
       "alias": {

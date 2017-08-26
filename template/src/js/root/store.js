@@ -11,10 +11,10 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
   : compose
 
 export default history => {
-  const { reducer: routesReducer, middleware, enhancer } = connectRoutes(history, routes.map, routes.options)
-  const combinedReducers = combineReducers(Object.assign(rootReducer, { location: routesReducer }))
-  const middlewares = applyMiddleware(middleware)
-  const enhancers = composeEnhancers(enhancer, middlewares)
+  const routerSetup = connectRoutes(history, routes.map, routes.options)
+  const combinedReducers = combineReducers(Object.assign(rootReducer, { location: routerSetup.reducer }))
+  const middlewares = applyMiddleware(routerSetup.middleware)
+  const enhancers = composeEnhancers(routerSetup.enhancer, middlewares)
 
   return createStore(combinedReducers, enhancers)
 }

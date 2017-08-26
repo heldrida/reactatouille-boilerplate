@@ -28,6 +28,7 @@ class App extends Component {
 }
 
 function mapStateToProps (state, ownProps) {
+  console.log('[debug Main/State] main/state: ', state)
   return {
     [API.constants.NAME]: state[API.constants.NAME]
   }

@@ -1,3 +1,8 @@
+https://github.com/team-gryff/react-monocle
+https://mohebifar.github.io/konsul
+https://github.com/krasimir/react-in-patterns
+https://github.com/garbles/why-did-you-update?utm_source=hashnode.com
+------
  > When running the command to create a new component,
   - read the rootReducer.js into an array
   - include the new component reducer into the array, the ln after the combineReducer({

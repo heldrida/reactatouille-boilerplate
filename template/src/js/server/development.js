@@ -4,18 +4,18 @@ import path from 'path'
 import axios from 'axios'
 import chalk from 'chalk'
 
-import React from 'react'
-import { renderToString } from 'react-dom/server'
-import { StaticRouter } from 'react-router'
+// import React from 'react'
+// import { renderToString } from 'react-dom/server'
+// import { StaticRouter } from 'react-router'
 
 // import configureStore from '../root/store'
-import { Provider } from 'react-redux'
+// import { Provider } from 'react-redux'
 
-import App from '../modules/main/containers/App'
+// import App from '../modules/main/containers/App'
 
-import Routes from '../root/routes'
+// import Routes from '../root/routes'
 
-const mainChildRoutes = Routes[0].routes
+// const mainChildRoutes = Routes[0].routes
 const app = express()
 const port = process.env.PORT ? process.env.PORT : 3000
 var serverInstance = null

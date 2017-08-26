@@ -1,15 +1,20 @@
 // main/reducer.js
 import * as t from './actionTypes'
+import { combineReducers } from 'redux'
+import { NOT_FOUND } from 'redux-first-router'
 
-const initialState = {
-  lastUpdated: 0
+const lastUpdated = (state = 0, action) => action.type === t.REPLAY ? action.payload : state
+const page = (state = components.HOME, action = {}) => components[action.type] || state
+
+const components = {
+  HOME: 'Home',
+  ABOUT: 'About',
+  [NOT_FOUND]: 'NotFound'
 }
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-    case t.REPLAY:
-      return action.payload
-    default:
-      return state
-  }
-}
+const reducer = combineReducers({
+  lastUpdated,
+  page
+})
+
+export default reducer
