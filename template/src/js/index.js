@@ -31,3 +31,7 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
     renderApp(NextRoot, store, history)
   })
 }
+
+if (process.env.NODE_ENV === 'production') {
+  require('offline-plugin/runtime').install()
+}

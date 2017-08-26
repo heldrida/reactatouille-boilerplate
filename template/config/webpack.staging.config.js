@@ -2,6 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var rootDir = path.resolve(__dirname, '../')
+var OfflinePlugin = require('offline-plugin')
 
 module.exports = {
   context: path.resolve(rootDir, 'src'),
@@ -56,6 +57,7 @@ module.exports = {
         'NODE_ENV': JSON.stringify('staging'),
         'BUILDER': true
       }
-    })
+    }),
+    new OfflinePlugin() // it's always better if OfflinePlugin is the last plugin added
   ]
 }

@@ -12,7 +12,7 @@ const setRoute = (route) => {
 const Root = ({store, history}) => {
   return (
     <Provider store={store}>
-      <BrowserRouter history={history}>
+      <BrowserRouter>
         <Switch>
           { rootRoutes.map(route => setRoute(route)) }
         </Switch>

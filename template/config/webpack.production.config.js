@@ -3,6 +3,7 @@ var webpack = require('webpack')
 var CompressionPlugin = require('compression-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var rootDir = path.resolve(__dirname, '../')
+var OfflinePlugin = require('offline-plugin')
 
 module.exports = {
   context: path.resolve(rootDir, 'src'),
@@ -80,6 +81,7 @@ module.exports = {
       test: /\.js$|\.css$|\.html$/,
       threshold: 10240,
       minRatio: 0.8
-    })
+    }),
+    new OfflinePlugin() // it's always better if OfflinePlugin is the last plugin added
   ]
 }
