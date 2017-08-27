@@ -1,12 +1,13 @@
 import React from 'react'
 import { NOT_FOUND } from 'redux-first-router'
+import MainApi from 'modules/main'
 import AboutApi from 'modules/about'
 
 const HomePanel = AboutApi.containers.HomePanel
 const About = AboutApi.containers.About
 
 const map = {
-  'HOME': {
+  [MainApi.constants.HOME]: {
     path: '/',
     thunk: async (dispatch, getState) => {
       const request = await window.fetch(`//www.mocky.io/v2/59a1687b110000471164437a`)
@@ -18,7 +19,7 @@ const map = {
     },
     component: <HomePanel />
   },
-  'ABOUT': {
+  [MainApi.constants.ABOUT]: {
     path: '/about',
     component: <About />
   }

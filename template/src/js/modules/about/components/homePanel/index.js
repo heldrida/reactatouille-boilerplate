@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import CtaButton from '../ctaButton'
 import Logo from '../logo'
 import Utils from 'utils'
+import MainApi from 'modules/main'
 
 class HomePanel extends Component {
   constructor (props) {
@@ -40,7 +41,7 @@ class HomePanel extends Component {
     return (
       <div className='app home-panel'>
         <Logo image={this.image} style={this.style} replay={this.props.replay} />
-        <CtaButton text='About page' callback={() => this.props.goPage('ABOUT')} />
+        <CtaButton text='About page' callback={() => this.props.goPage(MainApi.constants.ABOUT)} />
       </div>
     )
   }
