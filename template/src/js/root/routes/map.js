@@ -1,5 +1,8 @@
 import React from 'react'
 import { NOT_FOUND } from 'redux-first-router'
+import AboutApi from 'modules/about'
+
+const HomePanel = AboutApi.containers.HomePanel
 
 const map = {
   'HOME': {
@@ -12,7 +15,7 @@ const map = {
       }
       dispatch({ type: 'DATA_FOUND', payload: data })
     },
-    component: (<div>Home component</div>)
+    component: <HomePanel />
   },
   'ABOUT': {
     path: '/about',
