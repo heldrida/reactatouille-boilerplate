@@ -12,27 +12,22 @@ const API = {
   constants
 }
 
-const { HomePanel } = components
+const { About } = API.components
 
-class HomePanelContainer extends Component {
+class AboutContainer extends Component {
   render () {
     return (
       <div>
-        <HomePanel replay={this.props.replay} lastUpdated={this.props[API.constants.NAME].lastUpdated} goPage={this.props.goPage} />
+        <About goPage={this.props.goPage} />
       </div>
     )
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  [API.constants.NAME]: state[API.constants.NAME]
-})
-
 const matchDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    replay: actions.replay,
     goPage: MainApi.actions.goPage
   }, dispatch)
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(HomePanelContainer)
+export default connect(null, matchDispatchToProps)(AboutContainer)

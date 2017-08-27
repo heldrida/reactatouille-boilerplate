@@ -3,6 +3,7 @@ import { NOT_FOUND } from 'redux-first-router'
 import AboutApi from 'modules/about'
 
 const HomePanel = AboutApi.containers.HomePanel
+const About = AboutApi.containers.About
 
 const map = {
   'HOME': {
@@ -19,7 +20,7 @@ const map = {
   },
   'ABOUT': {
     path: '/about',
-    component: (<div>About component</div>)
+    component: <About />
   }
 }
 

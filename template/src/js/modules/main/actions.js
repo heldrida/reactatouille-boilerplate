@@ -7,3 +7,5 @@ export const replay = (time = new Date().getTime()) => ({
     lastUpdated: time
   }
 })
+
+export const goPage = (type) => ({ type })

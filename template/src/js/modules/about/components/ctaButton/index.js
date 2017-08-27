@@ -1,9 +1,9 @@
 import React from 'react'
 
-const CtaButton = ({callback}) => {
+const CtaButton = ({text, callback}) => {
   return (
     <div className='cta-button-container'>
-      <button onClick={callback}>Replay</button>
+      <button onClick={callback}>{text}</button>
     </div>
   )
 }

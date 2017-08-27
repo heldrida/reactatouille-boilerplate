@@ -39,8 +39,8 @@ class HomePanel extends Component {
   render () {
     return (
       <div className='app home-panel'>
-        <Logo image={this.image} style={this.style} />
-        <CtaButton callback={() => this.props.replay()} />
+        <Logo image={this.image} style={this.style} replay={this.props.replay} />
+        <CtaButton text='About page' callback={() => this.props.goPage('ABOUT')} />
       </div>
     )
   }

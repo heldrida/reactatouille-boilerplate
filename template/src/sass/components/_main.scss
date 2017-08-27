@@ -15,3 +15,14 @@ body {
 		align-items: baseline;
 	}
 }
+
+h1 {
+	font-family: 'Roboto';
+}
+
+a {
+	text-decoration: none;
+	padding-top: 4rem;
+	display: inline-block;
+	color: $purple;
+}
