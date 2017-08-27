@@ -1,3 +1,4 @@
+import React from 'react'
 import { NOT_FOUND } from 'redux-first-router'
 
 const map = {
@@ -10,10 +11,12 @@ const map = {
         return dispatch({ type: NOT_FOUND })
       }
       dispatch({ type: 'DATA_FOUND', payload: data })
-    }
+    },
+    component: (<div>Home component</div>)
   },
   'ABOUT': {
-    path: '/about'
+    path: '/about',
+    component: (<div>About component</div>)
   }
 }
 

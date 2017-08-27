@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { replay } from '../../actions'
 import Utils from 'utils'
 import * as actions from '../../actions'
 import * as components from '../../components'
 import * as constants from '../../constants'
+import * as selectors from '../../selectors'
 
 const API = {
   actions,
   components,
-  constants
+  constants,
+  selectors
   // containers, TODO: ** CIRCULAR DEPENDENCY, had to import directly, try improve? **
 }
 
@@ -22,21 +23,27 @@ class App extends Component {
     return (
       <div>
         <h1>Hello world!</h1>
+        {
+          this.props.component
+            ? this.props.component
+            : <div>not found</div>
+        }
       </div>
     )
   }
 }
 
 function mapStateToProps (state, ownProps) {
-  console.log('[debug Main/State] main/state: ', state)
   return {
-    [API.constants.NAME]: state[API.constants.NAME]
+    [API.constants.NAME]: state[API.constants.NAME],
+    location: state.location,
+    component: API.selectors.getMapRouteComponent(state.location)
   }
 }
 
 function matchDispatchToProps (dispatch) {
   return bindActionCreators({
-    replay: replay
+    replay: API.actions.replay
   }, dispatch)
 }
 
