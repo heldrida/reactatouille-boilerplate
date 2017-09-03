@@ -1,6 +1,6 @@
 {
   "name": "reactatouille",
-  "version": "0.9.6b",
+  "version": "0.9.7b",
   "description": "Reactatouille is a command-line tool to help quickly start and build a new React project, using Redux, Webpack, Gulp (You can add your own tasks, yo!), HMR/Hot Module Reload, Sass (architecture best practices), Jest, Enzyme, popmotion, Redux devtools (browser ext support) and the Express server.",
   "main": "index.js",
   "scripts": {
