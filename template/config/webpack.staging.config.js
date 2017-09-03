@@ -6,6 +6,7 @@ var OfflinePlugin = require('offline-plugin')
 const AutoDllPlugin = require('autodll-webpack-plugin')
 
 module.exports = {
+  devtool: 'cheap-module-source-map',
   context: path.resolve(rootDir, 'src'),
   entry: ['babel-polyfill', './js/index.js'],
   output: {

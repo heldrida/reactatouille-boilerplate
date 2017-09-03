@@ -10,7 +10,7 @@ var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlug
 module.exports = {
   name: 'client',
   target: 'web',
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   context: path.resolve(rootDir, 'src'),
   entry: [
     'babel-polyfill',

@@ -7,6 +7,7 @@ var OfflinePlugin = require('offline-plugin')
 var AutoDllPlugin = require('autodll-webpack-plugin')
 
 module.exports = {
+  devtool: 'cheap-module-source-map',
   context: path.resolve(rootDir, 'src'),
   entry: ['babel-polyfill', './js/index.js'],
   output: {
@@ -59,7 +60,8 @@ module.exports = {
     new ExtractTextPlugin('css/[name].min.css?[hash]'),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('production')
+        'NODE_ENV': JSON.stringify('production'),
+        'BUILDER': true
       }
     }),
     new webpack.optimize.AggressiveMergingPlugin(),

@@ -38,6 +38,7 @@ gulp.task('html', function () {
             ejs({
               build: config.build_name,
               bundle: 'js/bundle.js',
+              vendors: 'assets/js/vendors.dll.js',
               css: 'css/main.min.css',
               app: '<!-- CLIENT SIDE ONLY -->',
               state: false
@@ -124,7 +125,7 @@ gulp.task('_build-staging', ['test', 'images', 'videos', 'html'], function (cb) 
   })
 })
 
-gulp.task('_build-production', ['test', 'images', 'videos', , 'html'], function (cb) {
+gulp.task('_build-production', ['test', 'images', 'videos', 'html'], function (cb) {
   // run webpack
   webpack(webpackProductionConfig, function (err, stats) {
     if (err) {
