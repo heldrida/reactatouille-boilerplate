@@ -2,13 +2,22 @@ body {
 	background: #fff;
 }
 
-.app {
+.app-container {
 	width: 100vw;
 	height: 100vh;
 	display: flex;
 	justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  .container {
+  	text-align: center;
+  	width: 50vw;
+  	&:first-child {
+  		margin-bottom: 80px;
+  	}
+  }
 	img {
-		width: 75%;
+		width: 100%;
 		max-width: 300px;
 		height: auto;
 		align-self: center;

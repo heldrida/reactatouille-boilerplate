@@ -1,9 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const CtaButton = ({callback}) => {
+const CtaButton = ({text, callback}) => {
   return (
     <div className='cta-button-container'>
-      <button onClick={callback}>Replay</button>
+      <Link to='/about'>{text}</Link>
     </div>
   )
 }

@@ -16,9 +16,7 @@ const API = {
 class HomePanelContainer extends Component {
   render () {
     return (
-      <div>
-        <HomePanel replay={this.props.replay} lastUpdated={this.props[API.constants.NAME].lastUpdated} />
-      </div>
+      <HomePanel replay={this.props.replay} lastUpdated={this.props[API.constants.NAME].lastUpdated} />
     )
   }
 }

@@ -22,7 +22,7 @@ Utils.helpers.isBrowser() && require('sass/app.scss')
 class App extends Component {
   render () {
     return (
-      <div>
+      <div className='app-container'>
         {
           Array.isArray(this.props.routes) && this.props.routes.map(route => <Route key={route.path} exact={route.exact} path={route.path} component={route.component} />)
         }
