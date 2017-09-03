@@ -1,8 +1,8 @@
-import { tween, css, transform } from 'popmotion';
+import { tween, css, transform } from 'popmotion'
 
 const { interpolate } = transform
 
-export const onHomePanelReveal = (params) => {
+export const onReveal = params => {
   const elRenderer = css(params.el)
   tween({
     from: 50,

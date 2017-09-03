@@ -26,7 +26,7 @@ class HomePanel extends Component {
   }
 
   logoAnimation () {
-    Utils.animations.onHomePanelReveal({
+    Utils.animations.onReveal({
       el: this.logo,
       onComplete: () => {
         this.setState({
