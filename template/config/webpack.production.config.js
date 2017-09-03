@@ -4,6 +4,7 @@ var CompressionPlugin = require('compression-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var rootDir = path.resolve(__dirname, '../')
 var OfflinePlugin = require('offline-plugin')
+var AutoDllPlugin = require('autodll-webpack-plugin')
 
 module.exports = {
   context: path.resolve(rootDir, 'src'),
@@ -81,6 +82,20 @@ module.exports = {
       test: /\.js$|\.css$|\.html$/,
       threshold: 10240,
       minRatio: 0.8
+    }),
+    new AutoDllPlugin({
+      filename: 'bundle.dll.js',
+      path: 'js',
+      entry: {
+        vendor: [
+          'react',
+          'react-dom',
+          'react-redux',
+          'redux',
+          'history/createBrowserHistory',
+          'babel-polyfill'
+        ]
+      }
     }),
     new OfflinePlugin() // it's always better if OfflinePlugin is the last plugin added
   ]

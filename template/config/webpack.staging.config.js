@@ -3,6 +3,7 @@ var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var rootDir = path.resolve(__dirname, '../')
 var OfflinePlugin = require('offline-plugin')
+const AutoDllPlugin = require('autodll-webpack-plugin')
 
 module.exports = {
   context: path.resolve(rootDir, 'src'),
@@ -56,6 +57,20 @@ module.exports = {
       'process.env': {
         'NODE_ENV': JSON.stringify('staging'),
         'BUILDER': true
+      }
+    }),
+    new AutoDllPlugin({
+      filename: 'bundle.dll.js',
+      path: 'js',
+      entry: {
+        vendor: [
+          'react',
+          'react-dom',
+          'react-redux',
+          'redux',
+          'history/createBrowserHistory',
+          'babel-polyfill'
+        ]
       }
     }),
     new OfflinePlugin() // it's always better if OfflinePlugin is the last plugin added

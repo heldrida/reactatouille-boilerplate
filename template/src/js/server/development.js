@@ -129,12 +129,14 @@ app.get('*', (req, res) => {
         <App routes={mainChildRoutes} />
       </Provider>
     </StaticRouter>)
-      // Grab the initial state from our Redux store
+
+    // Grab the initial state from our Redux store
     const finalState = store.getState()
     res.render('index', {
       app: mainHtml,
       state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
       bundle: webpackAssets.main.js,
+      bundledll: 'assets/js/bundle.dll.js',
       build: config.buildName,
       css: '/assets/css/main.min.css'
     })

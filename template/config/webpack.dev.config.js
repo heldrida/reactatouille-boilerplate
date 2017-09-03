@@ -3,23 +3,25 @@ var webpack = require('webpack')
 var AssetsPlugin = require('assets-webpack-plugin')
 var assetsPluginInstance = new AssetsPlugin({ path: path.resolve(__dirname), update: true })
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var AutoDllPlugin = require('autodll-webpack-plugin')
 var rootDir = path.resolve(__dirname, '../')
 
 module.exports = {
+  name: 'client',
+  target: 'web',
+  devtool: 'inline-source-map',
   context: path.resolve(rootDir, 'src'),
   entry: [
-    'react-hot-loader/patch',
-    'webpack/hot/dev-server',
-    'webpack-hot-middleware/client',
     'babel-polyfill',
-    './js/index.js'
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false',
+    'react-hot-loader/patch',
+    path.resolve(rootDir, 'src/js/index.js')
   ],
   output: {
     path: path.join(rootDir, '/dist/development'),
     publicPath: '/assets/',
     filename: 'js/bundle.js?[hash]'
   },
-  devtool: 'inline-source-map',
   devServer: {
     hot: true,
     // match the output path
@@ -70,6 +72,20 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('development')
+      }
+    }),
+    new AutoDllPlugin({
+      filename: 'bundle.dll.js',
+      path: 'js',
+      entry: {
+        vendor: [
+          'react',
+          'react-dom',
+          'react-redux',
+          'redux',
+          'history/createBrowserHistory',
+          'babel-polyfill'
+        ]
       }
     }),
     assetsPluginInstance
