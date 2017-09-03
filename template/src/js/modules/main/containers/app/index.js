@@ -1,19 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { replay } from '../../actions'
 import { withRouter, Route } from 'react-router'
 import Utils from 'utils'
 // import Config from 'config'
-import * as actions from '../../actions'
-import * as components from '../../components'
-import * as constants from '../../constants'
+import * as actions from 'modules/main/actions'
+import * as components from 'modules/main/components'
+import * as constants from 'modules/main/constants'
 
+// Exclude `containers` to prevent `circular dependency`
 const API = {
   actions,
   components,
   constants
-  // containers, TODO: ** CIRCULAR DEPENDENCY, had to import directly, try improve? **
 }
 
 // include the stylesheet entry-point
@@ -37,7 +36,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const matchDispatchToProps = (dispatch) => bindActionCreators({
-  replay: replay
+  replay: API.replay
 }, dispatch)
 
 export default connect(mapStateToProps, matchDispatchToProps)(withRouter(App))
