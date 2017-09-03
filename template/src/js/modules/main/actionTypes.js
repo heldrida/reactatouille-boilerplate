@@ -1,2 +1,2 @@
 // main/actionTypes.js
-export const REPLAY = 'main/REPLAY'
+export const APP_LOAD_TIME = 'main/APP_LOAD_TIME'

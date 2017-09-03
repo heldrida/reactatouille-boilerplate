@@ -19,6 +19,10 @@ const API = {
 Utils.helpers.isBrowser() && require('sass/app.scss')
 
 class App extends Component {
+  componentDidMount () {
+    this.props.setAppLoadTime()
+  }
+
   render () {
     return (
       <div className='app-container'>
@@ -32,11 +36,12 @@ class App extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   [API.constants.NAME]: state[API.constants.NAME],
-  pathname: ownProps.location.pathname
+  // https://github.com/reactjs/react-router-redux#how-do-i-access-router-state-in-a-container-component
+  location: ownProps.location
 })
 
 const matchDispatchToProps = (dispatch) => bindActionCreators({
-  replay: API.replay
+  setAppLoadTime: API.actions.setAppLoadTime
 }, dispatch)
 
 export default connect(mapStateToProps, matchDispatchToProps)(withRouter(App))

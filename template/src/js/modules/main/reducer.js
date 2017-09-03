@@ -2,13 +2,16 @@
 import * as t from './actionTypes'
 
 const initialState = {
-  lastUpdated: 0
+  appLoadTime: ''
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case t.REPLAY:
-      return action.payload
+    case t.APP_LOAD_TIME:
+      return {
+        ...state,
+        appLoadTime: action.payload.appLoadTime
+      }
     default:
       return state
   }
