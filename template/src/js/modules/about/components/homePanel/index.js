@@ -27,7 +27,7 @@ class HomePanel extends Component {
 
   logoAnimation () {
     Utils.animations.onReveal({
-      el: this.logo,
+      el: [this.refs.logoContainer, this.refs.ctaContainer],
       onComplete: () => {
         this.setState({
           style: this.logo.getAttribute('style').replace('z-index', 'zIndex')
@@ -39,10 +39,10 @@ class HomePanel extends Component {
   render () {
     return (
       <div className='home-panel'>
-        <div className='container' onClick={() => this.props.replay()}>
+        <div ref='logoContainer' className='container' onClick={() => this.props.replay()}>
           <Logo image={this.image} style={this.style} />
         </div>
-        <div className='container'>
+        <div ref='ctaContainer' className='container'>
           <CtaButton text='about' />
         </div>
       </div>

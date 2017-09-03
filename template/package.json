@@ -78,6 +78,7 @@
     "offline-plugin": "^4.8.3",
     "open": "0.0.5",
     "popmotion": "^7.7.0",
+    "popmotion-timeline": "^1.0.1",
     "proxyquire": "^1.8.0",
     "react": "^15.6.1",
     "react-addons-test-utils": "^15.6.0",
