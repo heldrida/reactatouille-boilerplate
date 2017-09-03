@@ -1,3 +1,5 @@
+var config = require('config')
+var fs = require('fs')
 var path = require('path')
 var webpack = require('webpack')
 var AssetsPlugin = require('assets-webpack-plugin')
@@ -6,6 +8,9 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var AutoDllPlugin = require('autodll-webpack-plugin')
 var rootDir = path.resolve(__dirname, '../')
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+
+// https://github.com/lorenwest/node-config/wiki/Webpack-Usage
+fs.writeFileSync(path.resolve(rootDir, 'config/client.development.json'), JSON.stringify(config))
 
 module.exports = {
   name: 'client',
@@ -112,5 +117,10 @@ module.exports = {
       statsOptions: null,
       logLevel: 'info'
     })
-  ]
+  ],
+  resolve: {
+    alias: {
+      config: path.resolve(rootDir, 'config/client.development.json')
+    }
+  }
 }

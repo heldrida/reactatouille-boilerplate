@@ -3,6 +3,9 @@ import { render } from 'react-dom'
 import { AppContainer as HotReload } from 'react-hot-loader'
 import Root from './root'
 import configureStore from './root/store'
+import { default as appConfig } from 'config'
+
+console.log('[debug app config]', appConfig)
 
 const store = configureStore()
 

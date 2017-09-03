@@ -1,9 +1,14 @@
+var config = require('config')
+var fs = require('fs')
 var path = require('path')
 var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var rootDir = path.resolve(__dirname, '../')
 var OfflinePlugin = require('offline-plugin')
 const AutoDllPlugin = require('autodll-webpack-plugin')
+
+// https://github.com/lorenwest/node-config/wiki/Webpack-Usage
+fs.writeFileSync(path.resolve(rootDir, 'config/client.development.json'), JSON.stringify(config))
 
 module.exports = {
   devtool: 'source-map',
@@ -81,5 +86,10 @@ module.exports = {
       }
     }),
     new OfflinePlugin() // it's always better if OfflinePlugin is the last plugin added
-  ]
+  ],
+  resolve: {
+    alias: {
+      config: path.resolve(rootDir, 'config/client.development.json')
+    }
+  }
 }
