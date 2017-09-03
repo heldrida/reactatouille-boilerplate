@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import CtaButton from '../ctaButton'
 import Logo from '../logo'
 import Utils from 'utils'
+import { Link } from 'react-router-dom'
 
 class HomePanel extends Component {
   constructor (props) {
@@ -41,6 +42,7 @@ class HomePanel extends Component {
       <div className='app home-panel'>
         <Logo image={this.image} style={this.style} />
         <CtaButton callback={() => this.props.replay()} />
+        <Link to='/about'>About</Link>
       </div>
     )
   }

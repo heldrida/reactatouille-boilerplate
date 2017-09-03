@@ -1,0 +1,22 @@
+.about-container {
+  font-family: 'Baloo Bhaijaan', cursive;
+  padding: 3em;
+  max-width: 768px;
+  h1 {
+    font-size: 3.2rem;
+    font-family: inherit;
+    padding-bottom: 5px;
+  }
+  p {
+    font-size: 1.8rem;
+    line-height: 2rem;
+    color: $salmonPink;
+  }
+  button {
+    border: none;
+    background: none;
+    margin-top: 40px;
+    padding: 0;
+    cursor: pointer;
+  }
+}

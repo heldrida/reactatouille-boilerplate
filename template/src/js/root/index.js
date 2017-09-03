@@ -9,7 +9,7 @@ const setRoute = (route) => {
   return <Route key={route.path} path={route.path} render={routeProps => <MyComponent {...Object.assign({}, routeProps, { routes: rootRoutes[0].routes })} />} />
 }
 
-const Root = ({store, history}) => {
+const Root = ({store}) => {
   return (
     <Provider store={store}>
       <BrowserRouter>

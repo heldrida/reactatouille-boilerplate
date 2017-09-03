@@ -12,7 +12,7 @@ const rootRoutes = [
       exact: true
     }, {
       path: '/about',
-      component: about.containers.App,
+      component: about.containers.About,
       exact: true
     }]
   }
