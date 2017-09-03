@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { replay } from '../../actions'
 import { withRouter, Route } from 'react-router'
 import Utils from 'utils'
-import Config from 'config'
+// import Config from 'config'
 import * as actions from '../../actions'
 import * as components from '../../components'
 import * as constants from '../../constants'
@@ -31,16 +31,13 @@ class App extends Component {
   }
 }
 
-function mapStateToProps (state, ownProps) {
-  return {
-    [API.constants.NAME]: state[API.constants.NAME]
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  [API.constants.NAME]: state[API.constants.NAME],
+  pathname: ownProps.location.pathname
+})
 
-function matchDispatchToProps (dispatch) {
-  return bindActionCreators({
-    replay: replay
-  }, dispatch)
-}
+const matchDispatchToProps = (dispatch) => bindActionCreators({
+  replay: replay
+}, dispatch)
 
 export default connect(mapStateToProps, matchDispatchToProps)(withRouter(App))
