@@ -28,7 +28,9 @@
     "universal",
     "isomorphic",
     "react router 4",
-    "redux-devtools-extension"
+    "redux-devtools-extension",
+    "service-worker",
+    "appcache"
   ],
   "author": "Punkbit",
   "license": "WTFPL",

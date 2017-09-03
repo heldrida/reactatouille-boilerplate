@@ -117,6 +117,7 @@ The first time you browse the javascript source directory you may find the way f
 * STANDARDJS
 * UNIVERSAL / ISOMORPHIC
 * REDUX DEVTOOLS (Browser extension support)
+* SERVICEWORKER / APPCACHE
 
 ### Logo
 
