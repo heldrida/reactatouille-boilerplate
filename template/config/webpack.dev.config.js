@@ -10,7 +10,7 @@ var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlug
 module.exports = {
   name: 'client',
   target: 'web',
-  devtool: 'source-map',
+  devtool: 'cheap-eval-source-map',
   context: path.resolve(rootDir, 'src'),
   entry: [
     'babel-polyfill',
@@ -43,7 +43,13 @@ module.exports = {
         test: /\.scss$/,
         use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
+          use: [{
+            loader: 'css-loader',
+            options: {
+              minimize: true,
+              sourceMap: true
+            }
+          }, 'sass-loader?sourceMap']
         }))
       },
       {

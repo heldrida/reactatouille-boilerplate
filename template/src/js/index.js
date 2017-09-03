@@ -29,6 +29,6 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
   })
 }
 
-if (process.env.NODE_ENV === 'production') {
+if (['staging', 'production'].includes(process.env.NODE_ENV)) {
   require('offline-plugin/runtime').install()
 }

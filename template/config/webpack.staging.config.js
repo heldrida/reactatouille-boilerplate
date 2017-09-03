@@ -6,13 +6,13 @@ var OfflinePlugin = require('offline-plugin')
 const AutoDllPlugin = require('autodll-webpack-plugin')
 
 module.exports = {
-  devtool: 'cheap-module-source-map',
+  devtool: 'source-map',
   context: path.resolve(rootDir, 'src'),
   entry: ['babel-polyfill', './js/index.js'],
   output: {
     path: path.join(rootDir, '/dist/staging'),
     publicPath: '',
-    filename: 'js/bundle.js?[hash]'
+    filename: 'js/bundle.js'
   },
   module: {
     rules: [
@@ -29,8 +29,11 @@ module.exports = {
           fallback: 'style-loader',
           use: [{
             loader: 'css-loader',
-            options: { minimize: true }
-          }, 'sass-loader'],
+            options: {
+              minimize: true,
+              sourceMap: true
+            }
+          }, 'sass-loader?sourceMap'],
           publicPath: '../'
         })
       },
@@ -44,7 +47,7 @@ module.exports = {
         test: /\.(jpg|png|gif|svg)$/i,
         exclude: /(node_modules)/,
         use: [
-          'file-loader?name=[path][name].[ext]?[hash]'
+          'file-loader?name=[path][name].[ext]'
         ]
       },
       {
@@ -56,7 +59,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('css/[name].min.css?[hash]'),
+    new ExtractTextPlugin('css/[name].min.css'),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('staging'),
