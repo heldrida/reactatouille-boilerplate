@@ -136,7 +136,7 @@ app.get('*', (req, res) => {
       app: mainHtml,
       state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
       bundle: webpackAssets.main.js,
-      bundledll: 'assets/js/bundle.dll.js',
+      vendors: 'assets/js/vendors.dll.js',
       build: config.buildName,
       css: '/assets/css/main.min.css'
     })

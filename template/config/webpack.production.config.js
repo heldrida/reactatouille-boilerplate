@@ -84,7 +84,7 @@ module.exports = {
       minRatio: 0.8
     }),
     new AutoDllPlugin({
-      filename: 'bundle.dll.js',
+      filename: 'vendors.dll.js',
       path: 'js',
       entry: {
         vendor: [

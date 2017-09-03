@@ -60,7 +60,7 @@ module.exports = {
       }
     }),
     new AutoDllPlugin({
-      filename: 'bundle.dll.js',
+      filename: 'vendors.dll.js',
       path: 'js',
       entry: {
         vendor: [
