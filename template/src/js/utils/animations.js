@@ -11,7 +11,8 @@ const onUpdate = (elRenderer, x) => {
 
 export const onReveal = params => {
   if (Array.isArray(params.el)) {
-    const tweens = params.el.map(el => tween({ from: 50, to: 0, onUpdate: onUpdate.bind(undefined, css(el)) }))
+    let tweens = params.el.map(el => tween({ from: 50, to: 0, onUpdate: onUpdate.bind(undefined, css(el)) }))
+    tweens = tweens.reduce((acc, v) => [...acc, v, '+20'], [])
     timeline(tweens).start()
   } else {
     const elRenderer = css(params.el)
