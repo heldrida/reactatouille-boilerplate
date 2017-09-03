@@ -23,7 +23,7 @@ Nodejs & NPM
 ### Installing
 
 ```
-npm install
+yarn install
 ```
 
 ### Build for distribution
@@ -51,7 +51,7 @@ gulp build --env production
 ### Development
 
 ```
-npm start
+yarn start
 ```
 
 or,
@@ -63,7 +63,7 @@ gulp
 ### Test runner
 
 ```
-gulp test
+yarn test
 ```
 
 ### Tests
