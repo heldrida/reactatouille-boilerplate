@@ -82,9 +82,13 @@ module.exports = {
           'react',
           'react-dom',
           'react-redux',
+          'react-hot-loader',
+          'react-router',
           'redux',
           'history/createBrowserHistory',
-          'babel-polyfill'
+          'babel-polyfill',
+          'popmotion',
+          'popmotion-timeline'
         ]
       }
     }),
