@@ -5,6 +5,7 @@ var assetsPluginInstance = new AssetsPlugin({ path: path.resolve(__dirname), upd
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var AutoDllPlugin = require('autodll-webpack-plugin')
 var rootDir = path.resolve(__dirname, '../')
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
   name: 'client',
@@ -92,6 +93,18 @@ module.exports = {
         ]
       }
     }),
-    assetsPluginInstance
+    assetsPluginInstance,
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      analyzerHost: 'localhost',
+      analyzerPort: 8888,
+      reportFilename: 'report.html',
+      defaultSizes: 'parsed',
+      openAnalyzer: false,
+      generateStatsFile: false,
+      statsFilename: 'stats.json',
+      statsOptions: null,
+      logLevel: 'info'
+    })
   ]
 }
