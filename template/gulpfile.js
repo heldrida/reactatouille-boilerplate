@@ -53,10 +53,6 @@ gulp.task('html', function () {
 })
 
 gulp.task('images', function () {
-  // TODO: there's an issue when handling the images in webpack
-  // it's related with the helper loadImage, because node_modules are ignored
-  // would be nice if this is handled by webpack instead
-  console.log('[debug gulpfile] images: ', getDistributionDir() + '/images')
   return gulp
          .src('src/images/**/*')
          .pipe(gulp.dest(getDistributionDir() + '/images'))
