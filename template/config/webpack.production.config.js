@@ -18,7 +18,7 @@ module.exports = {
   output: {
     path: path.join(rootDir, '/dist/production'),
     publicPath: '',
-    filename: 'js/bundle.js'
+    filename: 'assets/js/bundle.js'
   },
   module: {
     rules: [
@@ -40,13 +40,23 @@ module.exports = {
               sourceMap: true
             }
           }, 'sass-loader?sourceMap'],
-          publicPath: '../'
+          publicPath: '../../'
         })
       },
       {
         test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+        // use: [
+        //   'file-loader?name=[path][name].[ext]&outputPath=assets/'
+        // ]
         use: [
-          'file-loader?name=[path][name].[ext]'
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: './assets/fonts/',
+              context: path.join(rootDir, '/dist/production')
+            }
+          }
         ]
       },
       {
@@ -65,7 +75,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('css/[name].min.css'),
+    new ExtractTextPlugin('assets/css/[name].min.css'),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production'),
@@ -99,7 +109,7 @@ module.exports = {
     }),
     new AutoDllPlugin({
       filename: 'vendors.dll.js',
-      path: 'js',
+      path: 'assets/js',
       entry: {
         vendor: [
           'react',

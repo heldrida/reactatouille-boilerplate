@@ -37,9 +37,9 @@ gulp.task('html', function () {
           .pipe(
             ejs({
               build: config.build_name,
-              bundle: 'js/bundle.js',
-              vendors: 'js/vendors.dll.js',
-              css: 'css/main.min.css',
+              bundle: 'assets/js/bundle.js',
+              vendors: 'assets/js/vendors.dll.js',
+              css: 'assets/css/main.min.css',
               app: '<!-- CLIENT SIDE ONLY -->',
               state: false
             })
@@ -55,13 +55,13 @@ gulp.task('html', function () {
 gulp.task('images', function () {
   return gulp
          .src('src/images/**/*')
-         .pipe(gulp.dest(getDistributionDir() + '/images'))
+         .pipe(gulp.dest(getDistributionDir() + '/assets/images'))
 })
 
 gulp.task('videos', function () {
   return gulp
          .src('src/videos/**/*')
-         .pipe(gulp.dest(getDistributionDir() + '/videos'))
+         .pipe(gulp.dest(getDistributionDir() + '/assets/videos'))
 })
 
 gulp.task('copy-files', function () {
