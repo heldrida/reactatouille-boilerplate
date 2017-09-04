@@ -6,8 +6,19 @@ var serverInstance = null,
   chalk = require('chalk'),
   port = process.env.PORT ? process.env.PORT : config.defaultPort,
   rootDir = path.resolve(__dirname, '../../../'),
-  dist = path.join(rootDir, ('dist' + (process.env.NODE_ENV ? '/' + process.env.NODE_ENV : null)))
+  dist = path.join(rootDir, ('dist' + (process.env.NODE_ENV ? '/' + process.env.NODE_ENV : null))),
+  React = require('react'),
+  renderToString = require('react-dom/server').renderToString,
+  StaticRouter = require('react-router').StaticRouter,
+  Provider = require('react-redux').Provider,
+  configureStore = require(rootDir + '/dist/production/lib/root/store').default,
+  App = require(rootDir + '/dist/production/lib/modules/main/containers/App').default,
+  Routes = require(rootDir + '/dist/production/lib/root/routes').default
 
+const webpackAssets = require('../../../config/webpack-assets.json')
+const mainModuleChildRoutes = Routes[0].routes
+
+console.log('[DIRNAME ] >>>>>> ', __dirname)
 console.log('dist', dist)
 
 app.use(function (req, res, next) {
@@ -30,23 +41,6 @@ app.use(function (req, res, next) {
 
 app.disable('x-powered-by')
 
-app.use(express.static(dist))
-
-/**
- * Healthcheck
- */
-app.use('/health', function (req, res) {
-  res.json({
-    'UP': true,
-    'env': {
-      'NODE_ENV': process.env.NODE_ENV
-    },
-    'build_name': config.buildName
-  })
-  // Close the response
-  res.end()
-})
-
 process.on('uncaughtException', function (err) {
   throw err
 })
@@ -56,9 +50,47 @@ process.on('SIGINT', function () {
   process.exit(0)
 })
 
-app.get('*', function (req, res) {
-  res.sendFile(path.join(dist, 'index.html'))
+app.set('views', path.join(rootDir, 'src'))
+app.set('view engine', 'ejs')
+
+app.get('*', (req, res) => {
+  console.log('~~~~ req.url: ', req.url)
+  // const isRoute = mainModuleChildRoutes.find(route => route.path === req.url)
+  if (false) {
+    res.status(404).send('Not found')
+  } else {
+    const preloadedState = {'foobar': 1}
+      // Create a new Redux store instance
+    const store = configureStore(preloadedState)
+      // Render the component to a string
+    const mainHtml = renderToString(React.createElement(
+      StaticRouter,
+      { context: {}, location: req.url },
+      React.createElement(
+        Provider,
+        { store: store },
+        React.createElement(App, {routes: mainModuleChildRoutes})
+      )
+    ))
+
+    // const mainHtml = renderToString(React.createFactory(App)({}))
+
+    console.log('~~~~ mainHtml ~~~ >> ', mainHtml)
+
+    // Grab the initial state from our Redux store
+    const finalState = store.getState()
+    res.render('index', {
+      app: mainHtml,
+      state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
+      bundle: webpackAssets.main.js,
+      vendors: 'assets/js/vendors.dll.js',
+      build: config.buildName,
+      css: '/assets/css/main.min.css'
+    })
+  }
 })
+
+app.use('/assets', express.static(dist))
 
 serverInstance = app.listen(port, (error) => {
   if (error) {

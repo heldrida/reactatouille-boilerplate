@@ -24,7 +24,7 @@ var figlet = require('figlet')
 var clean = require('gulp-clean')
 var standard = require('gulp-standard')
 var rename = require('gulp-rename')
-// var Moment = require('moment')
+var Moment = require('moment')
 var ejs = require('gulp-ejs')
 
 function getDistributionDir () {
@@ -122,7 +122,7 @@ gulp.task('_build-staging', ['test', 'images', 'videos', 'html'], function (cb) 
   })
 })
 
-gulp.task('_build-production', ['test', 'images', 'videos', 'html'], function (cb) {
+gulp.task('_build-production', ['test', 'images', 'videos', 'html', 'create-library'], function (cb) {
   // run webpack
   webpack(webpackProductionConfig, function (err, stats) {
     if (err) {
@@ -248,14 +248,14 @@ gulp.task('standardjs', function () {
 //         .pipe(gulp.dest(getDistributionDir()))
 // })
 
-// gulp.task('create-library', function (cb) {
-//   var now = new Moment()
-//   var cmd = spawn('babel', ['src/js', '--out-dir', getDistributionDir() + '/lib'], { stdio: 'ignore' })
-//   cmd.on('close', function (code) {
-//     console.log('[' + now.format('HH:mm:ss') + '] Transpiled the source code into the distribution lib directory')
-//     cb(code)
-//   })
-// })
+gulp.task('create-library', function (cb) {
+  var now = new Moment()
+  var cmd = spawn('babel', ['src/js', '--out-dir', getDistributionDir() + '/lib'], { stdio: 'ignore' })
+  cmd.on('close', function (code) {
+    console.log('[' + now.format('HH:mm:ss') + '] Transpiled the source code into the distribution lib directory')
+    cb(code)
+  })
+})
 
 gulp.doneCallback = function (err) {
   process.exit(err ? 1 : 0)

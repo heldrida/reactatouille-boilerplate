@@ -5,7 +5,8 @@
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp",
-    "test": "jest ./src/js"
+    "test": "jest ./src/js",
+    "production": "NODE_ENV=production node server.js"
   },
   "repository": {
     "type": "git",
