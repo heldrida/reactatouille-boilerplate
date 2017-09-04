@@ -1,5 +1,5 @@
 var serverInstance = null,
-  config = require('../../../config/app'),
+  config = require('config'),
   express = require('express'),
   path = require('path'),
   app = express(),

@@ -38,7 +38,7 @@ gulp.task('html', function () {
             ejs({
               build: config.build_name,
               bundle: 'js/bundle.js',
-              vendors: 'assets/js/vendors.dll.js',
+              vendors: 'js/vendors.dll.js',
               css: 'css/main.min.css',
               app: '<!-- CLIENT SIDE ONLY -->',
               state: false
@@ -56,6 +56,7 @@ gulp.task('images', function () {
   // TODO: there's an issue when handling the images in webpack
   // it's related with the helper loadImage, because node_modules are ignored
   // would be nice if this is handled by webpack instead
+  console.log('[debug gulpfile] images: ', getDistributionDir() + '/images')
   return gulp
          .src('src/images/**/*')
          .pipe(gulp.dest(getDistributionDir() + '/images'))

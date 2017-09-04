@@ -15,7 +15,7 @@ import App from '../modules/main/containers/App'
 
 import Routes from '../root/routes'
 
-const mainChildRoutes = Routes[0].routes
+const mainModuleChildRoutes = Routes[0].routes
 const app = express()
 const port = process.env.PORT ? process.env.PORT : 3000
 var serverInstance = null
@@ -107,17 +107,8 @@ app.use('/api/test', (req, res) => {
 app.use('/assets', express.static(dist))
 
 app.get('*', (req, res) => {
-  // (wip) migration to react-router v4 temporary solution
-  // let matches
-  // if (typeof routes.props.children !== 'undefined' && Array.isArray(routes.props.children)) {
-  //   matches = routes.props.children.find((v) => {
-  //     return v.props.path === req.url
-  //   })
-  // } else {
-  //   matches = routes.props.children.props.path === req.url
-  // }
-  let matches = true
-  if (!matches) {
+  const isRoute = mainModuleChildRoutes.find(route => route.path === req.url)
+  if (!isRoute) {
     res.status(404).send('Not found')
   } else {
     const preloadedState = {'foobar': 1}
@@ -126,7 +117,7 @@ app.get('*', (req, res) => {
       // Render the component to a string
     const mainHtml = renderToString(<StaticRouter context={{}} location={req.url}>
       <Provider store={store}>
-        <App routes={mainChildRoutes} />
+        <App routes={mainModuleChildRoutes} />
       </Provider>
     </StaticRouter>)
 

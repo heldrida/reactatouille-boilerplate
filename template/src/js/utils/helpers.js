@@ -17,6 +17,6 @@ export const loadImage = (filename) => {
       process.env.NPM_PACKAGE_DEV === 1) {
     return require('../../images/' + filename)
   } else {
-    return '/assets/images/' + filename
+    return '/images/' + filename
   }
 }
