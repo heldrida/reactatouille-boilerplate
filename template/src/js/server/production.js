@@ -78,9 +78,9 @@ app.get('*', (req, res) => {
 
 serverInstance = app.listen(port, (error) => {
   if (error) {
+    console.log(error)
     serverInstance.close()
     process.exit(0)
-    console.log(error) // eslint-disable-line no-console
   }
   console.log(chalk.green('[' + config.buildName + '] listening on port ' + port + '!'))
 })
