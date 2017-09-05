@@ -12,12 +12,10 @@ export const isBrowser = () => {
 }
 
 export const loadImage = (filename) => {
-  console.log('[debug helpers] loadImage fn call!')
   if (process.env.NODE_ENV === 'development' &&
       (typeof window !== 'undefined' && ({}).toString.call(window) === '[object Window]')) {
     return require('../../images/' + filename)
   } else {
-    console.log('[debug helpers] case B')
     return '/assets/images/' + filename
   }
 }

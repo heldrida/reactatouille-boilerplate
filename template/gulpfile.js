@@ -33,23 +33,24 @@ function getDistributionDir () {
 }
 
 gulp.task('html', function () {
-  return gulp.src('./src/index.ejs')
-          .pipe(
-            ejs({
-              build: config.build_name,
-              bundle: 'assets/js/bundle.js',
-              vendors: 'assets/js/vendors.dll.js',
-              css: 'assets/css/main.min.css',
-              app: '<!-- CLIENT SIDE ONLY -->',
-              state: false
-            })
-          )
-          .pipe(
-            rename({
-              extname: '.html'
-            })
-          )
-          .pipe(gulp.dest(getDistributionDir()))
+  // TODO: keep using ejs?!
+  // return gulp.src('./src/index.ejs')
+  //         .pipe(
+  //           ejs({
+  //             build: config.build_name,
+  //             bundle: 'assets/js/bundle.js',
+  //             vendors: 'assets/js/vendors.dll.js',
+  //             css: 'assets/css/main.min.css',
+  //             app: '<!-- CLIENT SIDE ONLY -->',
+  //             state: false
+  //           })
+  //         )
+  //         .pipe(
+  //           rename({
+  //             extname: '.html'
+  //           })
+  //         )
+  //         .pipe(gulp.dest(getDistributionDir()))
 })
 
 gulp.task('images', function () {

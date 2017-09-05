@@ -1,41 +1,29 @@
-var serverInstance = null,
-  config = require('config'),
-  express = require('express'),
-  path = require('path'),
-  app = express(),
-  chalk = require('chalk'),
-  port = process.env.PORT ? process.env.PORT : config.defaultPort,
-  rootDir = path.resolve(__dirname, '../../../'),
-  dist = path.join(rootDir, ('dist' + (process.env.NODE_ENV ? '/' + process.env.NODE_ENV : null))),
-  React = require('react'),
-  renderToString = require('react-dom/server').renderToString,
-  StaticRouter = require('react-router').StaticRouter,
-  Provider = require('react-redux').Provider,
-  configureStore = require(rootDir + '/dist/production/lib/root/store').default,
-  App = require(rootDir + '/dist/production/lib/modules/main/containers/App').default,
-  Routes = require(rootDir + '/dist/production/lib/root/routes').default
-
+const config = require('config')
+const express = require('express')
+const path = require('path')
+const app = express()
+const chalk = require('chalk')
+const port = process.env.PORT ? process.env.PORT : config.defaultPort
+const rootDir = path.resolve(__dirname, '../../../')
+const dist = path.join(rootDir, ('dist' + (process.env.NODE_ENV ? '/' + process.env.NODE_ENV : null)))
+const React = require('react')
+const renderToString = require('react-dom/server').renderToString
+const StaticRouter = require('react-router').StaticRouter
+const Provider = require('react-redux').Provider
+const configureStore = require(rootDir + '/dist/production/lib/root/store').default
+const App = require(rootDir + '/dist/production/lib/modules/main/containers/App').default
+const Routes = require(rootDir + '/dist/production/lib/root/routes').default
 const webpackAssets = require('../../../config/webpack-assets.json')
 const mainModuleChildRoutes = Routes[0].routes
-
-console.log('[DIRNAME ] >>>>>> ', __dirname)
-console.log('dist', dist)
-
+let serverInstance
 app.use(function (req, res, next) {
-    // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', '*')
-    // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
-    // Request headers you wish to allow
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
   res.setHeader('Access-Control-Allow-Credentials', true)
-    // Pass to next layer of middleware
   res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate')
   res.setHeader('Expires', '-1')
   res.setHeader('Pragma', 'no-cache')
-
   next()
 })
 
@@ -53,14 +41,17 @@ process.on('SIGINT', function () {
 app.set('views', path.join(rootDir, 'src'))
 app.set('view engine', 'ejs')
 
+app.use('/assets', express.static(path.join(dist, '/assets')))
+
 app.get('*', (req, res) => {
-  console.log('~~~~ req.url: ', req.url)
-  // const isRoute = mainModuleChildRoutes.find(route => route.path === req.url)
-  if (false) {
+  const isRoute = mainModuleChildRoutes.find(route => route.path === req.url)
+  if (!isRoute) {
+    // TODO: Show a 404 Component
     res.status(404).send('Not found')
   } else {
-    const preloadedState = {'foobar': 1}
-      // Create a new Redux store instance
+    // TODO: create async configureStore serverSideVersion and await
+    const preloadedState = {}
+    // Create a new Redux store instance
     const store = configureStore(preloadedState)
       // Render the component to a string
     const mainHtml = renderToString(React.createElement(
@@ -72,16 +63,11 @@ app.get('*', (req, res) => {
         React.createElement(App, {routes: mainModuleChildRoutes})
       )
     ))
-
-    // const mainHtml = renderToString(React.createFactory(App)({}))
-
-    console.log('~~~~ mainHtml ~~~ >> ', mainHtml)
-
     // Grab the initial state from our Redux store
-    const finalState = store.getState()
+    const stateJson = JSON.stringify(store.getState())
     res.render('index', {
       app: mainHtml,
-      state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
+      state: stateJson,
       bundle: webpackAssets.main.js,
       vendors: 'assets/js/vendors.dll.js',
       build: config.buildName,
@@ -90,10 +76,10 @@ app.get('*', (req, res) => {
   }
 })
 
-app.use('/assets', express.static(dist))
-
 serverInstance = app.listen(port, (error) => {
   if (error) {
+    serverInstance.close()
+    process.exit(0)
     console.log(error) // eslint-disable-line no-console
   }
   console.log(chalk.green('[' + config.buildName + '] listening on port ' + port + '!'))

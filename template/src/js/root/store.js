@@ -4,7 +4,7 @@ import { routerMiddleware } from 'react-router-redux'
 import rootReducer from './reducer'
 import thunk from 'redux-thunk'
 
-export default function configureStore (initialState) {
+export default function configureStore (preLoadedState) {
   const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose
   const enchancers = composeEnhancers(
     applyMiddleware(thunk),
@@ -12,6 +12,7 @@ export default function configureStore (initialState) {
   )
   const store = createStore(
     rootReducer,
+    preLoadedState,
     enchancers
   )
   if (module.hot) {
