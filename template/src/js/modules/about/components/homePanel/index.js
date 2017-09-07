@@ -10,7 +10,7 @@ class HomePanel extends Component {
       style: ''
     }
     this.logo = null
-    this.image = Utils.helpers.loadImage('logo-reactatouille-boilerplate.png')
+    this.image = '/assets/images/logo-reactatouille-boilerplate.png'
     this.style = Utils.helpers.styleObjectParser(this.state.style)
   }
 

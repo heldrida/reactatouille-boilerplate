@@ -104,7 +104,7 @@ app.use('/api/test', (req, res) => {
   .then((response) => res.send(response.data))
 })
 
-app.use('/assets', express.static(dist))
+app.use('/', express.static(dist))
 
 app.get('*', (req, res) => {
   const isRoute = mainModuleChildRoutes.find(route => route.path === req.url)
@@ -127,9 +127,9 @@ app.get('*', (req, res) => {
       app: mainHtml,
       state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
       bundle: webpackAssets.main.js,
-      vendors: 'assets/js/vendors.dll.js',
+      vendors: '/js/vendors.dll.js',
       build: config.buildName,
-      css: '/assets/css/main.min.css'
+      css: '/css/main.min.css'
     })
   }
 })

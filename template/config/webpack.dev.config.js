@@ -25,15 +25,15 @@ module.exports = {
   ],
   output: {
     path: path.join(rootDir, '/dist/development'),
-    publicPath: '/assets/',
-    filename: 'js/bundle.js?[hash]'
+    publicPath: '/',
+    filename: 'assets/js/bundle.js?[hash]'
   },
   devServer: {
     hot: true,
     // match the output path
     contentBase: path.join(rootDir, '/dist/development'),
     // match the output `publicPath`
-    publicPath: '/assets/'
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -78,7 +78,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('css/[name].min.css?[hash]'),
+    new ExtractTextPlugin('assets/css/[name].min.css?[hash]'),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
@@ -88,7 +88,7 @@ module.exports = {
     }),
     new AutoDllPlugin({
       filename: 'vendors.dll.js',
-      path: 'js',
+      path: 'assets/js',
       entry: {
         vendor: [
           'react',

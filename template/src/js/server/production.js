@@ -16,6 +16,7 @@ const Routes = require(rootDir + '/dist/production/lib/root/routes').default
 const webpackAssets = require('../../../config/webpack-assets.json')
 const mainModuleChildRoutes = Routes[0].routes
 let serverInstance
+
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
@@ -28,6 +29,8 @@ app.use(function (req, res, next) {
 })
 
 app.disable('x-powered-by')
+
+console.log('test aa2223233')
 
 process.on('uncaughtException', function (err) {
   throw err

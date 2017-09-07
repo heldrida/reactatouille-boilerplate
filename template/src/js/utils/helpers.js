@@ -12,10 +12,5 @@ export const isBrowser = () => {
 }
 
 export const loadImage = (filename) => {
-  if (process.env.NODE_ENV === 'development' &&
-      (typeof window !== 'undefined' && ({}).toString.call(window) === '[object Window]')) {
-    return require('../../images/' + filename)
-  } else {
-    return '/assets/images/' + filename
-  }
+  return '/assets/images/' + filename
 }
