@@ -30,8 +30,6 @@ app.use(function (req, res, next) {
 
 app.disable('x-powered-by')
 
-console.log('test aa2223233')
-
 process.on('uncaughtException', function (err) {
   throw err
 })
