@@ -6,6 +6,7 @@
   "scripts": {
     "start": "gulp",
     "test": "jest ./src/js",
+    "staging": "NODE_ENV=staging node server.js",
     "production": "NODE_ENV=production node server.js"
   },
   "repository": {
