@@ -111,7 +111,7 @@ app.get('*', (req, res) => {
   if (!isRoute) {
     res.status(404).send('Not found')
   } else {
-    const preloadedState = {'foobar': 1}
+    const preloadedState = {}
       // Create a new Redux store instance
     const store = configureStore(preloadedState)
       // Render the component to a string
@@ -127,9 +127,9 @@ app.get('*', (req, res) => {
       app: mainHtml,
       state: JSON.stringify(finalState).replace(/</g, '\\x3c'),
       bundle: webpackAssets.main.js,
-      vendors: '/js/vendors.dll.js',
+      vendors: '/assets/js/vendors.dll.js',
       build: config.buildName,
-      css: '/css/main.min.css'
+      css: '/assets/css/main.min.css'
     })
   }
 })
