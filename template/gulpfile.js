@@ -106,7 +106,7 @@ gulp.task('_build-development', ['test', 'images', 'videos'], function (cb) {
   })
 })
 
-gulp.task('_build-staging', ['test', 'images', 'videos', 'html'], function (cb) {
+gulp.task('_build-staging', ['test', 'images', 'videos', 'html', 'create-library'], function (cb) {
   // run webpack
   webpack(webpackStagingConfig, function (err, stats) {
     if (err) {

@@ -10,10 +10,10 @@ const React = require('react')
 const renderToString = require('react-dom/server').renderToString
 const StaticRouter = require('react-router').StaticRouter
 const Provider = require('react-redux').Provider
-const configureStore = require(rootDir + '/dist/production/lib/root/store').default
-const App = require(rootDir + '/dist/production/lib/modules/main/containers/App').default
-const Routes = require(rootDir + '/dist/production/lib/root/routes').default
-const webpackAssets = require('../../../config/webpack-assets.json')
+const configureStore = require(dist + '/lib/root/store').default
+const App = require(dist + '/lib/modules/main/containers/App').default
+const Routes = require(dist + '/lib/root/routes').default
+const webpackAssets = require(`${rootDir}/config/webpack-assets.json`)
 const mainModuleChildRoutes = Routes[0].routes
 let serverInstance
 
@@ -42,7 +42,8 @@ process.on('SIGINT', function () {
 app.set('views', path.join(rootDir, 'src'))
 app.set('view engine', 'ejs')
 
-app.use('/assets', express.static(path.join(dist, '/assets')))
+// app.use('/assets', express.static(path.join(dist, '/assets')))
+app.use('/', express.static(path.join(dist, '/')))
 
 app.get('*', (req, res) => {
   const isRoute = mainModuleChildRoutes.find(route => route.path === req.url)
