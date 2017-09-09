@@ -1,6 +1,5 @@
 import express from 'express'
 import path from 'path'
-// import superagent from 'superagent'
 import axios from 'axios'
 import chalk from 'chalk'
 
@@ -15,21 +14,19 @@ import App from '../modules/main/containers/App'
 
 import Routes from '../root/routes'
 
+const config = require('config')
 const mainModuleChildRoutes = Routes[0].routes
 const app = express()
-const port = process.env.PORT ? process.env.PORT : 3000
+const port = config.defaultPort
 var serverInstance = null
 var rootDir = path.resolve(__dirname, '../../../')
 var dist = path.join(rootDir, 'dist/' + process.env.NODE_ENV)
-var config = null
 const webpack = require('webpack')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackDevConfig = require('../../../config/webpack.dev.config')
 const compiler = webpack(require('../../../config/webpack.dev.config'))
 var webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackAssets = require('../../../config/webpack-assets.json')
-
-config = require('config')
 
 /**
  * Process error handling
