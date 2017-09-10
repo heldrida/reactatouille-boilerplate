@@ -1,4 +1,10 @@
 
+ssr implement:
+
+renderToNodeStream "react-dom/server"
+
+-------------
+
 There's a new helper for the react router config ( react-router-config, use this instead of the current technique):
  
 http://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/
